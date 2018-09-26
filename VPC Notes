@@ -1,0 +1,37 @@
+creating VPC
+A VPC is an isolated portion of the AWS cloud populated by AWS objects, such as Amazon EC2 instances. 
+You must specify an IPv4 address range for your VPC.
+ Specify the IPv4 address range as a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. 
+ You cannot specify an IPv4 CIDR block larger than /16. You can optionally associate an Amazon-provided IPv6 CIDR block with the VPC.
+
+
+ Each Amazon account comes with a default VPC where in all your ec2-instances etc is launched.
+ VPC can span multiple availability zones in the region
+
+
+ Default VPC 12.31.0.0/16 will provide about 65536 IP Addresses
+
+ Subnets are required to launch instances into VPCs.
+
+ Public IP address
+ Private IP address 
+ Elastic IP address (They remian in your account until you 
+ choose to release it) 
+
+ Subnet Definition
+
+ A range of IP Addresses in your VPC; you can launch AWS resources into a subnet that you select.
+ Use a public subnet for resources that must be connected to the internet and a private subnet for resources that won't be connected to the interet.
+
+ per subnet around 4000 connections
+
+ A subnet is always mapped to a single availability zone.
+
+ Internet Gateway is a horizontally scaled, redundant, and highly available VPC component that allows communication between instances in your VPC and the internet. It therefore imposes no avaiability risks or bandwidth constraints on your network traffic.
+
+ Basically  Internet Gateway allows VPC to connect to internet.
+
+ Route Table:
+
+ 1. Each Subnet in your VPC must be associated with a route table and only one route able
+ but the route table can be asoociated with multiple subnets.
