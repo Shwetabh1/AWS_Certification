@@ -1,0 +1,16 @@
+The Exam Blue Print
+
+Deployment 22%
+Security 26%
+Development with AWS Services 30%
+Refactoring 10%
+Monitoring and Troubleshooting 12%
+
+130 Minutes
+65 Questions
+Total Score 1000
+Passing is 720
+Resuts are available immediately
+
+
+Scenario  bases questions

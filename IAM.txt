@@ -1,0 +1,50 @@
+IAM: Identity Access Management
+The best place to start.
+
+It allows you to manage users and their level of acces to the AWS Console. 
+
+What does it give you?
+-Centralized control of your AWS account.
+-Shared Access to your AWS account
+-Granular Permission: diferent level of permission to different USER.
+-Identity Federation: Basically allow users to login using credentials stored in LinkedIn, Active Directory, FaceBook etc)
+-MultiFactor Authentication
+-Provides temporary access for users/devices and services, as necessary.
+- Allows you to setup your own password rotation Policy.
+- Supports PCI DSS Compilance
+- Integrates with Many Diffferent AWS Services (payments associated with Payment Card Industry)
+
+
+Critical Terms
+
+-Users
+-Groups (a number of users under one set of permission)
+-Roles (You create roles and can assign them to AWS resources)
+e.g s3 bucket wants to access files located in s3 can be done via Roles.
+-Policies (A document that defines one(or more)) permissions
+
+
+IAM lab1
+
+1.Set up your MultiFactor Authentication
+2.Create Users and groups and policies
+
+Set Password policies from the account settings
+
+
+What are IAM roles?
+IAM roles are a secure way to grant permissions to entities that you trust. Examples of entities include the following:
+
+IAM user in another account
+Application code running on an EC2 instance that needs to perform actions on AWS resources
+An AWS service that needs to act on resources in your account to provide its features
+Users from a corporate directory who use identity federation with SAML
+IAM roles issue keys that are valid for short durations, making them a more secure way to grant access.
+
+IMPORTANT
+IAM is universal and doesn't apply to regions at this time. 
+The root account is simply the account created when first setup your AWS account. It has complete admin access.
+New users have no permission at all when first created.
+You only get to view Access Key ID and Secret Access Key once. If you lose them you have to regenerate them.
+FAQs for IAM
+https://aws.amazon.com/iam/faqs/
