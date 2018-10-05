@@ -13,4 +13,4 @@ Passing is 720
 Resuts are available immediately
 
 
-Scenario  bases questions
+Scenario based questions

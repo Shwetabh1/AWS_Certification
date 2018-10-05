@@ -1,0 +1,3 @@
+Amazon Elastic Compute Cloud is a web service that provides resizable compute capacity in the cloud.
+
+It reduces time to obatain a new server and boot to minutes thus reduces time to scale very easily
