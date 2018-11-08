@@ -13,4 +13,9 @@ Passing is 720
 Resuts are available immediately
 
 
-Scenario based questions
+Lookout for scenario based questions.
+Confirm big focus on DynamoDB (~15/55 questions) and S3 (~12/55 questions)
+
+
+Important Links:
+

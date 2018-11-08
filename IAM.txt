@@ -1,5 +1,4 @@
 IAM: Identity Access Management
-The best place to start.
 
 It allows you to manage users and their level of acces to the AWS Console. 
 
@@ -41,10 +40,16 @@ An AWS service that needs to act on resources in your account to provide its fea
 Users from a corporate directory who use identity federation with SAML
 IAM roles issue keys that are valid for short durations, making them a more secure way to grant access.
 
-IMPORTANT
+IMPORTANT!
 IAM is universal and doesn't apply to regions at this time. 
 The root account is simply the account created when first setup your AWS account. It has complete admin access.
 New users have no permission at all when first created.
 You only get to view Access Key ID and Secret Access Key once. If you lose them you have to regenerate them.
+
 FAQs for IAM
 https://aws.amazon.com/iam/faqs/
+
+1. You can also grant permissions for users outside of AWS (federated users)
+ - By federating your AWS accounts, users can sign in to the AWS Management Console and AWS Command Line Interface (CLI) using credentials from your corporate directory.
+ - To help you manage federation for multiple AWS accounts centrally, you can use AWS Single Sign-On to manage SSO access for all of your accounts in AWS Organizations. 
+ - You also can add federation support to your own web and mobile applications by using Amazon Cognito.
