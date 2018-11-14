@@ -1,0 +1,5 @@
+Route53 is Amazon's DNS service and it allows you to map your domain names to 
+EC2 Instances, Load Balancers and s3 buckets.
+
+Default Region is Northern Virginia.
+

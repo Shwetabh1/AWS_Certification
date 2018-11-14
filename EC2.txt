@@ -1,6 +1,6 @@
 Amazon Elastic Compute Cloud is a web service that provides resizable compute capacity in the cloud.
 
-It reduces time to obatain a new server and boot to minutes thus reduces time to scale very easily.
+It reduces time to obtain a new server and boot to minutes thus reduces time to scale very easily.
 
 EC2- options
 
@@ -29,7 +29,7 @@ EC2- options
 ???EC2(FIGHT DR MC PX)???
 
 
-Note: Some Windows or Linux AMIs carry with them an additional hourly charge from the provider instead of secondly
+Note: Some Windows or Linux AMIs carry with them an additional hourly charge from the provider instead of secondly.
 
 
 EC-2 Instance type types
@@ -77,7 +77,7 @@ An Amazon EBS volume is a durable, block-level storage device that you can attac
 EBS volumes persist independently from the running life of an EC2 instance. After a volume is attached to an instance, you can use it like any other physical hard drive.
 You can create file system on top of these volumes, run a database, or use them in any other way you would use a block device. Amazon EBS are placed in a specific availbility zone where they are automatically replicated to protect you from the failure of a single component.
 
-EBS Volume Types
+EBS Volume Types (Exam Question)
 
 1. SSD
 
@@ -105,11 +105,42 @@ EBS Volume Types
 -Lowest cost per gigabyte of all EBS volume types that is bootable.
 previous generation.
 
+Elastic Load Balancer
+Balances load between 2 servers such that load is balanced and no server gets overloaded.
+
+    Familiarise yourself with OSI layer (Open Systems Interconnection )
+    1. Physical (lower) - electrical and mechanical level
+    2. Data Link (lower) - data packets are encoded and decoded into bits
+    3. Network (lower) - Switching and Routing
+    4. Transport (lower) - UDP
+    5. Session (upper) - manage connection between applications 
+    6. Presentation (upper) - data transformation e.g ASCII
+    7. Application (upper) - Email, Telnet, FTP, HTTP
+
+Now there are three type of load balancers
+1. Application Load balancers (they can make very clever decision and they operate at layer 7)
+    - They are best suited for balancing HTTP and HTTPS traffi,c They operate at layer 7 and are intelligent. 
+    - You can create advanced request routing sending specified request to specified server.
+2. Network Load Balancer (operates at layer 4, most expensive, used in production)
+    - Best Suited for load balancing of TCP traffic where extreme performance is required.
+    - Operates at layer 4.
+    - Capable of handling millions of requests per second.
+3. Classic Load Balancer (there for legacy purposes) !important
+    - load balance HTTP/HTTPS applications and use Layer 7-specific features, such as X-Forwarded and sticky sessions.
+    - You can strict Layer 4 load balancing for applications that rely prely on the TCP protocol.
+
+Load Balancer Errors
+
+Classic Load Balancers - if your application stops responding, the ELB (classic load balancer) responds with a 504 error.
+This means that the application is having issues either at the database or web server layer.
+Identify where it is failing and scale it up or out where possible.
+504 error means gateway has timed out.
 EC2 Exam tips
 
 -4 demand pricing types
 
 [Important] If a spot instance is terminated by Amazon EC2, you will not be charged for a partial hour of usage. However, if you terminate it yourself, you will be charged for the complete hour in which the instance ran.
 
+- questions on Classic LoadBalancer
 
 
