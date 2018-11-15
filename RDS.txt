@@ -1,0 +1,44 @@
+Relational DataBase Service
+
+These are the database types that we can provision:
+
+1. SQL Server
+2. Oracle
+3. MySQL Server
+4. PostgreSQL
+5. Aurora (Amazon's Own)
+6. MariaDB
+
+DynamoDB to handle Non Relational DataBase
+
+RedShift - OLAP 
+
+Data Warehousing
+Used for business Intelligence. Tools like Cognos, Jaspersoft, SQL Server
+Reporting Services, Oracle Hyperion, and SAP NetWeaver.
+
+Used to pull in very large and complex data sets. Usually used by managements to do queries on data
+
+Used for Reporting only not for production
+
+
+OLTP vs OLAP
+Something related to order 
+
+Something related to profit, unit purchase etc in some region.
+
+ElastiCache - In memory caching
+
+A web service that makes it easy to deploy, operate, and scale an in memory cache in the cloud.
+The service improves the performance of web applications by allowing you to retrieve information from 
+fast, managed, in memory caches, instead of relying entirely on slower disk based databases.
+
+Elasticache supports two open-source in-memory caching engine.
+
+1. Memcached
+2. Redis
+
+LeaderBoard kinda website faster ->
+
+
+

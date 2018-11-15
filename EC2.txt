@@ -4,13 +4,13 @@ It reduces time to obtain a new server and boot to minutes thus reduces time to 
 
 EC2- options
 
-1.On Demand - allows you to pay a fixed rate by the hour with no commitment.
+1. On Demand - allows you to pay a fixed rate by the hour with no commitment.
 
     -> Perfect for users that want the low cost and flexibility without up front payment or long term commitment.
     -> Applications with short term, spiky, or unpredictable workloads that cannot be interrupted.
     -> Applications being develped or tested on Amazon EC2 for the first time.
 
-2.Reserved - provides you with a capacity reservation, and offer a siginificant discount on the hourly charge for an instance. 1 year or 3 year terms.
+2. Reserved - provides you with a capacity reservation, and offer a siginificant discount on the hourly charge for an instance. 1 year or 3 year terms.
     -> Applications with steady state or predictable usage
     -> Applications that require reserved capacity
     -> Users can make up front payments to reduce the cost even further.
@@ -18,12 +18,12 @@ EC2- options
     -> Convertible RIs
     -> Scheduled RIs (scale it on a particular day)
 
-3.Spot - enables you to bid whatever price you want for instance capacity, providing for even greater savings if your applications have flexible start and end times.
+3. Spot - enables you to bid whatever price you want for instance capacity, providing for even greater savings if your applications have flexible start and end times.
     -> Applications that have flexible start and end times
     -> Applications that are only feasible at very low compute prices
     -> Users with an urgent need for large computational capacity(Genome etc)
 
-4.Dedicated Hosts - Physical EC2 server dedicated for your use. Dedicated hosts can help you reduce costs by allowing you to use your existing server bound software licenses.
+4. Dedicated Hosts - Physical EC2 server dedicated for your use. Dedicated hosts can help you reduce costs by allowing you to use your existing server bound software licenses.
    -> Useful for licenses that doesn't support cloud virtulization etc.
 
 ???EC2(FIGHT DR MC PX)???
@@ -143,4 +143,18 @@ EC2 Exam tips
 
 - questions on Classic LoadBalancer
 
+EC2 LAB--->>>
 
+root volume is the one that has OS running on it.
+
+Volumes that are created from encrypted snapshots are automatically encrypted, and volumes that are created from unencrypted snapshots are unencrypted
+
+EBS volumes must be in the same availbility zone.
+
+To encrypt an unencrypted snapshot you need to make a copy and encrypt it.
+--then create image and deploy it. This time the root volume will be encrypted.
+
+Thus you can encrypt the root device volume (the volume the OS is installed on) using operating System level encryption.
+You can encrypt the root device volume by first making a snapshot of that volume and then creating a copy of it.
+
+Additional attached volumes can easily be encrypted using console, CLI or API.
