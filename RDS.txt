@@ -38,7 +38,45 @@ Elasticache supports two open-source in-memory caching engine.
 1. Memcached
 2. Redis
 
-LeaderBoard kinda website faster ->
+LeaderBoard kinda website faster -> Redis
+
+
+
+Difference Betweem MultiAZ and Read Replicas ***Imortant
+(RDS - Back Ups, Multi AZ & Read Replicas)
+
+There are two types of backups
+
+1. Automated Backups and DataBase Snapshots.
+2. Automated Backups allow you to recover your database to any point in time within a 
+"retention period". The retention period can be between one and 35 days. Automated Backups 
+will take a full daily snapshot and will also store transaction logs throughout the day. This allows
+you to do a point in time recovery down to a second, within the retention period.
+Enabled by default and is stored on s3 for free.
+
+if I have 10gb RDS I get 10gb S3 size for free.
+
+Snapshots are done manually and are stored even after you delete the original RDS instance, 
+unlike automated backups.
+
+Encrypting an existing database is not supported now.
+
+If a Rest endpoint is encrypted, the underlying storage is encrypted.
+
+
+MULTI AZ is for disaster recovery only.
+
+If you want performance improvement, you need read Replicas.
+
+READ Replicas
+
+scaling out the database to improve performance improvement.
+
+Read Replicas can be in dfiference region and availability zones.
+
+
+Not availabile for SQL Server or Aurora. 
+
 
 
 

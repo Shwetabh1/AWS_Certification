@@ -54,4 +54,6 @@ https://aws.amazon.com/iam/faqs/
  - To help you manage federation for multiple AWS accounts centrally, you can use AWS Single Sign-On to manage SSO access for all of your accounts in AWS Organizations. 
  - You also can add federation support to your own web and mobile applications by using Amazon Cognito.
 
-2.  
+2. 
+
+All effects in IAM takes place immediately

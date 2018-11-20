@@ -1,0 +1,98 @@
+Simple Storage Service
+S3 provides developers and IT teams with secure, durable, highly scalable object storage.
+
+It is not for OS or DBMS
+
+The data is spread across multiple devices and facilities.
+
+There is unlimited storage.
+
+Bucket ~ Folder
+
+S3 is a universal namesapce. That is, names must be unique globally.
+e.g https://s3-eu-west-1.amazonaws.com/acloudguru
+
+2- Data Model Consistency
+
+Read after Write Consistency- as soon as you upload it is available.
+
+Eventual Consistency for overwrite PUTS and DELETES.
+
+S3 is a simple key, value store.
+S3 supports version control.
+
+S3 Object Anatomy {
+    key
+    value
+    version ID
+    MetaData
+    Subresources -  bucket specific configuration. (CORS and Bucket Policies)
+}
+
+
+Built for 99.99% availability for s3 platform
+Amazon Guarentees 99.9% availability
+Amazon Guarentees 99.999999999 (11 9's) of durability.
+It is designed to sustain the loss of 2 facilities concurrently.
+
+
+S3- Storage Tiers/Classes [check image]
+ 1. s3 (Standard)
+ 2. S3-IA (Infrequently Accessed): For data that is accessed less frequently, 
+ but requires rapid access when needed.
+ 3. S3- One Zone IA: Same as IA however data is stored in a single availability Zone only,
+  still 99.999999999 durability, but only 99.5% availability.
+  Cost is 20% less than regular S3-IA
+4. Reduced Redundancy Storage: Designed to provide 99.99% durability and 99.99% availability of objects over a guven year.
+Used for data that can be recreated if lost, e.g thumbnails. (Starting to disappear from AWS documentation but may still feature in exam)
+5. Glacier: Very Cheap, but used for archival only. Optimised for data that is infrequently accessed.
+
+
+Lifecycle Management
+Versioning
+Encryption
+
+Charges
+1. Storage per GB 
+2. Requests (GET PUT etc)
+3. Storage Management pricing. Inventory, analytics etc
+4. Data Managment pricing i.e downloading file (data transfeered out of s3)
+5. Transfer Acceleration (Use of cloudfront to optimize transfers)
+
+Files can be from 0 Bytes to 5 TB.
+
+S3-Security
+
+By Default all buckets are PRIVATE.
+
+You can set up access control to your buckets using:
+ Bucket Policies - Applied at bucket level.
+ Access Control Lists - Applied at Object Level.
+S3 Buckets can be configured to create access logs, which log all requests made to the s3 bucket.
+These logs can be written to another bucket.
+Bucket Policy are written in JSON.
+
+
+LAB (S3 Policy etc)
+
+2 encrypiton is offerred AES-256 and AWS-KMS
+
+1.In-Transit:
+SSL/TLS (HTTPS)
+
+2.At-REST 
+Server Side Encryption:
+ S3 Managed Keys - SSE-S3 
+ AWS Key Management Service, Managed Keys, SSE-KMS 
+ Server Side Encryption with customer provided keys - SSE-C 
+
+3.Client Side Encryption 
+
+If you want to enforce the use of encryption for oyur files stored in S3, use an S3 Bucket Policy
+to deny all PUT requests that don't include the x-amz-server-side-encryption parameter in the request header.
+
+Every time a file is uploaded a PUT request is initiated.
+
+
+
+
