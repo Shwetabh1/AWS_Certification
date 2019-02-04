@@ -1,12 +1,19 @@
-creating VPC
+A virtual private cloud (VPC) is a virtual network dedicated to your AWS account.
+
+Inside this you get the Subnet whic is firewalled by ACL.
+
+each subnet has ec-2 instanes
+
+each subnet must be within one AZ. It can't span AZ.
+
 A VPC is an isolated portion of the AWS cloud populated by AWS objects, such as Amazon EC2 instances. 
 You must specify an IPv4 address range for your VPC.
- Specify the IPv4 address range as a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. 
- You cannot specify an IPv4 CIDR block larger than /16. You can optionally associate an Amazon-provided IPv6 CIDR block with the VPC.
+Specify the IPv4 address range as a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. 
+You cannot specify an IPv4 CIDR block larger than /16. You can optionally associate an Amazon-provided IPv6 CIDR block with the VPC.
 
 
- Each Amazon account comes with a default VPC where in all your ec2-instances etc is launched.
- VPC can span multiple availability zones in the region
+Each Amazon account comes with a default VPC where in all your ec2-instances etc is launched.
+VPC can span multiple availability zones in the region
 
 
  Default VPC 12.31.0.0/16 will provide about 65536 IP Addresses

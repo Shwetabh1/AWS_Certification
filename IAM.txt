@@ -1,5 +1,11 @@
 IAM: Identity Access Management
 
+Theory + Practical + Practice Questions and Exam Tips(AWS FAQs and Best Practices)
+Practice Questions and Exam Tips
+1. 3-4 Questions on IAM will be asked.
+2. 
+3.
+
 It allows you to manage users and their level of acces to the AWS Console. 
 
 What does it give you?
@@ -30,6 +36,7 @@ IAM lab1
 
 Set Password policies from the account settings
 
+Everything will be handled by Amazon SQS, so find the optimal settings for VisibilityTimeout, maxReceiveCount and definitely configure DLQ policy.
 
 What are IAM roles?
 IAM roles are a secure way to grant permissions to entities that you trust. Examples of entities include the following:
@@ -54,6 +61,44 @@ https://aws.amazon.com/iam/faqs/
  - To help you manage federation for multiple AWS accounts centrally, you can use AWS Single Sign-On to manage SSO access for all of your accounts in AWS Organizations. 
  - You also can add federation support to your own web and mobile applications by using Amazon Cognito.
 
-2. 
+All effects in IAM takes place immediately.
 
-All effects in IAM takes place immediately
+There are three types of Policies in AWS:
+
+1. Managed Policies
+2. Customer Managed Policies
+3. Inline Policies
+
+
+Managed Policies: A Managed Policy is an IAM Policy which is created and administered by AWS. AWS Provide Managed Policies for common use cases based on Job Function like 
+AWSS3FullAccess, AWSSQSFullAccess etc.
+
+You cannot change a permission defined in an AWS managed policy.
+
+A single policy can be applied multiple time to Groups, roles, users etc.
+
+
+Customer Managed  Policies :  It is a standalone policy that you create and administer inside your own AWS account. You can attach this policy to multiple users, groups and roles - but only within your account.
+
+Copy an exisiting managed policy and customise it to your needs, yo. Recommended for use cases where the existing AWS Managed Policies don't meet the needs of your environment.
+
+Inline Policy:
+
+Strict 1:1 policy between the entity and the policy.
+Delete the user and the policy gets deleted as well.
+An inline policy is actually embedded within the user, group or role to which it applies.
+
+[use case] Useful when you want to ensure permission in a policy are not inadverdently assigned to any other user, group or role than the one for which they are intended.
+
+ assume-role-with-web-identity
+
+ It is an API Provided by STS (Security Token Service)
+ Returns temporary security credentials for users authenticated by mobile or web applications.
+
+
+ Cross Account Access
+
+
+
+
+

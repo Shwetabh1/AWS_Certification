@@ -1,0 +1,39 @@
+Adavnced IAM
+
+Web Identity Federation
+AWS Web Identity Federation lets you give your users access to AWS resources  after they have successfully authenticated with a web-based identity provider like Amazon, Google or Facebook.
+
+Following Successful authentication, the user recieves an authentication code from the web id provider,which they can trade for temporary AWS Security Credentials.
+
+Cognito
+
+Policies
+
+Cross Account Access
+
+Amazon Cognito provides Web Identity Federation with the following features:
+
+Sign-Up and Sign-In to your Apps.
+Access to Gues Users
+Acts as an Identity Broker between your application and Web Id Providers, so you don't
+need to write any additional code.
+Synchronizes user data for multiple devices
+Recommended for all mobile applications.
+
+It is the recommended approach for Web Identity Federation using social media accounts like facebook.
+
+Cognito User Pools:
+
+User pools are user directories which is used to manage sign-up and sign-in functionality for mobile and web applications.
+
+Users can sign in diretly to the user pool, or indirectlt via an identity provider like Facebook, Amazon or Google. Cognito acts as an identity broker between the ID provider and AWS. Successful authnetication generates a number of JWTs
+
+Identity pools enable you to create unique identities for your users and authentiate them with identity providers. With an identity, you can obtain temporary, limited privilege AWS credentials to access other AWS services.
+
+AWS Cognito uses sth called Push Synchronization to provide seamless experience.
+It pushes the update silently using SNS whenever data is changed.
+
+LAB -> Configure a cognito Pool
+
+Inline vs Custom vs Managed Policies
+

@@ -1,0 +1,32 @@
+Elastic Beanstalk
+
+A provisioning service. You don't need to choose ec2 etc.
+Deploys and scales your web application.
+Java PHP Python GO Node.js Docker and Node.js
+
+Elastic BeanStalk Supports several options for processing deployments
+
+1. All at once.: deploys to all instances simulataneously and all of your instances are out while the deployment takes place.
+
+2. Rolling: Deploys new version in batches. each batch of instances is taken out while deployment takes place.
+
+3. Rolling with Additional Batch: Does the above shebang but maintains full capacity by rolling additional instances.
+
+4. Immutable: Kinda like blue green, yo.
+Deploys the new version to a fresh group of instances in their own new autoscaling group.
+
+Configuration to be done via config files. YAML or JSON and they are stored under a  folder .ebextensions
+Must be included in the top level directory of your application source code bundle.
+
+
+
+Systems Manager Parameter Store
+Storing Confidential Information which can be passed to ec2 usig lambda etc.
+If you have confidential information such as passwords, database, connection strings, and license codes can be stored in SSM parameter store.
+
+You can store values as plain text or you can encrypt the data.
+
+
+Difference between Amazon Block Store, Amazon Storage Gateway and Amazon Elastic FileSystem.
+
+

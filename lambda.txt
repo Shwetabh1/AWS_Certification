@@ -1,0 +1,110 @@
+AWS EC2 was released in 2006.
+
+Amazon's version of PAAS is Elastic Beanstalk.
+
+Lambda Scales automatically.
+
+What is Lambda?
+
+AWS Lambda is a compute service where you can upload your code and create a Lambda function. AWS LAmbda takes care of provisioning and managing the servers that you use to run the code. You don't have to worry about operating systems, patching scaling etc. You can use Lambda in the following ways.
+
+1. As an event-driven compute service where AWS Lambda runs your code in response to events. These events could be changes to data in an Amazon s3 bucket or Dynamo DB table.
+
+Functions are triggered in parallel, if multiple requests are there.
+
+The supported languages are:
+Java, Node.js, GO, Python, C#
+
+
+Pricing: 
+1. Number of Requests: First 1 million requests are free. $0.20 per 1 million requests thereafter.
+2. Duration: It is calculated from the time your code begins executing until it returns or otherwise terminates, rounded up to the nearest 100ms. The price depends on the amount of memory you allocate to your function. You are charged $0.00001667 for every GB per second used.
+
+Why it is cool?
+> No servers
+> No need for Scaling.
+> Super super cheap.
+> Amazon Echo is all Lambda.
+
+LAMBDA scales out (not up) automatically.
+Lambda functions are independent, 1 event = 1 function.
+What services are serverless in AWS
+> API Gateway, S3, Dyanamo DB
+Lambda@Edge lets you run Lambda functions at AWS Edge Location.
+AWS fargate for containers
+AWS Elastic File System (file storage)
+Amazon Aurora Serverless
+
+AWS Step Functions (ORCHESTRATION)
+Amazon Kinesis
+Amazon Athena
+
+1 event can = x functions if functions trigger other functions
+
+AWS X-ray allows you to debug what is happening [question]
+Know your triggers [question]
+
+
+Practical: Create a serverless website.
+
+
+Versioning in Lambda
+
+when you are versioning in Lambda you can publish different versions of your lambda function. As a result you can work with different versions of your lambda function in your development workflow, such as development, beta and  production. Each Lambda function has a different ARN and once published it is immutable.
+
+AWS function maintains your latest code in $LATEST version.
+
+There are two types of ARN
+Qualified ARN and Unqualified ARN
+
+Qualified ARN has version suffix
+
+sth.com:version
+
+Unqualified doesn't have that
+
+You can use Aliases to map to different versions of Lambda functions.
+
+Can split traffic using aliases to different version
+
+Can't split traffic using $latest. Instead use aliases. [important exam]
+
+
+Difference between SQS and SNS
+Amazon SNS allows applications to send time-critical messages to multiple subscribers through a “push” mechanism, eliminating the need to periodically check or “poll” for updates.
+
+Amazon SQS is a message queue service used by distributed applications to exchange messages through a polling model, and can be used to decouple sending and receiving components—without requiring each component to be concurrently available
+
+How this is efficient
+
+SNS will publish to three queue when image is uploaded. Q1 will generate thumnail, q2 will do analysis and so on. This way shit will work.
+
+
+Improving Performance of Lambda
+
+Account Level Concurrent Execution is 1000
+By Default AWS Lambda limits the concurrent executions across all functions within a given region to 1000.
+We can increase it by raising a service limit increase from AWS Support Center.
+
+There is function level concurrency too. Suppose we have 8 functions then if we set 200 for one function then the rest 7 have 800 in total.
+
+Throttling
+If the request exceed 1000 it won't be executed at all.
+
+
+STEP FUNCTIONS
+Great way to visualize your serverless application.
+Step Function automatically triggers and tracks each step.
+Step function logs the state of each step so if something goes wrong you can know what and where.
+
+
+AWS X-RAY
+
+AWS X-RAY is a service that collects data about requests that your application serves, and provides tools you can view , filter and gain insights into that data to identify issues and oppurtunities for optimization.
+
+
+It integrates with Elastic Load Balancer, LAMBDA, EC2, API Gateway and Elastic Beanstalk
+
+Supports Java, Python, Ruby, .net Go Node.js
+
+AMAZON States language is what you use to define the step functions.

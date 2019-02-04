@@ -1,0 +1,108 @@
+CI & CD
+
+Code repository -> Build Management System -> Test FrameWork
+
+
+Multiple Developers working in on different features or bug fixes.
+All contributing to the same application.
+Sharing the same code repository.
+Frequently pushing their updates into the shared repo- at least daily.
+
+Code Repository integrated with a build management system. Code Changes trigger an automated build
+
+We need a way to ensure that any code changes does not break the build or intorduce new bugs in the application.
+
+The test system runs automated tests on the newly built application
+
+Identifies any bugs, preventing issues from being introduced in the master code
+
+CI focuses on small code changes which frequently committed into the main repository once they have been successfully tested.
+
+------------------------------------
+CD: Continous Delivery/ Deployment
+------------------------------------
+
+Continous Delivery is a development practice where merged changes are automatically built, tested, and prepared for release into staging and eventually production environments.
+
+There is usually a manual decision to deploy.
+
+
+---------------------------------------
+
+Continous Deployment takes the idea of automation one step further and automatically deploys the new code following successful testing, eliminating manual steps.
+
+The new code is automatically released as soon as it passes through the stages of your release process(build, test, package)
+
+Basically Continous Deployment also automate the release process as well.
+
+AWS Services:  [AWS Code Commit - > AWS CodeBuild -> AWS CodeDeploy] CodePipeline
+
+CodeCommit - source code control
+CodeBuild - compile source code, run tests and package code
+Code Deploy -
+AWS  CodePipeline - CI/CD workflow tool that fully automates the entire release process.
+
+
+AWS CodeCommit -> 1.based on git. central repo for all code binaries etc. Tracks and manages code changes. Maintains version history. Manages updates from multiple sources enables collaboration. 
+Data is encrypted in transit or at rest.
+
+
+
+Code Deploy
+
+It is an automated deployments service which allows you to deploy your application code automatically yo EC2 instances, on-premises systems and lambda functions.
+
+Allows you to quickly release new features, avoid downtime during application deployments, and avoid downtime during application deployments, and avoid the risks associated with manual processes.
+
+It integrates with various CI/CD tools such as jenkins, Github, Atlasssian, AWS CodePipeline as well as config management tools such as chef, puppet, Ansible
+Two different deployment approaches available:
+In-Place and Blue/Green
+
+
+In-Place: Application is stopped and then new version is installed. You can also use ELB to stop sending requests to it.
+also known is rolling feature.
+
+drawbacks
+Not supported for lambda, only for EC-2 and on-premise systems
+
+If you need to roll back rededploy prev version
+
+
+
+Blue Green: Just route back the traffic to new server
+
+blue: active
+green: new release
+
+Deployment Group - A set of EC2 instances or Lambda functions to which a new revision of the software is to be deployed.
+Deployment - The process and components used to apply a new revision.
+Deployment Configuration - A set of deployment rules as well as success/failure conditions used during a deployment.
+AppSec File - Defines the deployment actions you want AWS CodeDeploy to execute.
+Revision - Everything needed to deploy new version: Appsec File, applications file, executables, config files
+Appliaction - Unique identifier for the application you want to deploy. To ensure the correct Combination of revision, deployment configuration and deployment group are referenced during a deployment.
+
+
+Code Deploy Lab 
+
+
+CodePipeline 101
+
+AWS CodePipeLine is a fully managed Continous Integration and Delivery Service.
+
+CodePipeline can orchestrate the Build, Test, and even Deployment of your application every time there is a change to your code - all based on a user defined software release process.
+
+Traditional manual approaches to code delivery can be slow and prone to errors, whereas an automated process allows developers to frequently release new features and bug fixes in a fast and reliable way.
+
+It itnegrates with CodeCommit, deploy, Lambda, Elastic Beanstalk, ClouFormation, ECS as well as third party tools like Github and Jenkins. 
+
+
+Using Code Pipeline you can deploy to EC2, Lambda and On-Premise System.
+
+CodePipeLine Lab
+
+Use CodePipeLine to Deploy your code to a set of ec2 instances.
+
+There are three deployment style
+one at a time
+half at a time 
+all at a time
