@@ -1,9 +1,10 @@
-## ForeWord
+## Foreword
 Focus on the learning and certification will follow. Certification should never be the Target.  Your ability to comprehend and apply those learnings should be.
 
 ## What is this?
 > You can never understand everything but you should push yourself to understand the system.<br/>
 > *-Ryan Dahl (creator of Node.JS)*
+
 Notes, practical learnings and possible questions to clear the AWS certification exam. Each topic has 3 ssections, notes then the practical work you should do and dozens of questions that ca be asked in the exam
 
 ## Exam Blue Print
@@ -44,3 +45,4 @@ The certification is valid for 2 years.<br/>
 1. Elastic Beanstalk
 1. CICD 
 
+## Important Links
