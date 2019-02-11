@@ -93,6 +93,12 @@ to deny all PUT requests that don't include the x-amz-server-side-encryption par
 
 Every time a file is uploaded a PUT request is initiated.
 
+In AWS key names determine which partition the object(file) is stored in - you could add a hax prefix to file name for better performance.
+
+GET-Intensive Workloads : Use CloudFront
+
+Mixed Workloads (GET, PUT & DELETE) : Use hax prefix to S3 object key names to prevent multiple objects being stored on the same partition.
+
 
 
 
