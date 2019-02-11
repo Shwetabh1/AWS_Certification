@@ -1,88 +1,68 @@
-AWS EC2 was released in 2006.
+Contents:
+1. Notes
+2. Lab Work
+3. Possible Questions
 
-Amazon's version of PAAS is Elastic Beanstalk.
-
-Lambda Scales automatically.
+  //////////////////////////
+ /////////NOTES////////////
+//////////////////////////
 
 What is Lambda?
 
-AWS Lambda is a compute service where you can upload your code and create a Lambda function. AWS LAmbda takes care of provisioning and managing the servers that you use to run the code. You don't have to worry about operating systems, patching scaling etc. You can use Lambda in the following ways.
+AWS Lambda is a compute service where you can upload your code and create a Lambda function. AWS Lambda takes care of provisioning and managing the servers that you use to run the code. You don't have to worry about operating systems, patching scaling etc. It Scales automatically.
+You can use Lambda in the following ways:
 
-1. As an event-driven compute service where AWS Lambda runs your code in response to events. These events could be changes to data in an Amazon s3 bucket or Dynamo DB table.
-
+1. As an event-driven compute service where AWS Lambda runs your code in response to events. These events could be changes to data in an Amazon S3 bucket or Dynamo DB table.
 Functions are triggered in parallel, if multiple requests are there.
+Poll Based: SQS, Kinesis
 
-The supported languages are:
-Java, Node.js, GO, Python, C#
+2. For poll-based event sources, AWS Lambda polls the source and then invokes the Lambda function when records are detected on that source. For poll-based sources, event source mapping information is stored in AWS Lambda.
+e.g AWS Lambda Pulls Events from a Kinesis Stream and Invokes a Lambda Function
+Event Based : SNS, SES, S3, Cognito etc.
 
+AWS Lambda natively supports Java, Go, PowerShell, Node.js, C#, Python, and Ruby code,
 
-Pricing: 
+Pricing:
 1. Number of Requests: First 1 million requests are free. $0.20 per 1 million requests thereafter.
 2. Duration: It is calculated from the time your code begins executing until it returns or otherwise terminates, rounded up to the nearest 100ms. The price depends on the amount of memory you allocate to your function. You are charged $0.00001667 for every GB per second used.
 
 Why it is cool?
-> No servers
+> No servers.
 > No need for Scaling.
 > Super super cheap.
-> Amazon Echo is all Lambda.
+e.g Amazon Echo is all Lambda.
 
-LAMBDA scales out (not up) automatically.
+Lambda scales out (not up) automatically.
 Lambda functions are independent, 1 event = 1 function.
-What services are serverless in AWS
-> API Gateway, S3, Dyanamo DB
+
 Lambda@Edge lets you run Lambda functions at AWS Edge Location.
-AWS fargate for containers
-AWS Elastic File System (file storage)
-Amazon Aurora Serverless
 
-AWS Step Functions (ORCHESTRATION)
-Amazon Kinesis
-Amazon Athena
+AWS fargate is a purpose-built serverless compute engine for containers. Fargate scales and manages the infrastructure required to run your containers.
+AWS Elastic File System (file storage):  It is built to elastically scale on demand, growing and shrinking automatically as you add and remove files.
+Amazon Aurora Serverless: is an on-demand, auto-scaling configuration for Amazon Aurora (MySQL-compatible edition), where the database will automatically start up, shut down, and scale capacity up or down based on your application's needs.
 
-1 event can = x functions if functions trigger other functions
+AWS Step Functions (ORCHESTRATION) makes it easy to coordinate the components of distributed applications and microservices using visual workflows.
 
-AWS X-ray allows you to debug what is happening [question]
-Know your triggers [question]
+Amazon Kinesis is a platform for streaming data on AWS, offering powerful services to make it easy to load and analyze streaming data, and also providing the ability for you to build custom streaming data applications for specialized needs.
 
+Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
 
-Practical: Create a serverless website.
+1 event can = x functions if functions trigger other functions.
 
+## Understand versioning in AWS Lambda.
 
-Versioning in Lambda
-
-when you are versioning in Lambda you can publish different versions of your lambda function. As a result you can work with different versions of your lambda function in your development workflow, such as development, beta and  production. Each Lambda function has a different ARN and once published it is immutable.
+when you are versioning in Lambda you can publish different versions of your lambda function. As a result you can work with different versions of your lambda function in your development workflow, such as development, beta and production. Each Lambda function has a different ARN (Amazon Resource Name) and once published it is immutable.
+There are two types of ARN:
+Qualified ARN and Unqualified ARN. Qualified ARN has version suffix (sth.com:version). Unqualified doesn't have that.
 
 AWS function maintains your latest code in $LATEST version.
-
-There are two types of ARN
-Qualified ARN and Unqualified ARN
-
-Qualified ARN has version suffix
-
-sth.com:version
-
-Unqualified doesn't have that
-
 You can use Aliases to map to different versions of Lambda functions.
-
-Can split traffic using aliases to different version
-
+Can split traffic using aliases to different version.
 Can't split traffic using $latest. Instead use aliases. [important exam]
 
+## Improving Performance of Lambda Functions
 
-Difference between SQS and SNS
-Amazon SNS allows applications to send time-critical messages to multiple subscribers through a “push” mechanism, eliminating the need to periodically check or “poll” for updates.
-
-Amazon SQS is a message queue service used by distributed applications to exchange messages through a polling model, and can be used to decouple sending and receiving components—without requiring each component to be concurrently available
-
-How this is efficient
-
-SNS will publish to three queue when image is uploaded. Q1 will generate thumnail, q2 will do analysis and so on. This way shit will work.
-
-
-Improving Performance of Lambda
-
-Account Level Concurrent Execution is 1000
+Account Level Concurrent Execution limit is 1000.
 By Default AWS Lambda limits the concurrent executions across all functions within a given region to 1000.
 We can increase it by raising a service limit increase from AWS Support Center.
 
@@ -96,15 +76,93 @@ STEP FUNCTIONS
 Great way to visualize your serverless application.
 Step Function automatically triggers and tracks each step.
 Step function logs the state of each step so if something goes wrong you can know what and where.
-
+AMAZON States language is what you use to define the step functions.
 
 AWS X-RAY
 
-AWS X-RAY is a service that collects data about requests that your application serves, and provides tools you can view , filter and gain insights into that data to identify issues and oppurtunities for optimization.
+AWS X-RAY is a service that collects data about requests that your application serves, and provides tools you can view, filter and gain insights into that data to identify issues and oppurtunities for optimization. It integrates with Elastic Load Balancer, LAMBDA, EC2, API Gateway and Elastic Beanstalk
+It supports Java, Python, Ruby, .Net Go Node.js
 
 
-It integrates with Elastic Load Balancer, LAMBDA, EC2, API Gateway and Elastic Beanstalk
+  ///////////////////////////////
+ /////////PRACTICAL/////////////
+///////////////////////////////
 
-Supports Java, Python, Ruby, .net Go Node.js
+1. Create a serverless website.
+2. Play around with versions.
+3. Create a Lambda function that is evoked on an event. Leverage Cognito, S3 etc.
 
-AMAZON States language is what you use to define the step functions.
+
+
+  ///////////////////////////////
+ /////////QUESTIONS/////////////
+///////////////////////////////
+
+What are some of the Serverless Services in AWS?
+1. Compute (Lambda, Lambda@edge, AWS Fargate)
+2. Storage (S3) + EFS
+3. DB (Amazon Aurora Serverless)
+4. API Proxy (Amazon API Gateway)
+5. Interprocess Messaging (SQS + SNS)
+
+What languages is Supported by Lambda?
+1. Java
+2. Python
+3. Go
+4. Node.js
+5. .Net
+
+
+AWS X-ray allows you to debug what is happening [question]
+Know your triggers [question]
+
+Can I access the infrastructure that AWS Lambda runs on?
+No, you can't.
+
+Q: How does AWS Lambda secure my code?
+
+AWS Lambda stores code in Amazon S3 and encrypts it at rest. AWS Lambda performs additional integrity checks while your code is in use.
+
+
+Q: How long can an AWS Lambda function execute?
+
+AWS Lambda functions can be configured to run up to 15 minutes per execution. You can set the timeout to any value between 1 second and 15 minutes.
+
+Q: What is a Dead Letter Queue?
+
+Q: How do I deploy and manage a serverless application?
+
+You can deploy and manage your serverless applications using the AWS Serverless Application Model (AWS SAM). AWS SAM is a specification that prescribes the rules for expressing serverless applications on AWS. This specification aligns with the syntax used by AWS CloudFormation today and is supported natively within AWS CloudFormation as a set of resource types (referred to as "serverless resources"). These resources make it easier for AWS customers to use CloudFormation to configure and deploy serverless applications, using existing CloudFormation APIs.
+
+
+Q: How do I coordinate calls between multiple AWS Lambda functions?
+
+You can use AWS Step Functions to coordinate a series of AWS Lambda functions in a specific order. You can invoke multiple Lambda functions sequentially, passing the output of one to the other, and/or in parallel, and Step Functions will maintain state during executions for you.
+
+Q: How do I troubleshoot a serverless application?
+
+You can enable your Lambda function for tracing with AWS X-Ray by adding X-Ray permissions to your Lambda function’s execution role and changing your function’s “tracing mode” to “active.
+
+Q: How is AWS SAM licensed?
+
+The specification is open sourced under Apache 2.0,
+
+Q Which language supports Lambda@Edge?
+
+Only Node.js for now
+
+Q) Lambda is returning 429 error. What could be the reason?
+On exceeding the throttle limit, AWS Lambda functions being invoked synchronously will return a throttling error (429 error code)
+
+Q: How do I control which Amazon S3 buckets can call which AWS Lambda functions?
+
+Using Resource Policy.
+When you configure an Amazon S3 bucket to send messages to an AWS Lambda function a resource policy rule will a be created that grants access
+
+Q: Can a single Lambda function have access to multiple VPCs?
+
+No. Lambda functions provide access only to a single VPC. If multiple subnets are specified, they must all be in the same VPC. You can connect to other VPCs by peering your VPCs
+
+
+
+
