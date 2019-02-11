@@ -1,13 +1,18 @@
 Simple Storage Service
+
+(12 question at the least)
+
 S3 provides developers and IT teams with secure, durable, highly scalable object storage.
 
-It is not for OS or DBMS
+It is not for OS or DBMS.
 
 The data is spread across multiple devices and facilities.
 
 There is unlimited storage.
 
 Bucket ~ Folder
+
+It is object based storage.
 
 S3 is a universal namesapce. That is, names must be unique globally.
 e.g https://s3-eu-west-1.amazonaws.com/acloudguru
@@ -43,7 +48,7 @@ S3- Storage Tiers/Classes [check image]
  3. S3- One Zone IA: Same as IA however data is stored in a single availability Zone only,
   still 99.999999999 durability, but only 99.5% availability.
   Cost is 20% less than regular S3-IA
-4. Reduced Redundancy Storage: Designed to provide 99.99% durability and 99.99% availability of objects over a guven year.
+4. Reduced Redundancy Storage: Designed to provide 99.99% durability and 99.99% availability of objects over a given year.
 Used for data that can be recreated if lost, e.g thumbnails. (Starting to disappear from AWS documentation but may still feature in exam)
 5. Glacier: Very Cheap, but used for archival only. Optimised for data that is infrequently accessed.
 
@@ -52,6 +57,7 @@ Lifecycle Management
 Versioning
 Encryption
 
+They key name decides in which partition the file is stored in.
 Charges
 1. Storage per GB 
 2. Requests (GET PUT etc)
@@ -100,5 +106,47 @@ GET-Intensive Workloads : Use CloudFront
 Mixed Workloads (GET, PUT & DELETE) : Use hax prefix to S3 object key names to prevent multiple objects being stored on the same partition.
 
 
+CORS - Configuration LAB (pending)[do it. Made mistakes in the question] 
 
 
+CloudFront
+
+CDN: A content delivery network is a system of distributed servers that 
+Basically helps you reduce network latency and hops.
+
+Edge Locations used by Cloud Front to keep copies of cache file which is much closer to the geographihc location.
+
+origin: This is the origin of all the files the CDN will distribute, which can be an s3 bucket, an ec2 instance an elastic load balancer,route53 or elastic load balancer.
+
+Distribution is a collection of edge locations
+1. Web Distribution - Typically used for websites.HTTP, HTTPS
+2. RTMP- Protocol used for Media Streaming
+
+
+What is CloudFront?
+
+Amazon CloudFront can be used to deliver your entire website, including dynamic, static, streaming, and interactive content using a  global network of edge locations. Requests for your content are automatically routed to the nearest edge locations, so the content is delivered with the best possible performance.
+
+e.g Can be used to be used to optimize performance for users accessing a website backed by s3.
+
+ClouFront works with s3, route53, ec2 and also with non aws server
+
+Objects are cached for TTL value. The Time to Live value expires, cached object is deleted.
+
+You can clear cached objects but you will be charged.
+
+
+Create Distribution:
+
+1. Improve your loading speed by creating a cloudfront and serve some images nigga
+2.
+3.
+
+S3 performance update
+
+3500 put operations
+5500 get operations
+
+What is hex hash prefix in s3?
+
+At a time you can upload a max of 5GB. Use multipart upload if the file size is greater than that bruh.

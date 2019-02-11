@@ -1,0 +1,56 @@
+The Appspec file is used to define the parameters that will be used for a CodeDeploy deployment. The file structure depends on whether you are deploying to Lambda or EC2/on premise instance
+
+For Lambda Deployments the file can be written in YAML or JSON.
+They contain the following fields:
+
+1.resources : The name and properties of the Lambda function to deploy
+2.version: Reserved for future use - currently the only allowed value is 0.0
+3.hooks: specifies Lambda function to run at a certain time in the process etc.
+There are two hooks allowed:
+
+BeforeAllowTraffic: used to specify the task and function that needs to be excuted before the traffic is routed to the new lambda function
+
+e.g test validating deployment
+
+AfterAllowTraffic : used to specify the task and function that needs to be excuted after the traffic is routed to the new lambda function
+
+e.g validation tests for traffc analaysis
+
+------------------------
+FOR EC2
+------------------------
+
+1. version: Reserved for future use - currently the only allowed value is 0.0
+2. OS: The name of the operating system you are using.
+3. Files: source and destination folder.
+4. Hooks: scripts that need to run at set point in the deployment lifecycle.
+(e.g) Unzip files prior to deployment lifecycle, run functional tests.
+
+
+yml file only for this thang.
+
+Question. The deployment is failing. What could be the reason?
+The appsec.yml file is not placed in the root of the directory revision where all the application code is.
+
+Hooks:
+
+Application Stop: Gracefully stop the application in preparation for deploying the new revision.
+
+Download Bundle: The Code Deploy agent copies the file to a temporary location.
+
+BeforeInstall: Details of any installation script, backing up current revision, decrypting files
+
+Install: The code deploy agent copies the file from temporary location to correct location
+
+AfterInstall: Details of any post application scripts e.g configuration tasks, change file permission.
+
+ApplicationStart: restart any services that were stopped during ApplicationStop
+
+ValidateService: Details of any test to validate the service
+
+Then these 3 final hooks are executed for re-registering. They are also executed before beginning.
+
+
+BeforeBlockTraffic: Run Tasks on instances before they are deregistered from a load balancer
+BlockTraffic: Deregister instances from a load balancer
+AfterBlockTraffic: Run tasks on instances after they are deregistered from a load balancer

@@ -1,0 +1,84 @@
+-------------------
+SQS
+-------------------
+Amazon SQS offers distributed queue system, where messages can wait to be proecssed by other components.
+
+Messages can contain upto 256kb of text in any format. Any component can later retrieve the messages programmitically using the Amazon SQS API.
+
+The queue acts as a buffer between producer and consumer and helpful in cases where consumption rate is very slow or intermittent network connection is there.
+
+Default retention period is 4 days. You can have it for 14 days max to 1 minute minimum.
+Visibility Timeout
+Immediately after a message is received, it remains in the queue. To prevent other consumers from processing the message again, Amazon SQS sets a visibility timeout, a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. The default visibility timeout for a message is 30 seconds. The minimum is 0 seconds. The maximum is 12 hours.
+
+Amazon SQS offers two queue types for different application requirements.
+
+By default, Amazon SQS uses short polling, querying only a subset of its servers (based on a weighted random distribution), to determine whether any messages are available for a response.
+
+Standard Queues(default)					FIFO Queues
+
+1. Unlimited Throughput						High Throughput.
+Supports a nearly unlimited number of 		300 operations per second. Also you can	
+api requests per second.					send operation for limit increase.	
+
+2. At-Least-Once Delivery					Exactly once processing.
+A message is delivered at least once,       A message is delivered once and remains
+but occasionly more than one copy of        available until a consumer processes 
+a message is delivered.						and deletes it. Duplicates aren't introduced
+											into the queue.						
+3.Best effort ordering						First in First out delevery.
+Occasionly, messages might be delivered     Messages will always be sent in FIFO
+in an order different from which they are   ordering.
+sent.
+
+-------------
+SNS
+-------------
+
+Simple Notificication Service
+
+It is a web service that makes it easy to set up, operate, and send notifications from the cloud.
+
+It provides developers with a highly scalable, flexible and cost effective capability to publish messages from an application and immediately deliver them to subscribers or other applications.
+
+Push notifications to apple, google fire os devices etc.
+
+It can also send text messages. It can send messages to SQS, or to any http endpoint.
+
+It can also trigger lambda function.
+
+SNS allows you to group multiple recepients using topics. In each topic different devices can be there. It will format and send messaged appropriately.
+
+The messages are stored redundantly across all AZ.
+
+Benefits:
+
+1. Instantaneous Push Based Delivery.
+2. Flexible message delivery to different protocol.
+3. Inexpensive, pay as you go model with no upfront costs.
+
+Pricing:
+It is cheap.
+Users pay $0.50 per million requests
+%0.06 per 100,000 notification deliveries over http.
+$0.75 per 100 notification over SMS
+$2.00 per 100,000 notifications deliveries over email.
+
+It is a pub-sub model. No polling required.
+
+SES: Email Messaging Service. Can also be used to recieve emails which can be stored in s3. Incoming emails can also be used to trigger lamda functions and SNS notification.
+
+
+Kinesis
+
+First Understand streaming data. Data generated regularly from multiple sources. 
+Ex: Game Data etc.
+
+Identify which service you should use
+
+1. Kinesis Streams
+2. Kinesis Firehose
+3. Kinesis Analytics
+
+Check the image yo.
+

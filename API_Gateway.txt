@@ -1,0 +1,46 @@
+Amazon API Gateway is a fully managed service that makes it easy for developers to publish, maintain, monitor, and secure APIs at any scale. With a few clicks in the AWS Management Console, you can create an API that acts as a front door for applications to access data, business logic, or functionality from your back-end services, such as applications running on Amazon Elastic Compute Cloud, code running on AWS Lambda, or any web application.
+
+What can API Gateway Do?
+
+Expose HTTPS endpoints to define a restful API
+Serverless-ly conect to services like Lambda & DynamoDB
+Send each API endpoint to a different target.
+Run efficiently with low cost
+Scale Effortlessly
+Track and control usage by API key
+Throttle requests to prevent attacks
+Maintain multiple version of the API
+
+
+API Caching
+
+You can enable API caching in Amazon API Gateway to cache your endpoints response. With Caching, you can reduce the number of calls made to your endpoint and also improve the latency of the requests to your API. When you enable caching for a stage, API gateway caches responses from your endpoint for a specified time to live (TTL) period, in seconds. API Gateway then responds to the request by looking up the endpoint response from the cache instead of making a request to your endpoint.
+
+[LAB]
+
+Build a simple serverless website with route53, APIGateway, s3 and Lambda.
+
+The domain name must be equal to the bucket name.
+
+popular Question-> What are the triggers for AWS Lambda.
+
+API_GATEWAY
+S3
+SNS
+Cloudwatch Logs
+Cloudwatch events
+AWS IOT
+Alexa Skills Kit
+Alexa Smart Home
+Application Load Balancer
+Code Commit
+Cognito Sync Trigger
+Dynamo DB
+Kinesis
+S3
+SNS
+SQS
+
+
+Advanced API Gateway Import
+

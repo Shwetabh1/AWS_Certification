@@ -1,0 +1,154 @@
+[Buisness IDEA]
+[Give Mock Tests AWS Certification]
+[Develop the test module. Can be used anywhere.]
+
+DynamoDB:
+Tables, Items and Attributes
+Items is basically rows
+Attributes is column
+
+DOcument can be written in XML, HTML and JSON
+
+It supports both document and key-value based model. It is also serverless thus a good choice for developing serverless shit.
+
+It is always backed by solid state disks. Spread across 3 geographic locations and has 2 consistency model.
+
+1. Eventual Consistency Reads (Default)
+This gives best performance and ensures consistency across all copies of data  within seconds
+2. Strongly Consistent Reads
+Everywhere it is updated.
+
+Primary Key are of two types
+
+1. Partition Key : A simple primary key, composed of one attribute known as the partition key. Attributes in DynamoDB are similar in many ways to fields or columns in other database systems.
+2. Composite Key :  Referred to as a composite primary key, this type of key is composed of two attributes. The first attribute is the partition key, and the second attribute is the sort key. 
+
+Access is controlled by Identity Acess Management Policies.
+
+Fine Grained access control using IAM Condition parameter: dynamoDb:LeadingKeys to allow users to access only the items where the partition key value matches their user ID.
+
+
+
+All about indexes in DynamoDB:
+
+What are indexes? 
+In SQL databases an index is a data structure which allows you to perform fast queries on specific columns that you want included in the index and run your searches on the index- rather than on the entire dataset.
+
+In DynamoDB two types of indexes are supported.
+
+1. Local Secondary Index
+- Can be created when you are creating the table.
+- It can't be modified, added or removed later.
+- It has the same partition key as your original table.
+- But a different Sort Key. This way you get a different view of data organised on sort key.
+- Any query based on this sort key are much faster than the usual one.
+e.g Partition Key: Consumer ID
+Sort Key: Account Creation Date.
+
+
+
+2. Global Secondary Index
+- You can create it anytime. While creating the account or add it later.
+- Choose different partition key and sort key.
+- Thus speeds up queries based on above.
+ex: email_id [Partition Key]
+login_time [Sort Key]
+
+
+
+LAB: Run a script on EC2 to create dynamoDB database, all right.
+
+
+Query vs Scan
+
+Scans:
+A scan operation examines every item in the table.
+By default return all data attributes.
+Use the projection expression parameter to refine the scan to only return the attributes you want.
+
+
+When would you use query and when would you use Scan?
+Query is much more efficient than a Scan.
+
+Scan dumps the entire table and then filters out values to provide the desired result - removing the unwanetd data.
+
+This adds an extra step of removing the data you don't want. As the table grows the scan operation takes longer
+
+Improve the Scan Performance by introducing parallel scans.
+
+It can only scan 1 partition at a time. By Default it scans data @1mb at a time.
+
+
+Query results is always sorted on sort key.
+
+You can change the scanIndexForward parameter to do it decreasing order.
+
+Improve the performance of scans and queries by introducing a smaller page size which uses fewer read operations.
+
+
+Dynamo DB provision throughput
+
+- DynamoDB provisioned throughput is measured in Capacity Units
+1 Read Capacity Units = 1x strong consistent read of 4kb p/s or 2x eventual consisten read of 4kb p/s(default) 
+1 Write Capacity Units = 1 * 1kb per second.
+
+
+DynamoDB On Demand Capacity
+
+We don't need to specify our capacity requirement. They will automatically scale up and down. Charges apply for reading, writing and storing data.
+
+Question when you should use Provisioned capacity and when you should you use On-Demand capacity?
+When you don't know your traffic, short lived peaks, pay per capacity etc. [On Demand]
+When you know your traffic, or will have a consistent or gradual increase. [Provisioned]
+
+
+DynamoDB Accelerator (DAX)
+
+It is a fully managed , clustered in-memory cache for dynamoDB.
+Delivers up to a 10x read performance improvement. Useful for black friday etc. gaming auction etc
+
+DAX is a write through caching service, thus when data is written it is written to cache as well as back end store at the same time.
+It allows you to point your dynamodb calls at the DAX cluster. If the item you are querying is in the cache it will return it. 
+
+If the item is not available in the cache then it performs the eventual consistent GetItem operation against dynamoDB.
+
+retrieval of data from DAX reduces the read load on dynamodb tables. may be able to reduce provisioned read capacity.
+
+When not to choose DAX
+
+caters only to eventual consistent read thus if your application wants strongly consistent read this shit is not an option. bruh
+For Write Intensive Application.
+Applications that do not perform many read operations. 
+Applications that do not require microsecond response times.
+
+
+ELASTICACHE
+
+In memory caching. Can be used for any RDS database and also for DynamoDB.
+
+It sits between your DB and the application. Good if your data is not changing rapidly.
+
+There are two types of elasticache
+
+1.memcached: Widely adopted memory object caching system. Multi Threaded. No Multi A-Z capability. 
+2.redis: open source in memory key value store. Supports more complex data structure. Sorted List and Sets.
+Supports Multi AZ
+
+There are two types of caching mechanism
+
+1. Lazy Loading
+Only requested data is cached. First it is a miss and then it is loaded so it is available afterwards.
+
+remove stale data using TTL.
+
+2. Write Through
+
+DynamoDB Transactions
+
+ACID
+
+DynamoDB TTL [comes in exam]
+
+
+
+We need to specify capacity units at the time of creation
