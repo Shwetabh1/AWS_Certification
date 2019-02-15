@@ -1,85 +1,46 @@
-What you need to do?
-Just complete this course, read the most important FAQs and watch a couple videos on re:Invent 2016 for most important topics (DynamoDB, SQS, S3, EC2, VPC).
+1. Two questions about Kinesis Client Library and resharding
 
-Confirm big focus on DynamoDB (~15/55 questions) and S3 (~12/55 questions)
+2. One question about how to solve api gateway autodeployment with SAM
 
-1. Go through the course video's at least twice (once before the exam)
+3. One question about EC2 instance profile
 
-2. Read FAQ from S3,EC2,DyanamoDB,SQS,SNS at least.
+4. One question about EBS and multi container docker
 
-3. Whizlabs Practice test which was another game changer.
+5. One question about grouping messages by messageid in SQS
 
-4. Notes for Revision (https://acloud.guru/forums/aws-certified-developer-associate/discussion/-L-mB4r0GR6jF7qtsEuZ/quicknotesforawsdeveloper)
+6. Another item not mentioned by you is VPC flow logs
 
+7. one question about chosing Fargate over Ecs when you don't want to take care of everything yourself and you can leave it to AWS :)
 
-You should know about:
+8. how the user(client) can evict API gateway cache
 
-Optimising S3 Key (File) names for heavy load (http://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html)
-
-Optimising DynamoDB operations (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScanGuidelines.html)
-
-ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
-
-CORS
-
-Resources that Elastic Beanstalk can create.
-
-CloudFormation Output section and Function you would use.
-
-SNS message format
-
-I had quite a few DynamoDB questions about hash and range keys that I was not prepared for based on the course alone.
-You need to know what each is and how to optimize each for specific queries for the best performance. Also, know the best filename format in S3 to optimize performance.
-
-I had only 1, maybe 2, questions about calculating your provisioned throughput. The one I recall was about write throughput. There may have been 1 about read as well but there were far more questions about optimizing queries which I felt was not covered at all by Ryan in the course.
-
-Not covered in the course:
-
-Options on authenticating using LDAP together with IAM.
-Not covered: LDAP integration, S3 optimization
-* Know/review limits for S3, DynamoDB, EC2, SNS, and SQS. Understanding the service limits would have helped with at least 5 questions.
- Also know which AWS services are key-based and which platforms Elastic Beanstalk supports (in addition to which resources it can create, as mentioned by the OP)
-
-This was on the exam. How do you register devices for Amazon Mobile Devices and SNS Mobile Push notifiations.
-http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-devicetoken.html
-Answer: use CreatePlatformEndpoint is correct way to do. You can add device tokens and registration IDs to Amazon SNS using the following methods: • Manually add a single token to AWS using the AWS Management Console • Migrate existing tokens from a CSV file to AWS using the AWS Management Console • Upload several tokens using the CreatePlatformEndpoint API • Register tokens from devices that will install your apps in the futur
-
-free test at thecertschool.com
+Resharding (KCL), Evicting API cache (Default not DLB), Fargate, Glue and VPC/Security Groups (?)
 
 
-IAM:
-Some questions also from IAM including IAM role for DynamoDB, Web Federation, Corporate network, CloudFront, Elastic Beanstalk, Cloud Formation and Elastic Cache.
-Options on authenticating using LDAP together with IAM.
+ACL vs SG
 
-S3 - 15 Questions.
+Security groups are statefull - any inbound rule , applies to outbound as well (Only Allow rules)
 
-CORS, Static Hosting, S3 Encryption Header, S3 Performance optimisation(Mostly on adding uniqueness before the key),Bucket policy and ACL (basically how to restrict),Limits (like total bucket )
+by default all inbound deny, all outbound allow
 
-DynamoDB (10 Questions)-
+can span across AZ
 
-Basic questions about Hash and range key ,Throughput error (like if not Table then what is the cause) , Onw question on write throughput calculation
+ACL are stateless -
 
-EC2 (5 Question)-
+For default ACL, all inbound and outbound rules are allowed by default - associated with all subnets in VPC by default
 
-Basic API like DescribeImages,AMI related(example EC2 can be launched from the same region where AMI is stored) and Root Device Encryption .
+for Custom ACL, all inbound and outbound traffic is denied by default - not associated with any subnet
 
-SQS -(6-7 Questions)
+1 subnet is only associated with ACL. granular rules for ACLs, numbered rules (recommended steps of 100)
 
-Basic SQS functionality, Protocols used and ,Long Polling ,Max Visibility timeout scenario Questions
+rule no. 99 takes precedence over rule no. 100 (if 99 is blocked and 100 is allowed) 99 will be executed.
 
-SNS (4-5 Questions)
+Can SPAN across AZ
 
-Basic Functionality ,Do check the Format of the SNS Notification and Field used in (JSON ),Fanout concept
+Ephemeral port - 1024 - 65535 should be allowed to take traffic.
 
-SWF(1-2 Questions)
+if you want to BLOCK IP address then must use ACL, because security group doesn’t have deny
 
-Basic Functionality Scenario Based(like what all the functionally used by SWF)
+Bastion - keep it in public subnet to allow SSH / RDP into instances into private subnets (High availability - Bation in two public subnets and also ASG - Route 53 running Health checks on those Bastion)
 
-VPC (5 Questions)
-
-All scenario based 2-3 lines revolving around assigning Elastic address or public address to access the instance and NAT in subnet, Cover Ryan's Video that should suffice.
-
-Rest 5-7 Questions on AWS SDK ,Default region (us-east-1) and Elastic Beanstalk Platforms and Elastic Cache to avoid the session state problem and one Serverless (regarding the Lambda)
-
- I felt uncomfortable going through questions from Kinesis and DynamoDBStreams and AWS X-Ray
-
+https://docs.aws.amazon.com/streams/latest/dev/kinesis-record-processor-scaling.html

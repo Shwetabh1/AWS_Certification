@@ -1,8 +1,23 @@
-Elastic Beanstalk
+FAQs done
 
+What is Elastic Beanstalk?
+AWS Elastic Beanstalk makes it even easier for developers to quickly deploy and manage applications in the AWS Cloud. Developers simply upload their application, and Elastic Beanstalk automatically handles the deployment details of capacity provisioning, load balancing, auto-scaling, and application health monitoring.
+
+Amazon's version of PAAS is Elastic Beanstalk.
 A provisioning service. You don't need to choose ec2 etc.
 Deploys and scales your web application.
-Java PHP Python GO Node.js Docker and Node.js
+
+Language and platform supported:
+AWS Elastic Beanstalk supports the following languages and development stacks:
+Apache Tomcat for Java applications
+Apache HTTP Server for PHP applications
+Apache HTTP Server for Python applications
+Nginx or Apache HTTP Server for Node.js applications
+Passenger or Puma for Ruby applications
+Microsoft IIS 7.5, 8.0, and 8.5 for .NET applications
+Java SE
+Docker
+Go
 
 Elastic BeanStalk Supports several options for processing deployments
 
@@ -28,5 +43,51 @@ You can store values as plain text or you can encrypt the data.
 
 
 Difference between Amazon Block Store, Amazon Storage Gateway and Amazon Elastic FileSystem.
+
+Q) What are the resources Elastic BeanStalk can create?
+Q: What are the Cloud resources powering my AWS Elastic Beanstalk application?
+
+AWS Elastic Beanstalk uses proven AWS features and services, such as Amazon EC2, Amazon RDS, Elastic Load Balancing, Auto Scaling, Amazon S3, and Amazon SNS, to create an environment that runs your application. The current version of AWS Elastic Beanstalk uses the Amazon Linux AMI or the Windows Server 2012 R2 AMI.
+
+Q: How much does AWS Elastic Beanstalk cost?
+
+There is no additional charge for AWS Elastic Beanstalk–you pay only for the AWS resources actually used to store and run your application.
+
+Q: How do I make my application private?
+
+By default, your application is available publicly at myapp.elasticbeanstalk.com for anyone to access. You can use Amazon VPC to provision a private, isolated section of your application in a virtual network that you define. This virtual network can be made private through specific security group rules, network ACLs, and custom route tables. You can also easily control what other incoming traffic, such as SSH, is delivered or not to your application servers by changing the EC2 security group settings.
+
+
+
+1. Applications can have multiple env. like prod,non-prod,dev or functional type like Frontend ,Backend etc.
+
+2. Application can have many versions 1:M relationship
+
+3. Application versions can be deployed to the environment with an application
+
+4. By creating environment you allow the AWS ElasticBeanStalk to manage resources and permission on your behalf
+
+5. Platform : Java,.net(window/IIS),node.js,php,phython,Go,ruby,Packer
+
+6. Preconfigure Docker platform - Phython,Go,Glassfish
+
+7. Generic Docker -Docker and multiple container Docker
+
+8. You can stream logs into CloudWatch and set the retention period upto 10 years.Default 7 days
+
+9. If you delete the elesticbeanstalk app your associated database will be deleted ,so start your own database outside EB
+
+10. Immutable deployments when new version app will deployed as separate instance and autoscaling group
+
+11. AWS Elastic Beanstalk has two types of environment tiers to support different types of web applications. Web servers are standard applications that listen for and then process HTTP requests, typically over port 80.
+
+12. Workers are specialised applications that have a background processing task that listens for messages on an Amazon SQS queue. Worker applications post those messages to your application by using HTTP.
+
+13. Connection draining timeout - 20 sec ,Maximum time that the load balancer maintains connections to an Amazon EC2 instance before forcibly closing connections.
+
+14. In EB ,you can do App and configuration changes both
+
+16. Updates on application can at once,1 Instance at a time ,20% if EC2 fleet or immutable
+
 
 

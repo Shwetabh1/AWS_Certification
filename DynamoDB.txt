@@ -1,3 +1,8 @@
+Go thorugh this [Must] Optimising DynamoDB operations (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScanGuidelines.html)
+Know/review limits for DynamoDB [Question]http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+I had quite a few DynamoDB questions about hash and range keys that I was not prepared for based on the course alone.
+You need to know what each is and how to optimize each for specific queries for the best performance.
+
 [Buisness IDEA]
 [Give Mock Tests AWS Certification]
 [Develop the test module. Can be used anywhere.]
@@ -21,7 +26,7 @@ Everywhere it is updated.
 Primary Key are of two types
 
 1. Partition Key : A simple primary key, composed of one attribute known as the partition key. Attributes in DynamoDB are similar in many ways to fields or columns in other database systems.
-2. Composite Key :  Referred to as a composite primary key, this type of key is composed of two attributes. The first attribute is the partition key, and the second attribute is the sort key. 
+2. Composite Key :  Referred to as a composite primary key, this type of key is composed of two attributes. The first attribute is the partition key, and the second attribute is the sort key.
 
 Access is controlled by Identity Acess Management Policies.
 
@@ -31,7 +36,7 @@ Fine Grained access control using IAM Condition parameter: dynamoDb:LeadingKeys 
 
 All about indexes in DynamoDB:
 
-What are indexes? 
+What are indexes?
 In SQL databases an index is a data structure which allows you to perform fast queries on specific columns that you want included in the index and run your searches on the index- rather than on the entire dataset.
 
 In DynamoDB two types of indexes are supported.
@@ -85,11 +90,13 @@ You can change the scanIndexForward parameter to do it decreasing order.
 
 Improve the performance of scans and queries by introducing a smaller page size which uses fewer read operations.
 
+I had only 1, maybe 2, questions about calculating your provisioned throughput. The one I recall was about write throughput. There may have been 1 about read as well but there were far more questions about optimizing queries which I felt was not covered at all by Ryan in the course.
+
 
 Dynamo DB provision throughput
 
 - DynamoDB provisioned throughput is measured in Capacity Units
-1 Read Capacity Units = 1x strong consistent read of 4kb p/s or 2x eventual consisten read of 4kb p/s(default) 
+1 Read Capacity Units = 1x strong consistent read of 4kb p/s or 2x eventual consisten read of 4kb p/s(default)
 1 Write Capacity Units = 1 * 1kb per second.
 
 
@@ -108,7 +115,7 @@ It is a fully managed , clustered in-memory cache for dynamoDB.
 Delivers up to a 10x read performance improvement. Useful for black friday etc. gaming auction etc
 
 DAX is a write through caching service, thus when data is written it is written to cache as well as back end store at the same time.
-It allows you to point your dynamodb calls at the DAX cluster. If the item you are querying is in the cache it will return it. 
+It allows you to point your dynamodb calls at the DAX cluster. If the item you are querying is in the cache it will return it.
 
 If the item is not available in the cache then it performs the eventual consistent GetItem operation against dynamoDB.
 
@@ -118,7 +125,7 @@ When not to choose DAX
 
 caters only to eventual consistent read thus if your application wants strongly consistent read this shit is not an option. bruh
 For Write Intensive Application.
-Applications that do not perform many read operations. 
+Applications that do not perform many read operations.
 Applications that do not require microsecond response times.
 
 
@@ -130,7 +137,7 @@ It sits between your DB and the application. Good if your data is not changing r
 
 There are two types of elasticache
 
-1.memcached: Widely adopted memory object caching system. Multi Threaded. No Multi A-Z capability. 
+1.memcached: Widely adopted memory object caching system. Multi Threaded. No Multi A-Z capability.
 2.redis: open source in memory key value store. Supports more complex data structure. Sorted List and Sets.
 Supports Multi AZ
 
@@ -151,4 +158,206 @@ DynamoDB TTL [comes in exam]
 
 
 
-We need to specify capacity units at the time of creation
+We need to specify capacity units at the time of creation.
+
+
+
+
+
+////////////// DYNAMO DB SHIT YO ////////////
+DynamoDB Notes
+
+1. DynamoDb provide predictable performance with scalability
+
+2. Atomic updates is available which will increment or decrement the counter no matter what like website visitor
+
+3. Query functionality using Get/Put operation using primary key
+
+4. Primary key is the only required attribute for the item in the table
+
+5. in addition DynamoDb query on the non primary key attribute like local secondary index or global secondary index
+
+6. Primary can be single attribute(partition or Hash key) or composite(Partion/Hash and Range/Sort)
+
+7. Yes, you can specify a condition that must be satisfied for a put, update, or delete
+
+8. Yes, you can specify an expression as part of the Query API call to filter results based on values of primary keys on a table using the KeyConditionExpression parameter.
+
+9. there are no limits on the request capacity or storage size for a given table.
+
+10. a table in Amazon SimpleDB has a strict storage limitation of 10 GB and is limited in the request capacity it can achieve (typically under 25 writes/second); it is up to you to manage the partitioning and re-partitioning of your data over additional SimpleDB tables if you need additional scale. While SimpleDB has scaling limitations, it may be a good fit for smaller workloads that require query flexibility. Amazon SimpleDB
+
+11. Amazon DynamoDB stores structured data, indexed by primary key, and allows low latency read and write access to items ranging from 1 byte up to 400KB. Amazon S3 stores unstructured blobs and suited for storing large objects up to 5 TB. In order to optimize your costs across AWS services, large objects or infrequently accessed data sets should be stored in Amazon S3, while smaller data elements or file pointers (possibly to Amazon S3 objects) are best saved in Amazon DynamoDB.
+
+12. There is no explicit limitation on the number of attributes associated with an individual item,
+
+13. but the aggregate size of an item, including all the attribute names and attribute values, cannot exceed 400KB.
+
+14. Api’s of DynamoDB :
+
+CreateTable- Create a table and specifies the primary index
+
+DescribeLimits operation to see the current limit values.
+
+UpdateTable: Update the table ProvisionThoughput
+
+DeleteTable: Delete the table
+
+DescribeTable: Returns the size ,index and stays information of table
+
+ListTables: Returns the list of the table associated with current account and endpoint
+
+PutItem: Add a new item or replace existing item if present with same private key . Also supports conditional operation to replace the specific attribute based on condition
+
+UpdateItem – Edits an existing item's attributes. You can also use conditional operators to perform an update only if the item’s attribute values match certain conditions.
+
+DeleteItem – Deletes a single item in a table by primary key. You can also use conditional operators to perform a delete an item only if the item’s attribute values match certain conditions.
+
+BatchWriteItem – Inserts, replaces, and deletes multiple items across multiple tables in a single request, but not as a single transaction. Supports batches of up to 25 items to Put or Delete, with a
+
+maximum total request size of 16 MB.
+
+GetItem – The GetItem operation returns a set of Attributes for an item that matches the primary key. The GetItem operation provides an eventually consistent read by default. If eventually consistent
+
+reads are not acceptable for your application, use ConsistentRead.
+
+BatchGetItem – The BatchGetItem operation returns the attributes for multiple items from multiple tables using their primary keys. A single response has a size limit of 16 MB and returns a maximum
+
+of 100 items. Supports both strong and eventual consistency.
+
+Query – Gets one or more items using the table primary key, or from a secondary index using the index key. You can narrow the scope of the query on a table by using comparison operators or
+
+expressions. You can also filter the query results using filters on non-key attributes. Supports both strong and eventual consistency. A single response has a size limit of 1 MB.
+
+Scan – Gets all items and attributes by performing a full scan across the table or a secondary index. You can limit the return set by specifying filters against one or more attributes.
+
+15. By default, the Scan operation is eventually consistent. However, you can modify the consistency model using the optional ConsistentRead parameter in the Scan API call. Setting the ConsistentRead parameter to true will enable you make consistent reads from the Scan operation.
+
+16. Scan API request exceeds a 1 MB limit, the given request will terminate and fetched results will be returned along with a LastEvaluatedKey (to continue the scan in a subsequent operation).
+
+17. The read units required is the number of bytes fetched by the scan operation, rounded to the nearest 4KB, divided by 4KB. Scanning a table with consistent reads consumes twice the read capacity as a scan with eventually consistent reads.
+
+18. DynamoDB supports four scalar data types: Number, String, Binary, and Boolean. Additionally, DynamoDB supports collection data types: Number Set, String Set, Binary Set, heterogeneous List and heterogeneous Map. DynamoDB also supports NULL values.
+
+19. DynamoDB supports key-value and document data structures.
+
+20. but you can use the document SDK to pass JSON data directly to DynamoDB.
+
+21. could create an index to let you query based on First Name, Last Name, or Zip Code. The list of friends is not a top-level element, therefore you cannot index the list of friends.
+
+22. GetItem, BatchGetItem, Query, or Scan APIs, you can define a ProjectionExpression
+
+23. No. There is no limit to the amount of data you can store in an Amazon DynamoDB table
+
+24. no theoretical limit on the maximum throughput you can achieve
+
+25. 10,000 writes/second or 10,000 reads/second,aws form
+
+26. The service replicates data across three facilities
+
+27. DynamoDB Auto Scaling is a fully managed feature that automatically scales up or down provisioned read and write capacity of a DynamoDB table or a global secondary index
+
+28. Limits in DynamoDB
+
+Capacity Unit Sizes
+
+*One read capacity unit = one strongly consistent read per second, or two eventually consistent reads per second, for items up to 4 KB in size.
+
+*One write capacity unit = one write per second, for items up to 1 KB in size.
+
+*Provisioned Throughput Default Limits-For any table or global secondary index, the minimum settings for provisioned throughput are 1 read capacity unit and 1 write capacity unit.
+
+US East (N. Virginia) Region:
+
+Per table – 40,000 read capacity units and 40,000 write capacity units
+
+Per account – 80,000 read capacity units and 80,000 write capacity units
+
+All Other Regions:
+
+Per table – 10,000 read capacity units and 10,000 write capacity units
+
+Per account – 20,000 read capacity units and 20,000 write capacity units Note All the account's available throughput can be applied to a single table or across multiple tables.The provisioned throughput limit includes the sum of the capacity of the table together with the capacity of all of its global secondary indexes.
+
+You can increase ReadCapacityUnits or WriteCapacityUnits as often as necessary, using the AWS Management Console or the UpdateTable operation. In a single call, you can increase the provisioned
+
+throughput for a table, for any global secondary indexes on that table, or for any combination of these. The new settings do not take effect until the UpdateTable operation is complete
+
+*. At the end of that same day the table and the GSI's throughput can potentially be decreased a total of 9 times each.
+
+There is no practical limit on a table's size.
+
+For any AWS account, there is an initial limit of 256 tables per region.
+
+You can define a maximum of 5 local secondary indexes and 5 global secondary indexes per table.
+
+You can project a total of up to 20 attributes into all of a table's local and global secondary indexes. This only applies to user-specified projected attributes.
+
+his limit does not apply for secondary indexes with a ProjectionType of KEYS_ONLY or ALL.
+
+aggregate size of an item, including all the attribute names and attribute values, cannot exceed 400KB.
+
+In general, an attribute name must be at least 1 character long, but no greater than 64 KB long.
+
+The minimum length of a partition key value is 1 byte. The maximum length is 2048 bytes.
+
+There is no practical limit on the number of distinct partition key values
+
+The minimum length of a sort key value is 1 byte. The maximum length is 1024 bytes.
+
+A-Z,a-z,0-9,_ (underscore) ,- (hyphen) ., (dot) allowed ,for tables and secondary indexes must be at least 3 characters long, but no greater than 255 for table and secondary index name
+
+general, an attribute name must be at least 1 character long, but no greater than 64 KB long. except below which have 255 byte
+
+•Secondary index partition key names.
+
+*Secondary index sort key names.
+
+*The names of any user-specified projected attributes
+
+The length of a String is constrained by the maximum item size of 400 KB.
+A Number can have up to 38 digits of precision, and can be positive, negative, or zero.
+
+An attribute value cannot be an empty String or empty Set (String Set, Number Set, or Binary Set). However, empty Lists and Maps are allowed.
+
+DynamoDB supports nested attributes up to 32 levels deep.
+
+The maximum length of any expression string is 4 KB. For example, the size of the ConditionExpression a=b is three bytes.
+
+The maximum length of any single expression attribute name or expression attribute value is 255 bytes. For example, #name is five bytes; :val is four bytes.
+
+The maximum number of operators or functions allowed in an UpdateExpression is 300
+
+Do not allow more than two processes to read from the same DynamoDB Streams shard at the same time. Exceeding this limit can result in request throttling.
+
+n general, you can have up to 10 CreateTable, UpdateTable, and DeleteTable requests running simultaneously (in any combination).
+
+DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.
+
+The result set from a Query is limited to 1 MB per call. You can use the LastEvaluatedKey from the query response to retrieve more results.
+
+The result set from a Scan is limited to 1 MB per call. You can use the LastEvaluatedKey from the scan response to retrieve more results.
+
+29. No, an Auto Scaling policy can only be set to a single table or a global secondary indexes within a single region.
+
+30. No, scaling up instantly to maximum capacity or scaling down to minimum capacity is not supported. Instead, you can temporarily disable Auto Scaling, set desired capacity you need manually for required duration, and re-enable Auto Scaling later.
+
+31. When you delete a table or global secondary index from the console, its Auto Scaling policy and supporting Cloud Watch alarms are also deleted.
+
+DynamoDB Acloud Guru Notes
+
+1. Query operation returns the items in a table based on the primary key ,you must provide the partition key attribute and the distinct value
+
+2. You can optionally provide the Sort or range key attribute and value to get the refine results
+
+3. By default query operation will return all the attribute ,but we can use projectionExpression so that query will return few attribute
+
+4. query results are always be in sorted manner(ascending ) and if sort key is number and it should be in numeric order (1 to 10) or if in alphabet the ascii order .to Reverse the order we can ScanIndexForward value to false
+
+5. Query is eventual consistency you can gage to strongly consistence
+
+6. Scan operation is like scanning all the table like dumping the table returns all the attributes you can use projectionExpression so that query will return few attribute
+
+7. Query is more efficient than Scan as Scan is scanning the entire table and then filter out the value from data set .Avoid using Scan with large table that filters many results ,it can also consume your entire throughput in a single operation
+
+8. For better performance use Query ,Get or batchGetItem instead

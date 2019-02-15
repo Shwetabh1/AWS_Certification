@@ -14,3 +14,50 @@ The main sections in the cloud formation template is
 3. Resources: (mandatatory) The resources to create
 4. Mappings: Create Custom Mappings like region: AMI
 5. Transforms: reference code located in s3, eg Lambda Code or reusable snippets of cloud formation code.
+1.Cloud Fromation allow you to concert the AWS Resouces into code
+
+2. You need not to figure out the order for the provisioning AWS service CloudFormation will take care of.
+
+3. You can also mofify and update the deployed AWS resouces and also apply versions .
+
+4. Cloud Formation Template is the Achitectural daigram for the CF
+
+5.Cloud Frmation stack is the end result of the diagram
+
+6 You can create ,delete and update the AWS resouces by C,D,U the stack using template
+
+7 Template is in Json and Yaml
+
+8 Template :
+
+Json
+
+{
+
+"Resouces" : {
+
+"Hello" :{
+
+"Type" : "AWS::S3::Bucket"
+
+}
+
+}
+
+}
+
+9 Fn::GetAtt to get the output data in the CF
+
+10.By Default Automatic rollback for error are enables.
+
+11. you are charged for errors
+
+12 CF is free,underline resources are charged
+
+13 CF use Fn:GetAtt to output data
+
+14 You can create A records ,Aliases e
+
+CloudFormation Output section and Function you would use. [Important Question]
+CloudFormation template anatomy (different sections) ie. only resources section is required for template to execute. [Important]
+Also understand CF intrinsic function types and usage.
