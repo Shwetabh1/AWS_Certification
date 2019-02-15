@@ -1,3 +1,6 @@
+NAT instances can "Use an Elastic IP address or a public IP address." http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-comparison.html [Question Important]
+
+
 A virtual private cloud (VPC) is a virtual network dedicated to your AWS account.
 
 Inside this you get the Subnet whic is firewalled by ACL.
@@ -6,9 +9,9 @@ each subnet has ec-2 instanes
 
 each subnet must be within one AZ. It can't span AZ.
 
-A VPC is an isolated portion of the AWS cloud populated by AWS objects, such as Amazon EC2 instances. 
+A VPC is an isolated portion of the AWS cloud populated by AWS objects, such as Amazon EC2 instances.
 You must specify an IPv4 address range for your VPC.
-Specify the IPv4 address range as a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16. 
+Specify the IPv4 address range as a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
 You cannot specify an IPv4 CIDR block larger than /16. You can optionally associate an Amazon-provided IPv6 CIDR block with the VPC.
 
 
@@ -21,9 +24,9 @@ VPC can span multiple availability zones in the region
  Subnets are required to launch instances into VPCs.
 
  Public IP address
- Private IP address 
- Elastic IP address (They remian in your account until you 
- choose to release it) 
+ Private IP address
+ Elastic IP address (They remian in your account until you
+ choose to release it)
 
  Subnet Definition
 
@@ -42,3 +45,64 @@ VPC can span multiple availability zones in the region
 
  1. Each Subnet in your VPC must be associated with a route table and only one route able
  but the route table can be asoociated with multiple subnets.
+
+
+VPC Flowlogs: to capture all the traffic information into logs - logs everything (create IAM role and create cloud watch log group - and log stream) [Questions]
+
+VPC Cleanup: can’t delete VPC if you have active running instance or ELB is running [question]
+
+
+
+///NEXT LEVEL SHIT/////
+VPC - logical datacenters in AWS
+
+Can span multiple AZ, but can’t span multiple regions, PEER VPC, but no Transitive Peering
+
+Custom VPC has to be /16 can’t go higher then that /8 is not allowed
+
+When you create Custom VPC it creates default security group, default network ACL and default route table., it doesn’t create default Subnet
+
+One Subnet == one AZ, you can have security group spanning multiple AZ, ACL’s span across AZ (assign sg and ACL to two different subnets)
+
+any CIDR block 5 reserved IPs (.0, .1, .2, .3, .255)
+
+so for CIRD block /24: 2^8 - 5 = 256 - 5 = 251 available IP address space
+
+when you create internet gateway, by default its detached, attach it to VPC then, only 1 IGW per VPC
+
+When you create a VPC Default Routetable(Main Routable) is created where the default Routes are,
+
+10.0.0.0/16 Local <— all subnets inside VPC will be able to talk to each other
+
+Don’t touch Main route table
+
+Create another routetable for route out to internet (0.0.0.0/0 IGW) <— route out to the internet
+
+Last thing you associate this new route table to one of the subnet which will make it public. (you can enable auto assign public IP for the public subnet)
+
+1 subnet can have 1 routetable
+
+ICMP is for ping / monitor
+
+NAT instance and NAT gateway
+
+NAT Instance - disable source / destination check., always behind security group, must be in public subnet, must have an EIP, ,must be a route out of the private subnet to NAT
+
+Increase the instance size if bottleneck
+
+Change the main route table - add a route (0.0.0.0/0 NAT Instance target)
+
+NAT Instance is a single point of failover (put it behind a ASG),
+
+NAT gateway - released in 2016 - amazon handled
+
+Amazon maintains it for you, no need to handle yourself. (security patches applied by AWS)
+
+You can just create the gateway and assign EIP (put it in public subnet) (automatically assigned)
+
+Change the main route table - add a route (0.0.0.0/0 NAT gateway target)
+
+No need for disable source/destination check or no need to put it behind a security group - it handles it for you.
+
+Highly available / redundancy no need for ASG.NAT gateways are little bit costly - always use it in production scale automatically up to 10Gbps
+

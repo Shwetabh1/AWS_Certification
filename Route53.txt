@@ -1,5 +1,23 @@
-Route53 is Amazon's DNS service and it allows you to map your domain names to 
+Route53 is Amazon's DNS service and it allows you to map your domain names to
 EC2 Instances, Load Balancers and s3 buckets.
 
 Default Region is Northern Virginia.
+
+Cname is paid ,Alias is free
+
+2. A recode is Dns to IP
+
+3. Alias names can be used with naked Domain name like without www.
+
+4. Routing policies :
+
+Simple -simple Dns name is pointed to ELB using Alias name
+
+Weighted - 70 %percentage of traffic to A ELB and 30 % to B ELB
+
+Latency - depends upon network latency
+
+Failure- If primary ELB instances are down point to failover ELB
+
+Geolocation-Depends upon the geolocation of the user
 

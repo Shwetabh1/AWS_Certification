@@ -1,3 +1,5 @@
+Know/review limits for SQS
+
 -------------------
 SQS
 -------------------
@@ -18,14 +20,14 @@ By default, Amazon SQS uses short polling, querying only a subset of its servers
 Standard Queues(default)					FIFO Queues
 
 1. Unlimited Throughput						High Throughput.
-Supports a nearly unlimited number of 		300 operations per second. Also you can	
-api requests per second.					send operation for limit increase.	
+Supports a nearly unlimited number of 		300 operations per second. Also you can
+api requests per second.					send operation for limit increase.
 
 2. At-Least-Once Delivery					Exactly once processing.
 A message is delivered at least once,       A message is delivered once and remains
-but occasionly more than one copy of        available until a consumer processes 
+but occasionly more than one copy of        available until a consumer processes
 a message is delivered.						and deletes it. Duplicates aren't introduced
-											into the queue.						
+											into the queue.
 3.Best effort ordering						First in First out delevery.
 Occasionly, messages might be delivered     Messages will always be sent in FIFO
 in an order different from which they are   ordering.
@@ -71,7 +73,7 @@ SES: Email Messaging Service. Can also be used to recieve emails which can be st
 
 Kinesis
 
-First Understand streaming data. Data generated regularly from multiple sources. 
+First Understand streaming data. Data generated regularly from multiple sources.
 Ex: Game Data etc.
 
 Identify which service you should use
@@ -81,4 +83,67 @@ Identify which service you should use
 3. Kinesis Analytics
 
 Check the image yo.
+
+Difference between SQS and SNS
+Amazon SNS allows applications to send time-critical messages to multiple subscribers through a “push” mechanism, eliminating the need to periodically check or “poll” for updates.
+
+Amazon SQS is a message queue service used by distributed applications to exchange messages through a polling model, and can be used to decouple sending and receiving components—without requiring each component to be concurrently available
+
+How this is efficient
+
+SNS will publish to three queue when image is uploaded. Q1 will generate thumnail, q2 will do analysis and so on. This way shit will work.
+
+
+
+
+/////check this shit out
+
+
+1. SqS data limit is 256 kb and any format
+
+2. SQS can resolve the issue of producer producing fast or consumer consumes slowly (Autoscaling or failover)
+
+3. SQS can at least deliver the message once and support multiple readers and writers interacting with same queues
+
+4. Single SQS can be used by multiple application components without coordinating with each other(scaling out. Your application)
+
+5. SQS can guarantee to deliver the message but not in first in first out if you want you can add sequencing info in the messages so we can rearrange once it is received
+
+6. Always Pulls the data from SQS
+
+7. Visibitytimeout start only when application retrieve the message once it is completed it will be deleted from the queue during the visibilitytimeout window, if app server is failing in between message will not be deleted so another app server can use
+
+8. If SQS is filling fast we can do autoscaling n reduce the size of the sqs
+
+9. 12 hours of Visibility timeout
+
+10. Biiing is based on 64kb chunks
+
+11. 1 million SQS is free and 0.50$ after 1 million per message
+
+12. Single request can have 1 to 10 message upto 256 kb
+
+13. Standard queue and FIFO queue are there .
+
+14. FIFO is first in first out message and only once
+
+15. Standard queue: maximum throughput, best-effort ordering, at least once delivery
+
+16. FIFO queue: limited throughput, first in first out ordering, exactly once delivered
+
+17. You're charged $0.40 per million requests (after the first million, which is free).
+
+18. Data transferred between Amazon SQS and Amazon EC2 within a single region is free of charge (that is, $0.00 per GB). Data transferred between Amazon SQS and Amazon EC2 in different regions is charged at Internet Data Transfer rates on both sides of the transfer.
+
+19. The messages are pushed into the queue by the producers but pulled out of the queue by the consumers.
+
+20. You have to call the ReceiveMessage action from the consumer in order to get the messages, they are not pushed to you automatically when they arrive.
+
+21. Default time a message stays in the queue I(retention period) is 4 days, maximum is 14 days
+
+22. Default is 30 sec and Max visibility timeout is 12 hr, if you think Default visibility timeout is less and your processing is not completing within that you can change it by calling ChangeMessageVisiblity and specify new value
+
+23. Short polling or standard polling - Short polling polls for the message every time whether queue is empty ,consume cpu and waste extra money but Long polling you can set the Maxlongpollingime to 20 Sec and it will not continuously poll ,it will poll after 20 sec or when gives message if is there in the queue
+
+24. You can Create one SNS topic and create ,subscribe multiple SQS queues to that SNS topic ,basically you can fanned out single message to multiple SQS queues
 

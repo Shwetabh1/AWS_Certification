@@ -1,3 +1,7 @@
+Know/review limits for EC2 [Question]
+
+AWS EC2 was released in 2006.
+
 Amazon Elastic Compute Cloud is a web service that provides resizable compute capacity in the cloud.
 
 It reduces time to obtain a new server and boot to minutes thus reduces time to scale very easily.
@@ -105,6 +109,8 @@ EBS Volume Types (Exam Question)
 -Lowest cost per gigabyte of all EBS volume types that is bootable.
 previous generation.
 
+ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
+
 Elastic Load Balancer
 Balances load between 2 servers such that load is balanced and no server gets overloaded.
 
@@ -113,13 +119,13 @@ Balances load between 2 servers such that load is balanced and no server gets ov
     2. Data Link (lower) - data packets are encoded and decoded into bits
     3. Network (lower) - Switching and Routing
     4. Transport (lower) - UDP
-    5. Session (upper) - manage connection between applications 
+    5. Session (upper) - manage connection between applications
     6. Presentation (upper) - data transformation e.g ASCII
     7. Application (upper) - Email, Telnet, FTP, HTTP
 
 Now there are three type of load balancers
 1. Application Load balancers (they can make very clever decision and they operate at layer 7)
-    - They are best suited for balancing HTTP and HTTPS traffi,c They operate at layer 7 and are intelligent. 
+    - They are best suited for balancing HTTP and HTTPS traffi,c They operate at layer 7 and are intelligent.
     - You can create advanced request routing sending specified request to specified server.
 2. Network Load Balancer (operates at layer 4, most expensive, used in production)
     - Best Suited for load balancing of TCP traffic where extreme performance is required.

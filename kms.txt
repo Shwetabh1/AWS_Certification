@@ -1,6 +1,6 @@
 AWS KMS
 
-A managed service that helps you create and control Encryption Keys used to encrypt the data. 
+A managed service that helps you create and control Encryption Keys used to encrypt the data.
 AWS KMS is integrated with other AWS services including, EBS, S3, Amazon Redshift, Amazon Elastic Transcoder, Amazon Workmail etc.
 
 Encryption Keys are regional.[Important bitch] Users Groups etc can be global.
@@ -19,7 +19,7 @@ Can never be exported.
 Code to be used in aws cli
 aws kms encrypt --key-id YOURKEYIDHERE --plaintext fileb://secret.txt --output text --query CiphertextBlob | base64 --decode > encryptedsecret.txt
 aws kms decrypt --ciphertext-blob fileb://encryptedsecret.txt --output text --query Plaintext | base64 --decode > decryptedsecret.txt
-aws kms re-encrypt --destination-key-id YOURKEYIDHERE --ciphertext-blob fileb://encryptedsecret.txt | base64 > newencryption.txt 
+aws kms re-encrypt --destination-key-id YOURKEYIDHERE --ciphertext-blob fileb://encryptedsecret.txt | base64 > newencryption.txt
 aws kms enable-key-rotation --key-id YOURKEYIDHERE
 
 What does all these do?
@@ -32,3 +32,48 @@ Envelope Key is what is used to de crypt the data.
 Customer Master key is used to decrypt data key.
 
 For Deleting the key you first have to disable it. An it is usually deleted in minimum of 1 week.
+
+1. In IAAS ,
+
+AWS has to manage :
+
+*Global infrastructure like Regions ,AV's etc.
+
+*Foundation Services like Compute,Storage,DB and Networking
+
+example if hyper visor issue in Compute AWS will fix
+
+Customer has to manage :
+
+*Operating sys,Network firewalls,Encryption,Platform
+
+*app management and user data
+
+2. In Container services like RDS and EMR
+
+AWS has to mange:
+
+*Global infrastructure like Regions ,AV's etc.
+
+*Foundation Services like Compute,Storage,DB and Networking
+
+*Operating sys,Platform and app management
+
+Customer has to manage :
+
+*Network firewalls,Client side Encryption and user data
+
+In Abstract Services like S3 and dynamo
+AWS has to manage:
+
+Global infrastructure like Regions ,AV's etc.
+
+Foundation Services like Compute,Storage,DB and Networking
+
+Operating sys,Platform and app management
+
+Network firewalls,
+
+Customer has to manage :
+
+Client side Encryption and user data

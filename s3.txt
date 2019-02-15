@@ -1,5 +1,10 @@
 Simple Storage Service
 
+Go thorugh this: S3-Optimization -http://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html
+CORS in S3
+How to name a file for optimum performance? (Also, know the best filename format in S3 to optimize performance.)
+Know/review limits for S3
+
 (12 question at the least)
 
 S3 provides developers and IT teams with secure, durable, highly scalable object storage.
@@ -43,7 +48,7 @@ It is designed to sustain the loss of 2 facilities concurrently.
 
 S3- Storage Tiers/Classes [check image]
  1. s3 (Standard)
- 2. S3-IA (Infrequently Accessed): For data that is accessed less frequently, 
+ 2. S3-IA (Infrequently Accessed): For data that is accessed less frequently,
  but requires rapid access when needed.
  3. S3- One Zone IA: Same as IA however data is stored in a single availability Zone only,
   still 99.999999999 durability, but only 99.5% availability.
@@ -59,7 +64,7 @@ Encryption
 
 They key name decides in which partition the file is stored in.
 Charges
-1. Storage per GB 
+1. Storage per GB
 2. Requests (GET PUT etc)
 3. Storage Management pricing. Inventory, analytics etc
 4. Data Managment pricing i.e downloading file (data transfeered out of s3)
@@ -86,13 +91,13 @@ LAB (S3 Policy etc)
 1.In-Transit:
 SSL/TLS (HTTPS)
 
-2.At-REST 
+2.At-REST
 Server Side Encryption:
- S3 Managed Keys - SSE-S3 
- AWS Key Management Service, Managed Keys, SSE-KMS 
- Server Side Encryption with customer provided keys - SSE-C 
+ S3 Managed Keys - SSE-S3
+ AWS Key Management Service, Managed Keys, SSE-KMS
+ Server Side Encryption with customer provided keys - SSE-C
 
-3.Client Side Encryption 
+3.Client Side Encryption
 
 If you want to enforce the use of encryption for oyur files stored in S3, use an S3 Bucket Policy
 to deny all PUT requests that don't include the x-amz-server-side-encryption parameter in the request header.
@@ -106,12 +111,12 @@ GET-Intensive Workloads : Use CloudFront
 Mixed Workloads (GET, PUT & DELETE) : Use hax prefix to S3 object key names to prevent multiple objects being stored on the same partition.
 
 
-CORS - Configuration LAB (pending)[do it. Made mistakes in the question] 
+CORS - Configuration LAB (pending)[do it. Made mistakes in the question]
 
 
 CloudFront
 
-CDN: A content delivery network is a system of distributed servers that 
+CDN: A content delivery network is a system of distributed servers that
 Basically helps you reduce network latency and hops.
 
 Edge Locations used by Cloud Front to keep copies of cache file which is much closer to the geographihc location.
@@ -150,3 +155,134 @@ S3 performance update
 What is hex hash prefix in s3?
 
 At a time you can upload a max of 5GB. Use multipart upload if the file size is greater than that bruh.
+
+
+
+////////////////gotta format and shit
+S3 FAQ Notes
+
+1. S3 Standard and Standard IA ,Glacier storage provides the 99.999999999 durability (11 nines )
+
+2. Also provide Access control ,Versioning ,CORS and backup etc.
+
+3. When storing the objects in s3 it store in different devices and in different facilities before returning success to upload.
+
+4. Checksum using MD5 and cycle redundancy check (CRS’s) to detect the data corruption .Amazon performs these checks on data at rest fixed using redundant data to maintain integrity of data.
+
+5. Versioning is extra layer of durability and you can preservee ,retrieve and retain any version of data
+
+6. By default it returns the latest copy ,to get the overwritten or deleted data you can mention version and retrieve it .
+
+7. When user deletes the objects it will not be available for subsequent request (unversioned) but previous version will be preserved.
+
+8. User can create the rollback window using lifecycle of storing into glacier and delete after 100 days so rollback window is 100 days by saving storage costs also.
+
+9. Versioning MFA delete provide maximum protection of my preserve data. So was account credential and MFA token to delete anything
+
+10. S3 Standard IA class is for Infrequent access data with high speed and low latency and wit low code of receive and storage per Gb.
+
+11. S3 standard IA perform same performance as compared to S3 Standard
+
+12. Standard IA provide 99.9% avialablity.
+
+13. You can directly add the objects by specifying the STANDARD_IA in X-Ams-Storage-Class header or use the lifecycle policy to mover from standard to Standard IA
+
+14. latancy and through will be same standard class
+
+15. Although it is for long lived data but data should be there standard IA for minimum 30days otherwise it will be charged for full 30 days.min limit is 30 days
+
+16. Minimum size for Standard IA is 128kb ,whatever be the size less than 128 kb you have to pay for 128 kb
+
+17. Glacier is even more cheaper than others and used for archival data and cab be accessed slowly might takes minutes to hours
+
+18. Set the lifecycle rules to move data to glacier using prefix and period like /logs and 180days of obj creation
+
+19. Initiate retreival request to retrieve the data stored in glacier through console or API ,while retrieving AWS copy the glacier data into RRS and provide temporary copy and you can mention the time for which you want that data to be in RRS.
+
+20. Three option for Glacier Retrieval : Expedited(1-5min) , standard (3-5 hours) ,Bulk(5-12 hours)
+
+21. $0.004 per gb/mont for glacier storage and transition to Glacier ($0.05 /1000request) and minumium 90 days for Glacier.
+
+22. 10 Gb retrieval is free
+
+23. If you delete 1 gb of data from glacier in 1st month out of 3 then you have to pay remaining 2 month of glacier storage price for 1 gb
+
+24. Retrieval cost from glacier is 0.03 per gb and 0.01 per request,0.01 gb and 0.05 per 1000 requet ,0.0025 per Gb and 0.025 per 1000 request
+
+25. Yes you can host static websites on s3 on low cost ,highly available,scable solution
+
+26. Yes you can Tap your domain name to you bucket
+
+27. You can redirect to other url or using bookmarks to old page or using policy
+
+28. No additional charge only storage ,request and data transfer
+
+29. Objects Tags (key values ) can be used for IAM and lifecycle policies and customize metric storage
+
+30. You can add upto 10 tags to s3 object while creating or later
+
+31. Outside AWS console all the tags need to add in set example if you have added 5 tags and want to add 6th ,you have to mention all five
+
+32. $0.01 per 10000 tags per month
+
+33. Storage Analytics or Storage class analysis automatically define the patterns and identify the right storage class foe right data . Later you can create lifecycle policy using that data
+
+34. Use S3 put bucket analysis API to configure a storage class analysis .you can navigate to AWS Management console ,management tab to manage s3 analytics ,s3 inventory,s3 cloud metrics
+
+35. S3 analytics happen daily an you can export analysis data on your bucket for further checks
+
+36. S3 inventory is alternative for S3 sync list Api which will provide the .csv or ORC file containing the output of your obj and metadata
+
+37. You can use s3 put bucket api to configure the daily and weekly inventory for all the obj or prefix and mention the destination bucket where .csv or ORC and metadata like size ,modified at a etc will be stored
+
+38. You can encrypt inventory using SSE -S3 ,SSE -KMS
+
+39. You can s3 inventory as direct input to your app or also query
+
+40. You can set lifecycle policy to reduce cost the cost of storage ,it mover obj from one class to another .Also delete the obj if it is not required depends upon the days you give. Also Delete the multiple part expiration files
+
+41. Life cycle object applies to existing objects and new object which will come
+
+42. Cross region replication is to replicate object ,there ACL and metadata to destination bucket in the region. To provide low latency data access in the different region
+
+43. Versioning must be on while using CORS
+
+44. CORS is bucket level configuration you can enable by giving destination bucket
+
+45. Use s3 copy for previous data before CORS
+
+46. You can mention the subset to replication suing prefix
+
+47. Yes you can replicate the encrypted data by mentioning the Key in the configuration
+
+48. Transfer Accelararion can help in transfer data fast for long distance using cloud front edge location
+
+49. Nickname.s3-accelarate.awsamozon.com or backutname.s3-accrete.dulstack.awaamaazon.com
+
+50. Fast depends on bandwidth ,packet loss and distance
+
+51. Accelreate is secure are Over TCP and can restrict IP
+
+52. S3 acceleration is giving throuput and TCP it is better than cloud front if you have data < 5 gb then use put/post commands
+
+53. Snowball is idea for customer transferring batch at once and 5-7 days turnaround.Tranfer acceleration can use 1 gb bandwidth and upload 75 TB of Data if possible than this is better.
+
+54. Other option is perform initial heavy lift using snowball and use transfer acc later
+
+55. AWS Direct Connect is for customer having private network ,Tranfer acc is best for all from diff loc over public internet where variable network condition make throughput poor. Some Aws direct customer use transfer acc where internet speed is slow
+
+56. Gateways that connect directly to s3 can tae advantages of transfer acc
+
+57. S3 support ipv6 ,use dual stack endpoints which supports both 6 and 4
+
+58. http://s3.dualstak.region.awsamozon.com/bucketname and bucket.s3.dualstack.region.awsamaomzon.com
+
+
+Q) Question will be asked about Performance.
+Amazon S3 automatically scales to high request rates. For example, your application can achieve at least 3,500 PUT/POST/DELETE and 5,500 GET requests per second per prefix in a bucket. There are no limits to the number of prefixes in a bucket. It is simple to increase your read or write performance exponentially. For example, if you create 10 prefixes in an Amazon S3 bucket to parallelize reads, you could scale your read performance to 55,000 read requests per second.
+
+Q) What is TCP Window Scaling
+TCP window scaling allows you to improve network throughput performance between your operating system and application layer and Amazon S3 by supporting window sizes larger than 64 KB. At the start of the TCP session, a client advertises its supported receive window WSCALE factor, and Amazon S3 responds with its supported receive window WSCALE factor for the upstream dire.
+
+Q) TCP Selective Acknowledgement
+TCP selective acknowledgement is designed to improve recovery time after a large number of packet losses. TCP selective acknowledgement is supported by most newer operating systems, but might have to be enabled.
