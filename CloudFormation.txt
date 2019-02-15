@@ -1,0 +1,16 @@
+Cloud Formation
+
+Define AWS Infrastructure as Code
+
+Can be done in YAML or JSON
+It is free to use and you are charged for what you create.
+The resulting resources are called a stack.
+Create the cliud formation template and upload to s3 from where it is read.
+
+The main sections in the cloud formation template is
+
+1. Parameters: Custom Input Value
+2. Conditions: Provision resources based on environment
+3. Resources: (mandatatory) The resources to create
+4. Mappings: Create Custom Mappings like region: AMI
+5. Transforms: reference code located in s3, eg Lambda Code or reusable snippets of cloud formation code.
