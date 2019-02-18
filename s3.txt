@@ -134,7 +134,7 @@ Amazon CloudFront can be used to deliver your entire website, including dynamic,
 
 e.g Can be used to be used to optimize performance for users accessing a website backed by s3.
 
-ClouFront works with s3, route53, ec2 and also with non aws server
+CloudFront works with s3, route53, ec2 and also with non aws server
 
 Objects are cached for TTL value. The Time to Live value expires, cached object is deleted.
 
@@ -286,3 +286,9 @@ TCP window scaling allows you to improve network throughput performance between 
 
 Q) TCP Selective Acknowledgement
 TCP selective acknowledgement is designed to improve recovery time after a large number of packet losses. TCP selective acknowledgement is supported by most newer operating systems, but might have to be enabled.
+
+
+Q) Host static websites on S3
+
+You can host a static website on Amazon Simple Storage Service (Amazon S3). On a static website, individual webpages include static content. They might also contain client-side scripts. No server side scripts though.
+<bucket-name>.s3-website-<AWS-region>.amazonaws.com
