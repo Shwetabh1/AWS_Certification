@@ -1,0 +1,6 @@
+Kinesis
+
+Q) How can you ensure Data is stored in Kinesis?
+You can now encrypt data in your Amazon Kinesis streams using server-side encryption and AWS Key Management Service (KMS) keys. Server-side encryption makes it easy to meet strict data management requirements by encrypting your data at rest within Kinesis Streams.
+
+To get started, select a new or existing Kinesis stream in the Kinesis management console, select a KMS master key, and enable server-side encryption.

@@ -1,4 +1,4 @@
-1. Two questions about Kinesis Client Library and resharding
+1. Two questions about Kinesis Client Library and resharding.
 
 2. One question about how to solve api gateway autodeployment with SAM
 
