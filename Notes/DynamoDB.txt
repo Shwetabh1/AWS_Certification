@@ -417,3 +417,4 @@ If some operation under BatchWrite/PUT fails the entire operation fails?
 Nope. They are not. Failed operations are under unprocessedItems(BatchWrite) &
 UnprocessedKeys(BatchGetItem)
 
+Put in place exponential backoff algorithm to handle that shit, yo

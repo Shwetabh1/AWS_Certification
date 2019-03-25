@@ -7,3 +7,4 @@ To get started, select a new or existing Kinesis stream in the Kinesis managemen
 
 
 Your application currently makes use of AWS Kinesis streams. The data rate of the application is now increasing due to the increased number of producers. Which of the following can be done to keep up with the increased data rate?
+

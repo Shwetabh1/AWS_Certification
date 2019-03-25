@@ -1,7 +1,7 @@
 <h1 align="center">AWS Developer Associate Certification</h1>
 
 <div align="center">
-    <img src="https://github.com/Shwetabh1/AWS_Certification/blob/master/Resources/aws_cert.png" alt="AWS Developer"/>
+    <img src="https://github.com/Shwetabh1/AWS_Certification/blob/master/Images/aws_cert.png" alt="AWS Developer"/>
 </div>
 
 ## Foreword
@@ -14,14 +14,14 @@ Focus on the learning and certification will follow. Certification should never 
 This a complete guide for achieving AWS certified developer mettle. It comprises of notes, lab works, exam break down, essential tips and probable questions that have been asked or could be asked. Each topic in the content has 3 sections; Notes, then the practical work you should do and lastly dozens of questions that can be asked in the AWS Certified Developer Exam related to that topic.
 
 ## Exam Details
-
-Exam Duration: 130 Minutes<br/>
-Total Questions: 65 Questions<br/>
-Maximum Score 1000<br/>
-Passing is 720<br/>
-Resuts are available immediately.<br/>
-In case you were unsuccessful you can always retake the exam, 14 days after yor first attempt.<br/>
-The certification is valid for 3 years.<br/>
+<ul>
+<li>Exam Duration: 130 Minutes</li>
+<li>Total Questions: 65 Questions</li>
+<li>Maximum Score 1000</li>
+<li>Passing is 720</li>
+<li>Resuts are available immediately.</li>
+<li>In case you were unsuccessful you can always retake the exam, 14 days after yor first attempt.</li>
+<li>The certification is valid for 3 years.</li>
 
 ## Question Category Breakdown
 <div align="center">
