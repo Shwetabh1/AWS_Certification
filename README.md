@@ -44,50 +44,44 @@ The certification is valid for 3 years.<br/>
 
 ## Question Category Breakdown
 
-1. Deployment 22%<br/>
-1. Security 26%<br/>
-1. Development with AWS Services 30%<br/>
-1. Refactoring 10%<br/>
-1. Monitoring and Troubleshooting 12%<br/>
+| Category      | Weightage     |
+| ------------- |:-------------:|
+| Deployment    | 22% |
+| Security      | 26%     |
+| Development with AWS Services | 30%    |
+| Security      | 10%      |
+| Monitoring and Troubleshooting      | 12%    |
 
-IAM ~ 4 Questions.
+<b>IAM ~ 4 Questions.</b><br>
+<i>Questions will definetly be asked from IAM including IAM role for DynamoDB, Web Federation, Corporate network, CloudFront, Elastic Beanstalk, Cloud Formation and Elastic Cache.
+Options on authenticating using LDAP together with IAM.</i>
 
-Questions will definetly be asked from IAM including IAM role for DynamoDB, Web Federation, Corporate network, CloudFront, Elastic Beanstalk, Cloud Formation and Elastic Cache.
-Options on authenticating using LDAP together with IAM.
+<b>S3 ~ 12 Questions.</b><br>
+<i>CORS, Static Hosting, S3 Encryption Header, S3 Performance optimisation(Mostly on adding uniqueness before the key), Bucket policy and ACL (basically how to restrict), Limits (like total bucket</i>
 
-S3 ~ 12 Questions.
-
-CORS, Static Hosting, S3 Encryption Header, S3 Performance optimisation(Mostly on adding uniqueness before the key), Bucket policy and ACL (basically how to restrict), Limits (like total bucket)
-
-DynamoDB ~ 12 Questions
-
+<b>DynamoDB ~ 12 Questions</b></br>
 Basic questions about Hash and range key, DynamoDBStreams, Throughput error (like if not Table then what is the cause), One question on write throughput calculation.
 
-EC2 ~ 5 Question
-
+<b>EC2 ~ 5 Question</b></br>
 Less questions from EC2 as they are focusing more on serverless. Basic API like DescribeImages, AMI related(example EC2 can be launched from the same region where AMI is stored) and Root Device Encryption. Also one question regarding EC2 instance profile. One question about EBS and multi container docker.
 
-SQS  ~ 6-7 Questions
-
+<b>SQS  ~ 6-7 Questions</b></br>
 Basic SQS functionality, Protocols used and, Long Polling, Max Visibility and Timeout Scenario Questions. One question about grouping messages by messageid in SQS.
 
-SNS ~ 4-5 Questions
-
+<b>SNS ~ 4-5 Questions</b></br>
 Basic Functionality, Do check the Format of the SNS Notification and Field used in (JSON ), Fanout concept.
 
-SWF ~ 1-2 Questions
-
+<b>SWF ~ 1-2 Questions</b></br>
 Basic Functionality Scenario Based(like what all the functionally used by SWF)
 
-VPC ~ 5 Questions
+<b>VPC ~ 5 Questions</b></br>
 All scenario based 2-3 lines revolving around assigning Elastic address or public address to access the instance and NAT in subnet. One question related to VPC flow logs.
 
-Kinesis ~ 2-3 Questions
+<b>Kinesis ~ 2-3 Questions</b></br>
 Questions about Kinesis Client Library and resharding.
 
-API Gateway
-How to solve api gateway autodeployment with SAM.
-How the user(client) can evict API gateway cache.
+<b>API Gateway</b></br> 
+<i>Question related to solving api gateway autodeployment with SAM. Also how the user(client) can evict API gateway cache.</i>
 
 Note: 
 1. Know/review limits for S3, DynamoDB, EC2, SNS, and SQS. 
