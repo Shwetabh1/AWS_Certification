@@ -10,7 +10,7 @@
 
 6. Another item not mentioned by you is VPC flow logs
 
-7. one question about chosing Fargate over Ecs when you don't want to take care of everything yourself and you can leave it to AWS :)
+7. one question about chosing Fargate over ECS when you don't want to take care of everything yourself and you can leave it to AWS :)
 
 8. how the user(client) can evict API gateway cache
 

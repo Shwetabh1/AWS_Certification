@@ -27,7 +27,7 @@ re-encrypt - decyrpts the encrypted one and then re-encrypts again.
 
 KMS ENVELOPE ENCRYPTION
 
-Envelope Key is what is used to de crypt the data.
+Envelope Key is what is used to de-crypt the data.
 
 Customer Master key is used to decrypt data key.
 
@@ -37,9 +37,9 @@ For Deleting the key you first have to disable it. An it is usually deleted in m
 
 AWS has to manage :
 
-*Global infrastructure like Regions ,AV's etc.
+*Global infrastructure like Regions, AV's etc.
 
-*Foundation Services like Compute,Storage,DB and Networking
+*Foundation Services like Compute, Storage, DB and Networking.
 
 example if hyper visor issue in Compute AWS will fix
 
@@ -53,7 +53,7 @@ Customer has to manage :
 
 AWS has to mange:
 
-*Global infrastructure like Regions ,AV's etc.
+*Global infrastructure like Regions, AV's etc.
 
 *Foundation Services like Compute,Storage,DB and Networking
 
@@ -63,12 +63,12 @@ Customer has to manage :
 
 *Network firewalls,Client side Encryption and user data
 
-In Abstract Services like S3 and dynamo
+In Abstract Services like S3 and dynamodb
 AWS has to manage:
 
-Global infrastructure like Regions ,AV's etc.
+Global infrastructure like Regions, AV's etc.
 
-Foundation Services like Compute,Storage,DB and Networking
+Foundation Services like Compute, Storage, DB and Networking.
 
 Operating sys,Platform and app management
 
@@ -77,3 +77,7 @@ Network firewalls,
 Customer has to manage :
 
 Client side Encryption and user data
+
+Use Customer Master Key to Encrypt and user data key to decrypt.
+
+

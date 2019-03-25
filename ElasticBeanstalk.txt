@@ -87,7 +87,12 @@ By default, your application is available publicly at myapp.elasticbeanstalk.com
 
 14. In EB ,you can do App and configuration changes both
 
-16. Updates on application can at once,1 Instance at a time ,20% if EC2 fleet or immutable
+16. Updates on application can at once,1 Instance at a time ,20% if EC2 fleet or immutable.
+
+Q) You have a set of developers that need to work with applications hosted on the Elastic Beanstalk environment. You need to ensure they can work with the beanstalk environments but not give them access to the AWS Console. 
+How can you achieve this in the BEST way possible?
+
+Ask them use Elastic BeanStalk CLI.
 
 
 

@@ -7,3 +7,7 @@ AWS Config records the state of your AWS environment and can notify you of chang
 
 e.g What the roles were used in the security group.
 Who provisioned the security groups?-- That would  be cloudtrail
+
+
+Which of the following tools can be used to determine who provisioned an EC2 instance and what time they made the API call?
+Cloud Trail

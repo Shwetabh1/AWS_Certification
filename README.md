@@ -1,3 +1,4 @@
+aad image here
 ## Foreword
 Focus on the learning and certification will follow. Certification should never be the Target. Your ability to comprehend and apply those learnings should be.
 
@@ -5,7 +6,7 @@ Focus on the learning and certification will follow. Certification should never 
 > You can never understand everything but you should push yourself to understand the system.<br/>
 > *-Ryan Dahl (creator of Node.JS)*
 
-This a complete guide for achieving AWS certified developer mettle. It comprises of notes, lab works, exam break down, essential tips and multiple questions. Each topic in the content has 3 sections, notes then the practical work you should do and dozens of questions that can be asked in the AWS Certified Developer Exam.
+This a complete guide for achieving AWS certified developer mettle. It comprises of notes, lab works, exam break down, essential tips and probable questions that could be asked. Each topic in the content has 3 sections; Notes, then the practical work you should do and lastly dozens of questions that can be asked in the AWS Certified Developer Exam related to that topic.
 
 ## Contents
 1. IAM
@@ -15,11 +16,14 @@ This a complete guide for achieving AWS certified developer mettle. It comprises
 1. S3
 1. Lambda
 1. API Gateway
-1. DynamoDB
+1. DynamoDB & RDS
 1. KMS
 1. SQS
 1. Elastic Beanstalk
 1. CICD
+1. CloudFormation
+1. SWF
+1. Kinesis
 
 ## Exam Blue Print
 Deployment 22%<br/>
@@ -34,7 +38,7 @@ Maximum Score 1000<br/>
 Passing is 720<br/>
 Resuts are available immediately.<br/>
 In case you were unsuccessful you can always retake the exam , 14 days after yor first attempt.<br/>
-The certification is valid for 2 years.<br/>
+The certification is valid for 3 years.<br/>
 
 
 ## Question Category Breakdown
@@ -44,11 +48,11 @@ IAM
 Questions will definetly be asked from IAM including IAM role for DynamoDB, Web Federation, Corporate network, CloudFront, Elastic Beanstalk, Cloud Formation and Elastic Cache.
 Options on authenticating using LDAP together with IAM.
 
-S3 ~ 15 Questions.
+S3 ~ 12 Questions.
 
-CORS, Static Hosting, S3 Encryption Header, S3 Performance optimisation(Mostly on adding uniqueness before the key),Bucket policy and ACL (basically how to restrict),Limits (like total bucket)
+CORS, Static Hosting, S3 Encryption Header, S3 Performance optimisation(Mostly on adding uniqueness before the key), Bucket policy and ACL (basically how to restrict), Limits (like total bucket)
 
-DynamoDB ~ 10 Questions
+DynamoDB ~ 13 Questions
 
 Basic questions about Hash and range key, DynamoDBStreams, Throughput error (like if not Table then what is the cause), One question on write throughput calculation.
 
@@ -86,6 +90,6 @@ Rest Questions were on AWS SDK, Default region (us-east-1) and Elastic Beanstalk
 ## Important Links
 
 1. https://acloud.guru/forums/aws-certified-developer-associate/discussion/-KBkBPMHpN2ITSH1oDTO/passedwith90%25-myexamtips
-1.
-1.
+1. more links
+1. Linux Academy course here
 1. https://acloud.guru/forums/aws-certified-developer-associate/discussion/-KUdI5f2LNbi4wvK7v4I/howtopassawscertified_deve

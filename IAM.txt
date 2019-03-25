@@ -1,148 +1,168 @@
-Options on authenticating using LDAP together with IAM. [Question Important]
-
 IAM: Identity Access Management
 
-Theory + Practical + Practice Questions and Exam Tips(AWS FAQs and Best Practices)
-Practice Questions and Exam Tips
-1. 3-4 Questions on IAM will be asked.
-2.
-3.
+#THEORY#
 
-It allows you to manage users and their level of acces to the AWS Console.
+Identity Access Management allows you to manage users and their level of access to the AWS Console.
 
 What does it give you?
--Centralized control of your AWS account.
--Shared Access to your AWS account
--Granular Permission: diferent level of permission to different USER.
--Identity Federation: Basically allow users to login using credentials stored in LinkedIn, Active Directory, FaceBook etc)
--MultiFactor Authentication
--Provides temporary access for users/devices and services, as necessary.
+- Centralized control of your AWS account.
+- Shared Access to your AWS account.
+- Granular Permission: diferent level of permission to different USER.
+- Identity Federation: Basically allow users to login using credentials stored in LinkedIn, Active Directory, FaceBook etc)
+- MultiFactor Authentication.
+- Provides temporary access for users/devices and services, as necessary.
 - Allows you to setup your own password rotation Policy.
-- Supports PCI DSS Compilance
-- Integrates with Many Diffferent AWS Services (payments associated with Payment Card Industry)
+- Supports PCI DSS Compilance.
+- Integrates with Many Diffferent AWS Services(payments associated with Payment Card Industry).
 
 
 Critical Terms
-
 -Users
 -Groups (a number of users under one set of permission)
 -Roles (You create roles and can assign them to AWS resources)
-e.g s3 bucket wants to access files located in s3 can be done via Roles.
+e.g EC2 instance wants to access files sored in s3. Assign a role to ec2 instance with 
 -Policies (A document that defines one(or more)) permissions
-
-
-IAM lab1
-
-1.Set up your MultiFactor Authentication
-2.Create Users and groups and policies
-
-Set Password policies from the account settings
-
-Everything will be handled by Amazon SQS, so find the optimal settings for VisibilityTimeout, maxReceiveCount and definitely configure DLQ policy.
 
 What are IAM roles?
 IAM roles are a secure way to grant permissions to entities that you trust. Examples of entities include the following:
 
-IAM user in another account
-Application code running on an EC2 instance that needs to perform actions on AWS resources
-An AWS service that needs to act on resources in your account to provide its features
-Users from a corporate directory who use identity federation with SAML
+IAM user in another account/Cross Account Access
+Application code running on an EC2 instance that needs to perform actions on AWS resources.
+An AWS service that needs to act on resources in your account to provide its features.
+Users from a corporate directory who use identity federation with SAML.
 IAM roles issue keys that are valid for short durations, making them a more secure way to grant access.
 
-IMPORTANT!
+Important Points!
 IAM is universal and doesn't apply to regions at this time.
 The root account is simply the account created when first setup your AWS account. It has complete admin access.
 New users have no permission at all when first created.
 You only get to view Access Key ID and Secret Access Key once. If you lose them you have to regenerate them.
+All effects in IAM takes place immediately.
 
-FAQs for IAM
-https://aws.amazon.com/iam/faqs/
-
-1. You can also grant permissions for users outside of AWS (federated users)
+You can also grant permissions for users outside of AWS (federated users)
  - By federating your AWS accounts, users can sign in to the AWS Management Console and AWS Command Line Interface (CLI) using credentials from your corporate directory.
  - To help you manage federation for multiple AWS accounts centrally, you can use AWS Single Sign-On to manage SSO access for all of your accounts in AWS Organizations.
  - You also can add federation support to your own web and mobile applications by using Amazon Cognito.
 
-All effects in IAM takes place immediately.
-
+Policies in AWS IAM:
 There are three types of Policies in AWS:
-
 1. Managed Policies
 2. Customer Managed Policies
 3. Inline Policies
 
+Anatomy of a policy:
+{
+  "Version": "2012-10-17", //Specify the version of the policy language that you want to use.
+  "Statement": [ //  Use this main policy element as a container for the following elements. You can include more than one statement in a policy.
+    {
+      "Sid": "FirstStatement", // Include an optional statement ID to differentiate between your statements.
+      "Effect": "Allow", //Use Allow or Deny to indicate whether the policy allows or denies access.
+      "Action": ["iam:ChangePassword"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "SecondStatement",
+      "Effect": "Allow",
+      "Action": "s3:ListAllMyBuckets",
+      "Resource": "*"
+    },
+    {
+      "Sid": "ThirdStatement",
+      "Effect": "Allow",
+      "Action": [
+        "s3:List*",
+        "s3:Get*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::confidential-data",
+        "arn:aws:s3:::confidential-data/*"
+      ],
+      "Condition": {"Bool": {"aws:MultiFactorAuthPresent": "true"}} //Specify the circumstances under which the policy grants permission.
 
-Managed Policies: A Managed Policy is an IAM Policy which is created and administered by AWS. AWS Provide Managed Policies for common use cases based on Job Function like
-AWSS3FullAccess, AWSSQSFullAccess etc.
 
-You cannot change a permission defined in an AWS managed policy.
+    }
+  ]
+}
 
-A single policy can be applied multiple time to Groups, roles, users etc.
+Managed Policies: 
+- A Managed Policy is an IAM Policy which is created and administered by AWS. AWS Provide Managed Policies for common use cases based on Job Function like
+  AWSS3FullAccess, AWSSQSFullAccess etc.
+- You cannot change a permission defined in an AWS managed policy.
+- A single policy can be applied multiple time to Groups, roles, users etc.
 
-
-Customer Managed  Policies :  It is a standalone policy that you create and administer inside your own AWS account. You can attach this policy to multiple users, groups and roles - but only within your account.
-
-Copy an exisiting managed policy and customise it to your needs, yo. Recommended for use cases where the existing AWS Managed Policies don't meet the needs of your environment.
+Customer Managed Policies:
+- It is a standalone policy that you create and administer inside your own AWS account.
+- You can attach this policy to multiple users, groups and roles - but only within your account.
+- Copy an exisiting managed policy and customise it to your needs. 
+- Recommended for use cases where the existing AWS Managed Policies don't meet the needs of your environment.
 
 Inline Policy:
+- Strict 1:1 policy between the entity and the policy.
+- Delete the user and the policy gets deleted as well.
+- An inline policy is actually embedded within the user, group or role to which it applies.
+- Useful when you want to ensure permission in a policy are not inadverdently assigned to any other user, group or role than the one for which they are intended.
 
-Strict 1:1 policy between the entity and the policy.
-Delete the user and the policy gets deleted as well.
-An inline policy is actually embedded within the user, group or role to which it applies.
+`assume-role-with-web-identity`
+- Returns a set of temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider, such as Amazon Cognito, Login with Amazon, Facebook, Google, or any OpenID Connect-compatible identity provider.
+- By default, the temporary security credentials created by AssumeRoleWithWebIdentity last for one hour.
+- However, you can use the optional DurationSeconds parameter to specify the duration of your session. You can provide a value from 900 seconds (15 minutes) up to the maximum session duration setting for the role.
+- This setting can have a value from 1 hour to 12 hours.
 
-[use case] Useful when you want to ensure permission in a policy are not inadverdently assigned to any other user, group or role than the one for which they are intended.
+Cross Account Access
+- You can easily grant users permission to assume some role in a different AWS Account.
+- Create a role. Add a trust policy that defines who can assume this role. Add a permission policy that defines what permissios are provided.
+- You can switch via console or API/CLI.
+- AWS STS checks the source and matches with trust policy and then returns temporary credentials.
 
- assume-role-with-web-identity
+Providing Access to Third Parties
+- Use roles to delegate access to them.
+- You specify their AWS account ID as the principal when you define the trust policy for the role.
+- After you create the role, you must provide the role's Amazon Resource Name (ARN) to the third party.
+- Their use is billed to our account.
 
- It is an API Provided by STS (Security Token Service)
- Returns temporary security credentials for users authenticated by mobile or web applications.
-
-
- Cross Account Access
-
-
-
-Adavnced IAM
-
+Temporary AWS Access
+- Credentials are generated by STS.
+- 
 Web Identity Federation
-AWS Web Identity Federation lets you give your users access to AWS resources  after they have successfully authenticated with a web-based identity provider like Amazon, Google or Facebook.
-
-Following Successful authentication, the user recieves an authentication code from the web id provider,which they can trade for temporary AWS Security Credentials.
+- AWS Web Identity Federation lets you give your users access to AWS resources after they have successfully authenticated with a web-based identity provider like Amazon, Google or Facebook.
+- Following Successful authentication, the user recieves an authentication code from the web id provider,which they can trade for temporary AWS Security Credentials.
 
 Cognito
 
-Policies
-
-Cross Account Access
-
-Amazon Cognito provides Web Identity Federation with the following features:
-
-Sign-Up and Sign-In to your Apps.
-Access to Gues Users
-Acts as an Identity Broker between your application and Web Id Providers, so you don't
-need to write any additional code.
-Synchronizes user data for multiple devices
-Recommended for all mobile applications.
-
-It is the recommended approach for Web Identity Federation using social media accounts like facebook.
+- Amazon Cognito provides Web Identity Federation with the following features:
+- Sign-Up and Sign-In to your Apps.
+- Access to guest users.
+- Acts as an Identity Broker between your application and Web Id Providers, so you don't
+- No need to write any additional code.
+- Synchronizes user data for multiple devices
+- Recommended for all mobile applications.
+- It is the recommended approach for Web Identity Federation using social media accounts like facebook.
 
 Cognito User Pools:
 
-User pools are user directories which is used to manage sign-up and sign-in functionality for mobile and web applications.
+- User pools are user directories which is used to manage sign-up and sign-in functionality for mobile and web applications.
+- Users can sign in diretly to the user pool, or indirectly via an identity provider like Facebook, Amazon or Google. Cognito acts as an identity broker between the ID provider and AWS. Successful authnetication generates a number of JWTs
 
-Users can sign in diretly to the user pool, or indirectlt via an identity provider like Facebook, Amazon or Google. Cognito acts as an identity broker between the ID provider and AWS. Successful authnetication generates a number of JWTs
+Cognitio Identity Pools:
+- They enable you to create unique identities for your users and authentiate them with identity providers.
+- With an identity, you can obtain temporary, limited privilege AWS credentials to access other AWS services.
+- AWS Cognito uses sth called Push Synchronization to provide seamless experience.
+- It pushes the update silently using SNS whenever data is changed.
 
-Identity pools enable you to create unique identities for your users and authentiate them with identity providers. With an identity, you can obtain temporary, limited privilege AWS credentials to access other AWS services.
+Options on authenticating using LDAP together with IAM. [Question Important]
+Lightweight Directory Access Protocol
 
-AWS Cognito uses sth called Push Synchronization to provide seamless experience.
-It pushes the update silently using SNS whenever data is changed.
+## PRACTICAL ##
+- Create users, and make groups. Create roles and attach them to resources.
+- Create different policies.
+- Configure a cognito Pool
 
-LAB -> Configure a cognito Pool
-
-Inline vs Custom vs Managed Policies
-
-
-
+## IMPORTANT LINKS ##
+https://aws.amazon.com/iam/faqs/
 
 
+## Questions ##
+
+
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
 

@@ -106,3 +106,7 @@ No need for disable source/destination check or no need to put it behind a secur
 
 Highly available / redundancy no need for ASG.NAT gateways are little bit costly - always use it in production scale automatically up to 10Gbps
 
+
+
+A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection
+USE CASE: You want to connect to a Private s3 bucket. Create a VPC endpoint

@@ -1,46 +1,58 @@
-Amazon API Gateway is a fully managed service that makes it easy for developers to publish, maintain, monitor, and secure APIs at any scale. With a few clicks in the AWS Management Console, you can create an API that acts as a front door for applications to access data, business logic, or functionality from your back-end services, such as applications running on Amazon Elastic Compute Cloud, code running on AWS Lambda, or any web application.
+Amazon API GATEWAY
+
+## THEORY ##
+
+Amazon API Gateway is a fully managed service that makes it easy for developers to publish, maintain, monitor, and secure APIs at any scale. 
+With a few clicks in the AWS Management Console, you can create an API that acts as a front door for applications to access data, business logic, or functionality from your back-end services, such as applications running on Amazon Elastic Compute Cloud, code running on AWS Lambda, or any web application.
 
 What can API Gateway Do?
-
-Expose HTTPS endpoints to define a restful API
-Serverless-ly conect to services like Lambda & DynamoDB
-Send each API endpoint to a different target.
-Run efficiently with low cost
-Scale Effortlessly
-Track and control usage by API key
-Throttle requests to prevent attacks
-Maintain multiple version of the API
-
+-Expose HTTPS endpoints to define a restful API.
+-Serverless-ly conect to services like Lambda & DynamoDB.
+-Send each API endpoint to a different target.
+-Run efficiently with low cost.
+-Scale Effortlessly.
+-Track and control usage by API key.
+-Throttle requests to prevent attacks.
+-Maintain multiple version of the API.
 
 API Caching
+You can enable API caching in Amazon API Gateway to cache your endpoints response. 
+With Caching, you can reduce the number of calls made to your endpoint and also improve the latency of the requests to your API. 
+When you enable caching for a stage, API gateway caches responses from your endpoint for a specified time to live (TTL) period, in seconds.
+API Gateway then responds to the request by looking up the endpoint response from the cache instead of making a request to your endpoint.
 
-You can enable API caching in Amazon API Gateway to cache your endpoints response. With Caching, you can reduce the number of calls made to your endpoint and also improve the latency of the requests to your API. When you enable caching for a stage, API gateway caches responses from your endpoint for a specified time to live (TTL) period, in seconds. API Gateway then responds to the request by looking up the endpoint response from the cache instead of making a request to your endpoint.
+Advanced API Gateway Import.
 
-[LAB]
+Controlling Access to API Gateway
+1. Resource policies let you create resource-based policies to allow or deny access to your APIs and methods from specified source IP addresses or VPC endpoints.
+2. Standard AWS IAM roles and policies offer flexible and robust access controls that can be applied to an entire API or individual methods.
+3. Cross-origin resource sharing (CORS) lets you control how your REST API responds to cross-domain resource requests.
+4. Lambda authorizers are Lambda functions that control access to REST API methods using bearer token authentication as well as information described by headers, paths, query strings, stage variables, or context variables request parameters.
+5. Amazon Cognito user pools let you create customizable authentication and authorization solutions for your REST APIs.
+6. Client-side SSL certificates can be used to verify that HTTP requests to your backend system are from API Gateway.
 
-Build a simple serverless website with route53, APIGateway, s3 and Lambda.
+## PRACTICAL ##
 
+Q. Build a simple serverless website with route53, APIGateway, s3 and Lambda.
 The domain name must be equal to the bucket name.
 
-popular Question-> What are the triggers for AWS Lambda.
 
-API_GATEWAY
-S3
-SNS
-Cloudwatch Logs
-Cloudwatch events
-AWS IOT
-Alexa Skills Kit
-Alexa Smart Home
-Application Load Balancer
-Code Commit
-Cognito Sync Trigger
-Dynamo DB
-Kinesis
-S3
-SNS
-SQS
+## QUESTIONS ##
+What are API Keys?
+Usage plans let you provide API keys to your customers — and then track and limit usage of your API stages and methods for each API key.
 
+Controlling access to certain API
+To allow an API caller to invoke the API or refresh its caching, you must create IAM policies that permit a specified API caller to invoke the API method for which the IAM user authentication is enabled. 
+The API developer sets the method's authorizationType property to AWS_IAM to require that the caller submit the IAM user's access keys to be authenticated.
 
-Advanced API Gateway Import
+What will you use to trace latency issues for API Gateway?
+AWS X-Ray is an AWS service that allows you to trace latency issues with your Amazon API Gateway APIs. 
+
+If you do changes you can always rollback API_Gateway to the previous versions.
+
+API_GATEWAY also supports SOAP requests but only provides pass through.
+
+Q: What is an usage plan?
+
+Usage plans help you declare plans for third-party developers that restrict access only to certain APIs, define throttling and request quota limits, and associate them with API keys. You can also extract utilization data on an per-API key basis to analyze API usage and generate billing documents.
 

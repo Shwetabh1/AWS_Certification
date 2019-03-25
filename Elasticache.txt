@@ -1,0 +1,13 @@
+Amazon ElastiCache offers fully managed Redis and Memcached.
+
+It supports Master Slave Replication.
+
+
+Redis: In-Memory Key Value Store that supports data strutures such as sorted sets and lists.
+Use Cases: Ranking, More Advanced Data Types and shit.
+Wanna run in Multiple AZ, If so use Redis
+
+Memcached:  No Persistence, yo
+
+Use cases: Large Cahce Node with Mutli Threaded Performance use Memcached
+Horizontally Scaling

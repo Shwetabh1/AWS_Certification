@@ -9,26 +9,26 @@ You need to know what each is and how to optimize each for specific queries for 
 
 DynamoDB:
 Tables, Items and Attributes
-Items is basically rows
-Attributes is column
+Items is basically rows.
+Attributes is column.
 
-DOcument can be written in XML, HTML and JSON
+Document can be written in XML, HTML and JSON.
 
 It supports both document and key-value based model. It is also serverless thus a good choice for developing serverless shit.
 
 It is always backed by solid state disks. Spread across 3 geographic locations and has 2 consistency model.
 
 1. Eventual Consistency Reads (Default)
-This gives best performance and ensures consistency across all copies of data  within seconds
+This gives best performance and ensures consistency across all copies of data  within seconds.
 2. Strongly Consistent Reads
 Everywhere it is updated.
 
-Primary Key are of two types
+Primary Key are of two types:
 
 1. Partition Key : A simple primary key, composed of one attribute known as the partition key. Attributes in DynamoDB are similar in many ways to fields or columns in other database systems.
 2. Composite Key :  Referred to as a composite primary key, this type of key is composed of two attributes. The first attribute is the partition key, and the second attribute is the sort key.
 
-Access is controlled by Identity Acess Management Policies.
+Access is controlled by Identity Access Management Policies.
 
 Fine Grained access control using IAM Condition parameter: dynamoDb:LeadingKeys to allow users to access only the items where the partition key value matches their user ID.
 
@@ -37,7 +37,7 @@ Fine Grained access control using IAM Condition parameter: dynamoDb:LeadingKeys 
 All about indexes in DynamoDB:
 
 What are indexes?
-In SQL databases an index is a data structure which allows you to perform fast queries on specific columns that you want included in the index and run your searches on the index- rather than on the entire dataset.
+In SQL databases an index is a data structure which allows you to perform fast queries on specific columns that you want included in the index and run your searches on the index-rather than on the entire dataset.
 
 In DynamoDB two types of indexes are supported.
 
@@ -155,8 +155,12 @@ DynamoDB Transactions
 ACID
 
 DynamoDB TTL [comes in exam]
+Encryption at Rest encrypts the data in DynamoDB
 
-
+DynamoDB Streams
+DynamoDB Streams enables solutions such as these, and many others. 
+DynamoDB Streams captures a time-ordered sequence of item-level modifications in any DynamoDB table, and stores this information in a log for up to 24 hours
+Useful in managing changes to table
 
 We need to specify capacity units at the time of creation.
 
@@ -167,7 +171,7 @@ We need to specify capacity units at the time of creation.
 ////////////// DYNAMO DB SHIT YO ////////////
 DynamoDB Notes
 
-1. DynamoDb provide predictable performance with scalability
+1. DynamoDb provide predictable performance with scalability.
 
 2. Atomic updates is available which will increment or decrement the counter no matter what like website visitor
 
@@ -360,4 +364,56 @@ DynamoDB Acloud Guru Notes
 
 7. Query is more efficient than Scan as Scan is scanning the entire table and then filter out the value from data set .Avoid using Scan with large table that filters many results ,it can also consume your entire throughput in a single operation
 
-8. For better performance use Query ,Get or batchGetItem instead
+8. For better performance use Query ,Get or batchGetItem instead.
+
+
+What are the file formats supported by Dynamo DB.
+
+HTML,
+JSON
+XML
+
+
+Which of the following can be affectively used to manage this requirement?
+Requirement: A popular mobile app modifies data in a DynamoDB table, at the rate of thousands of updates per second. Another application captures and stores data about these updates, providing near real time usage metrics for the mobile app.
+DynamoDB Streams
+
+DynamoDB global tables
+DynamoDB global tables are ideal for massively scaled applications, with globally dispersed users. In such an environment, users expect very fast application performance. Global tables provide automatic multi-master replication to AWS regions world-wide, so you can deliver low-latency data access to your users no matter where they are located.
+
+Q: How do I update and query data items with DynamoDB?
+
+After you have created a table using the DynamoDB console or CreateTable API, you can use the PutItem or BatchWriteItem APIs to insert items. Then, you can use the GetItem, BatchGetItem, or, if composite primary keys are enabled and in use in your table, the Query API to retrieve the items you added to the table.
+
+
+Q) How can you change your provisioned throughput?
+If you would like to change your table’s provisioned throughput capacity, you can do so using the AWS Management Console, the UpdateTable API, or the PutScalingPolicy API for auto scaling
+
+Important Methods
+
+BatchGetItem: Max 16 MB or 100 records. If a partial result is returned, the operation returns a value for UnprocessedKeys
+BatchWriteItem: The BatchWriteItem operation puts or deletes multiple items in one or more tables. A single call to BatchWriteItem can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.
+It can't update items boyy
+PutItem
+GetItem
+Scan
+
+If you request more than 100 items BatchGetItem will return a ValidationException with the message "
+
+Error Handling DynamoDB: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html
+
+operators supported in DynamoDB
+a AND b — true if a and b are both true.
+
+a OR b — true if either a or b (or both) are true.
+
+NOT a — true if a is false; false if a is true
+
+Limit of Scan operation is 1 MB
+
+DynamoDB supports atomic counters, where you use the UpdateItem operation to increment or decrement the value of an existing attribute without interfering with other write requests. 
+
+If some operation under BatchWrite/PUT fails the entire operation fails?
+Nope. They are not. Failed operations are under unprocessedItems(BatchWrite) &
+UnprocessedKeys(BatchGetItem)
+

@@ -1,11 +1,22 @@
-Simple Storage Service
+Simple Storage Service (hence the name S3)
+(12 question from this category will be asked at the least)
 
-Go thorugh this: S3-Optimization -http://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html
-CORS in S3
+
+S3-Optimization -http://docs.aws.amazon.com/AmazonS3/latest/dev/request-rate-perf-considerations.html
+Amazon S3 automatically scales to high request rates. 
+For example, your application can achieve at least 3,500 PUT/POST/DELETE and 5,500 GET requests per second per prefix in a bucket. 
+There are no limits to the number of prefixes in a bucket. 
+
+CORS in S3.
+
 How to name a file for optimum performance? (Also, know the best filename format in S3 to optimize performance.)
-Know/review limits for S3
 
-(12 question at the least)
+Know/review limits for S3
+1. 100 Buckets per account
+2. After you have created a bucket, you can't change its Region
+3. No Buckets within a bucket.
+4. 
+
 
 S3 provides developers and IT teams with secure, durable, highly scalable object storage.
 
@@ -47,10 +58,10 @@ It is designed to sustain the loss of 2 facilities concurrently.
 
 
 S3- Storage Tiers/Classes [check image]
- 1. s3 (Standard)
- 2. S3-IA (Infrequently Accessed): For data that is accessed less frequently,
- but requires rapid access when needed.
- 3. S3- One Zone IA: Same as IA however data is stored in a single availability Zone only,
+1. s3 (Standard)
+2. S3-IA (Infrequently Accessed): For data that is accessed less frequently,
+   but requires rapid access when needed.
+3. S3- One Zone IA: Same as IA however data is stored in a single availability Zone only,
   still 99.999999999 durability, but only 99.5% availability.
   Cost is 20% less than regular S3-IA
 4. Reduced Redundancy Storage: Designed to provide 99.99% durability and 99.99% availability of objects over a given year.
@@ -112,6 +123,22 @@ Mixed Workloads (GET, PUT & DELETE) : Use hax prefix to S3 object key names to p
 
 
 CORS - Configuration LAB (pending)[do it. Made mistakes in the question]
+
+Cross Region Replication
+Cross-region replication (CRR) enables automatic, asynchronous copying of objects across buckets in different AWS Regions. 
+
+Configuration Required>>>
+The destination bucket, where you want Amazon S3 to replicate objects
+An AWS IAM role that Amazon S3 can assume to replicate objects on your behalf
+
+Criterias for CRR:
+Both source and destination buckets must have versioning enabled.
+
+The source and destination buckets must be in different AWS Regions.
+
+Amazon S3 must have permissions to replicate objects from the source bucket to the destination bucket on your behalf.
+
+If the owner of the source bucket doesn't own the object in the bucket, the object owner must grant the bucket owner READ and READ_ACP permissions with the object ACL
 
 
 CloudFront
@@ -292,3 +319,83 @@ Q) Host static websites on S3
 
 You can host a static website on Amazon Simple Storage Service (Amazon S3). On a static website, individual webpages include static content. They might also contain client-side scripts. No server side scripts though.
 <bucket-name>.s3-website-<AWS-region>.amazonaws.com
+Q:     How much data can I store in Amazon S3?
+
+The total volume of data and number of objects you can store are unlimited. 
+Individual Amazon S3 objects can range in size from a minimum of 0 bytes to a maximum of 5 terabytes. 
+The largest object that can be uploaded in a single PUT is 5 gigabytes. 
+For objects larger than 100 megabytes, customers should consider using the Multipart Upload capability.
+
+
+Q:  How can I control access to my data stored on Amazon S3?
+
+Customers may use four mechanisms for controlling access to Amazon S3 resources: Identity and Access Management (IAM) policies, bucket policies, Access Control Lists (ACLs), and Query String Authentication. IAM enables organizations with multiple employees to create and manage multiple users under a single AWS account. With IAM policies, customers can grant IAM users fine-grained control to their Amazon S3 bucket or objects while also retaining full control over everything the users do. With bucket policies, customers can define rules which apply broadly across all requests to their Amazon S3 resources, such as granting write privileges to a subset of Amazon S3 resources. 
+Customers can also restrict access based on an aspect of the request, such as HTTP referrer and IP address. 
+With ACLs, customers can grant specific permissions (i.e. READ, WRITE, FULL_CONTROL) to specific users for an individual bucket or object. 
+With Query String Authentication, customers can create a URL to an Amazon S3 object which is only valid for a limited time.
+
+Q:  What is an Amazon VPC Endpoint for Amazon S3?
+
+An Amazon VPC Endpoint for Amazon S3 is a logical entity within a VPC that allows connectivity only to S3. 
+The VPC Endpoint routes requests to S3 and routes responses back to the VPC. For more information about VPC Endpoints, read.
+
+If you want to do Replication at bucket level, do cross region replication(aka CRR).
+
+
+Q:  What checksums does Amazon S3 employ to detect data corruption?
+
+Amazon S3 uses a combination of Content-MD5 checksums and cyclic redundancy checks (CRCs) to detect data corruption
+
+Q) Versioning
+
+Q:  What is S3 Intelligent-Tiering?
+
+Amazon S3 Intelligent-Tiering (S3 Intelligent-Tiering) is an S3 storage class for data with unknown access patterns or changing access patterns that are difficult to learn. It is the first cloud storage class that delivers automatic cost savings by moving objects between two access tiers when access patterns change. One tier is optimized for frequent access and the other lower-cost tier is designed for infrequent access.
+
+Use AWS Lifecycle rules to PUT to data or use the API to move data to Glacier
+
+
+Object Lifecylce Mgmt.
+
+Transaction and Expiration actions.
+
+Q) What is "Query in Place" functionality?
+
+Amazon S3 allows customers to run sophisticated queries against data stored without the need to move data into a separate analytics platform. 
+The ability to query this data in place on Amazon S3 can significantly increase performance and reduce cost for analytics solutions leveraging S3 as a data lake. 
+
+Q:  What is Amazon Athena?
+
+Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL queries. Athena is serverless, so there is no infrastructure to setup or manage, and you can start analyzing data immediately.
+
+Q) How do you speed up S3 download?
+Use Amazon S3 Transfer Accelararion. 
+Your data transfer application must use one of the following two types of endpoints to access the bucket for faster data transfer: .s3-accelerate.amazonaws.com or .s3-accelerate.dualstack.amazonaws.com 
+It also supports Multipart Upload.
+
+Q:  What is S3 Inventory?
+
+The S3 Inventory report provides a scheduled alternative to Amazon S3’s synchronous List API. You can configure S3 Inventory to provide a CSV, ORC, or Parquet file output of your objects and their corresponding metadata on a daily or weekly basis for an S3 bucket or prefix.
+
+
+Website Hosting Required permissions?
+1. Make Bucket Public.
+2. Enable static web hosting in your bucket
+3. Add an index.js file
+
+The bucket name can be between 3 and 63 characters long, and can contain only lower-case characters, numbers, periods, and dashes.
+
+
+ERROR CODE for s3?
+403 [AccessDenied] Access Related 
+400 [TooSmall, TooLarge shit like that] BAD REQUEST
+409 [bucketAlreadyExists, ] CONFLICT
+
+When do you get this error?
+You are working with the S3 API and receive an error message: 409 Conflict. What is the possible cause of this error? Choose the correct answer from the options below
+
+You can remove the bucket only after removing the contents, otherwise face 409 error
+
+Any objects uploaded prior to versioning will have the version ID as NULL.
+
+

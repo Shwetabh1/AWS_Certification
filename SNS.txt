@@ -1,14 +1,15 @@
 SNS message format and corresponding API calls SNS message format, API calls for SNS and SWF [Question]
 Know/review limits for SNS [Question]
 http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-devicetoken.html
+Maximum number of SNS topics per Auto Scaling group	10
 
 SNS And SWF Notes
 
 1. SNS follows the Publish-Subscribe message paradigm with notification being delivered to the clients using the a PUSH mechanism
 
-2. SQS can deliver via SMS,Email,Email-json ,HTTP,HTTPS,SQS ,Lamba,Application
+2. SQS can deliver via SMS, Email, Email-json, HTTP, HTTPS, SQS, Lamba, Application
 
-3. To provide redundancy all the messages are stored in the different availability zones
+3. To provide redundancy all the messages are stored in the different availability zones.
 
 4. Topic is the access point for allowing the recipient to dynamically subscribe the for identical copies of same notification.IT can support different endpoints IOS ,Android,SMS.when you publish it will send the same to different endpoint in their format
 
@@ -39,3 +40,7 @@ Maximum workflow processing time can 1 year (equivalent seconds) - SQS is 12 hou
 This was on the exam. How do you register devices for Amazon Mobile Devices and SNS Mobile Push notifiations.
 http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-devicetoken.html
 Answer: use CreatePlatformEndpoint is correct way to do. You can add device tokens and registration IDs to Amazon SNS using the following methods: • Manually add a single token to AWS using the AWS Management Console • Migrate existing tokens from a CSV file to AWS using the AWS Management Console • Upload several tokens using the CreatePlatformEndpoint API • Register tokens from devices that will install your apps in the futur
+
+
+
+What kind of message does SNS send to endpoints? Choose the correct answer from the options below

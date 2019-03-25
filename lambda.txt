@@ -1,7 +1,4 @@
-Contents:
-1. Notes
-2. Lab Work
-3. Possible Questions
+AWS LAMBDA
 
   //////////////////////////
  /////////NOTES////////////
@@ -51,13 +48,14 @@ Amazon Athena is an interactive query service that makes it easy to analyze data
 
 ## Understand versioning in AWS Lambda.
 
-when you are versioning in Lambda you can publish different versions of your lambda function. As a result you can work with different versions of your lambda function in your development workflow, such as development, beta and production. Each Lambda function has a different ARN (Amazon Resource Name) and once published it is immutable.
+when you are versioning in Lambda you can publish different versions of your lambda function. As a result you can work with different versions of your lambda function in your development workflow, such as development, beta and production.
+Each Lambda function has a different ARN (Amazon Resource Name) and once published it is immutable.
 There are two types of ARN:
 Qualified ARN and Unqualified ARN. Qualified ARN has version suffix (sth.com:version). Unqualified doesn't have that.
 
 AWS function maintains your latest code in $LATEST version.
 You can use Aliases to map to different versions of Lambda functions.
-Can split traffic using aliases to different version.
+Can split traffic using aliases to different version. 
 Can't split traffic using $latest. Instead use aliases. [important exam]
 
 ## Improving Performance of Lambda Functions
@@ -124,37 +122,38 @@ Q: How does AWS Lambda secure my code?
 AWS Lambda stores code in Amazon S3 and encrypts it at rest. AWS Lambda performs additional integrity checks while your code is in use.
 
 
-Q: How long can an AWS Lambda function execute?
+Q:) How long can an AWS Lambda function execute?
 
 AWS Lambda functions can be configured to run up to 15 minutes per execution. You can set the timeout to any value between 1 second and 15 minutes.
 
-Q: What is a Dead Letter Queue?
+Q:) What is a Dead Letter Queue?
 
-Q: How do I deploy and manage a serverless application?
+Q:) How do I deploy and manage a serverless application?
 
-You can deploy and manage your serverless applications using the AWS Serverless Application Model (AWS SAM). AWS SAM is a specification that prescribes the rules for expressing serverless applications on AWS. This specification aligns with the syntax used by AWS CloudFormation today and is supported natively within AWS CloudFormation as a set of resource types (referred to as "serverless resources"). These resources make it easier for AWS customers to use CloudFormation to configure and deploy serverless applications, using existing CloudFormation APIs.
+You can deploy and manage your serverless applications using the AWS Serverless Application Model (AWS SAM). AWS SAM is a specification that prescribes the rules for expressing serverless applications on AWS. 
+This specification aligns with the syntax used by AWS CloudFormation today and is supported natively within AWS CloudFormation as a set of resource types (referred to as "serverless resources"). 
+These resources make it easier for AWS customers to use CloudFormation to configure and deploy serverless applications, using existing CloudFormation APIs.
 
-
-Q: How do I coordinate calls between multiple AWS Lambda functions?
+Q:) How do I coordinate calls between multiple AWS Lambda functions?
 
 You can use AWS Step Functions to coordinate a series of AWS Lambda functions in a specific order. You can invoke multiple Lambda functions sequentially, passing the output of one to the other, and/or in parallel, and Step Functions will maintain state during executions for you.
 
-Q: How do I troubleshoot a serverless application?
+Q:) How do I troubleshoot a serverless application?
 
 You can enable your Lambda function for tracing with AWS X-Ray by adding X-Ray permissions to your Lambda function’s execution role and changing your function’s “tracing mode” to “active.
 
-Q: How is AWS SAM licensed?
+Q:) How is AWS SAM licensed?
 
 The specification is open sourced under Apache 2.0,
 
-Q Which language supports Lambda@Edge?
+Q:) Which language supports Lambda@Edge?
 
 Only Node.js for now
 
 Q) Lambda is returning 429 error. What could be the reason?
 On exceeding the throttle limit, AWS Lambda functions being invoked synchronously will return a throttling error (429 error code)
 
-Q: How do I control which Amazon S3 buckets can call which AWS Lambda functions?
+Q:) How do I control which Amazon S3 buckets can call which AWS Lambda functions?
 
 Using Resource Policy.
 When you configure an Amazon S3 bucket to send messages to an AWS Lambda function a resource policy rule will a be created that grants access
@@ -162,6 +161,25 @@ When you configure an Amazon S3 bucket to send messages to an AWS Lambda functio
 Q: Can a single Lambda function have access to multiple VPCs?
 
 No. Lambda functions provide access only to a single VPC. If multiple subnets are specified, they must all be in the same VPC. You can connect to other VPCs by peering your VPCs
+
+What are the triggers for AWS Lambda?
+
+API_GATEWAY
+S3
+SNS
+Cloudwatch Logs
+Cloudwatch events
+AWS IOT
+Alexa Skills Kit
+Alexa Smart Home
+Application Load Balancer
+Code Commit
+Cognito Sync Trigger
+Dynamo DB
+Kinesis
+S3
+SNS
+SQS
 
 
 

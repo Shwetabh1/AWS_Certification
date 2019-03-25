@@ -61,3 +61,16 @@ Json
 CloudFormation Output section and Function you would use. [Important Question]
 CloudFormation template anatomy (different sections) ie. only resources section is required for template to execute. [Important]
 Also understand CF intrinsic function types and usage.
+
+
+You can use the Parameters section to take in values at runtime.
+
+"Fn::Join" : [ ":", [ "a", "b", "c" ] ]
+
+return a:b:c
+
+
+The following example returns: "grapes".
+
+JSON
+{ "Fn::Select" : [ "1", [ "apples", "grapes", "oranges", "mangoes" ] ] }

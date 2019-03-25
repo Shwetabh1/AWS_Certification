@@ -106,3 +106,30 @@ There are three deployment style
 one at a time
 half at a time 
 all at a time
+
+
+Code Deploy Right Sequence
+Code Build More Information
+Code Pipeline
+
+Q)Which of the following is the right sequence of hooks that get called in AWS CodeDeploy?
+Q) Code Deploy Instance Profile
+
+Create a service role for AWS CodeDeploy
+n AWS, service roles are used to grant permissions to an AWS service so it can access AWS resources.
+The policies that you attach to the service role determine which AWS resources the service can access and what it can do with those resources.
+
+For EC2 AWSCodeDeployRole
+For ECS AWSCodeDeployRoleForEC2
+For Lambda AWSCodeDeployRoleForLambda
+
+Code instance Profile only for EC2
+If you are using the Amazon ECS or AWS Lambda compute platform , skip this step. Amazon ECS deployments deploy an Amazon ECS service, and AWS Lambda deployments deploy a serverless Lambda function version, so an instance profile for Amazon EC2 instances is not required.
+
+You’re planning on using the AWS CodeDeploy tool for deployment of your application. Which of the following is used to specify how your application will be deployed to the underlying instances?
+
+AppSec.json
+
+
+
+
