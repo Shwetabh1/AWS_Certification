@@ -1,4 +1,9 @@
-aad image here
+<h1 align="center">AWS Developer Associate Certification</h1>
+
+<div align="center">
+    <img src="https://github.com/Shwetabh1/AWS_Certification/blob/master/Resources/aws_cert.png" alt="AWS Developer"/>
+</div>
+
 ## Foreword
 Focus on the learning and certification will follow. Certification should never be the Target. Your ability to comprehend and apply those learnings should be.
 
@@ -6,47 +11,46 @@ Focus on the learning and certification will follow. Certification should never 
 > You can never understand everything but you should push yourself to understand the system.<br/>
 > *-Ryan Dahl (creator of Node.JS)*
 
-This a complete guide for achieving AWS certified developer mettle. It comprises of notes, lab works, exam break down, essential tips and probable questions that could be asked. Each topic in the content has 3 sections; Notes, then the practical work you should do and lastly dozens of questions that can be asked in the AWS Certified Developer Exam related to that topic.
+This a complete guide for achieving AWS certified developer mettle. It comprises of notes, lab works, exam break down, essential tips and probable questions that have been asked or could be asked. Each topic in the content has 3 sections; Notes, then the practical work you should do and lastly dozens of questions that can be asked in the AWS Certified Developer Exam related to that topic.
 
 ## Contents
 1. API Gateway
-1. CICD
+1. Continous Integartion; Continous Delivery/ Deployment
 1. CloudFormation
 1. CloudWatch
 1. DynamoDB & RDS
 1. EC2 & Elasticache
 1. Elastic Beanstalk
-1. IAM
+1. Identity Access and Management
 1. Kinesis
-1. KMS
+1. Key Management System
 1. Lambda
 1. Route53
-1. S3
-1. SQS
-1. SNS
-1. SWF
-1. VPC
+1. Simple Storage Service
+1. Simple Queue Service
+1. Simple Notification Service
+1. Simple Workflow Service
+1. Virtual Private Cloud
 
-
-## Exam Blue Print
-Deployment 22%<br/>
-Security 26%<br/>
-Development with AWS Services 30%<br/>
-Refactoring 10%<br/>
-Monitoring and Troubleshooting 12%<br/>
+## Exam Details
 
 Exam Duration: 130 Minutes<br/>
 Total Questions: 65 Questions<br/>
 Maximum Score 1000<br/>
 Passing is 720<br/>
 Resuts are available immediately.<br/>
-In case you were unsuccessful you can always retake the exam , 14 days after yor first attempt.<br/>
+In case you were unsuccessful you can always retake the exam, 14 days after yor first attempt.<br/>
 The certification is valid for 3 years.<br/>
-
 
 ## Question Category Breakdown
 
-IAM
+1. Deployment 22%<br/>
+1. Security 26%<br/>
+1. Development with AWS Services 30%<br/>
+1. Refactoring 10%<br/>
+1. Monitoring and Troubleshooting 12%<br/>
+
+IAM ~ 4 Questions.
 
 Questions will definetly be asked from IAM including IAM role for DynamoDB, Web Federation, Corporate network, CloudFront, Elastic Beanstalk, Cloud Formation and Elastic Cache.
 Options on authenticating using LDAP together with IAM.
