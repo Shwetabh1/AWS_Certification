@@ -22,6 +22,7 @@ This a complete guide for achieving AWS certified developer mettle. It comprises
 <li>Resuts are available immediately.</li>
 <li>In case you were unsuccessful you can always retake the exam, 14 days after yor first attempt.</li>
 <li>The certification is valid for 3 years.</li>
+</ul>
 
 ## Question Category Breakdown
 <div align="center">
