@@ -7,7 +7,7 @@ SNS And SWF Notes
 
 1. SNS follows the Publish-Subscribe message paradigm with notification being delivered to the clients using the a PUSH mechanism
 
-2. SQS can deliver via SMS, Email, Email-json, HTTP, HTTPS, SQS, Lamba, Application
+2. SQS can deliver via SMS, Email, Email-json, HTTP, HTTPS, SQS, Lambda, Application
 
 3. To provide redundancy all the messages are stored in the different availability zones.
 
@@ -44,3 +44,5 @@ Answer: use CreatePlatformEndpoint is correct way to do. You can add device toke
 
 
 What kind of message does SNS send to endpoints? Choose the correct answer from the options below
+
+By default, a subscriber of an Amazon SNS topic receives every message published to the topic. To receive only a subset of the messages, a subscriber assigns a filter policy to the topic subscription.A filter policy is a simple JSON object. The policy contains attributes that define which messages the subscriber receives

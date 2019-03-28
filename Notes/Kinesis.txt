@@ -8,3 +8,9 @@ To get started, select a new or existing Kinesis stream in the Kinesis managemen
 
 Your application currently makes use of AWS Kinesis streams. The data rate of the application is now increasing due to the increased number of producers. Which of the following can be done to keep up with the increased data rate?
 
+Amazon Kinesis Firehose
+is used in delivering real-time streaming data to destinations such as Amazon Simple Storage Service
+
+Amazon Kinesis Data Analytics, you can process and analyze streaming data using standard SQL. 
+The service enables you to quickly author and run powerful SQL code against streaming sources to perform time series analytics, feed real-time dashboards, and create real-time metrics.
+

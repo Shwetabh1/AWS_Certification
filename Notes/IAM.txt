@@ -78,8 +78,6 @@ Anatomy of a policy:
         "arn:aws:s3:::confidential-data/*"
       ],
       "Condition": {"Bool": {"aws:MultiFactorAuthPresent": "true"}} //Specify the circumstances under which the policy grants permission.
-
-
     }
   ]
 }

@@ -182,5 +182,8 @@ SNS
 SQS
 
 
+To reuse execution context, initialize Lambda outside of aws client.
 
+
+To schedule a Lambda function use cloud watch events
 

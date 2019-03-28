@@ -398,4 +398,7 @@ You can remove the bucket only after removing the contents, otherwise face 409 e
 
 Any objects uploaded prior to versioning will have the version ID as NULL.
 
+Amazon Athena:
+Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.
+
 

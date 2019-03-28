@@ -1,46 +1,40 @@
-Go thorugh this [Must] Optimising DynamoDB operations (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScanGuidelines.html)
-Know/review limits for DynamoDB [Question]http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
-I had quite a few DynamoDB questions about hash and range keys that I was not prepared for based on the course alone.
-You need to know what each is and how to optimize each for specific queries for the best performance.
+DynamoDB
 
-[Buisness IDEA]
-[Give Mock Tests AWS Certification]
-[Develop the test module. Can be used anywhere.]
+##THEORY##
 
-DynamoDB:
-Tables, Items and Attributes
-Items is basically rows.
-Attributes is column.
+Key terms: Tables, Items, Attributes and Documents
+- Table is a mix of row and column.
+- Items is basically rows.
+- Attributes is column.
+- Document can be written in XML, HTML and JSON.
 
-Document can be written in XML, HTML and JSON.
-
-It supports both document and key-value based model. It is also serverless thus a good choice for developing serverless shit.
-
+It supports both document and key-value based model. 
+It is also serverless thus a good choice for developing serverless shit.
 It is always backed by solid state disks. Spread across 3 geographic locations and has 2 consistency model.
 
+What are Consistency Models?
 1. Eventual Consistency Reads (Default)
 This gives best performance and ensures consistency across all copies of data  within seconds.
 2. Strongly Consistent Reads
-Everywhere it is updated.
+It is updated everywhere.
 
+About Keys and Hashes
 Primary Key are of two types:
-
 1. Partition Key : A simple primary key, composed of one attribute known as the partition key. Attributes in DynamoDB are similar in many ways to fields or columns in other database systems.
 2. Composite Key :  Referred to as a composite primary key, this type of key is composed of two attributes. The first attribute is the partition key, and the second attribute is the sort key.
 
-Access is controlled by Identity Access Management Policies.
-
-Fine Grained access control using IAM Condition parameter: dynamoDb:LeadingKeys to allow users to access only the items where the partition key value matches their user ID.
-
-
+Access Control in DyanmoDB
+- Access is controlled by Identity Access Management Policies.
+- Fine Grained access control using IAM Condition parameter: 
+  dynamoDb:LeadingKeys to allow users to access only the items where the partition key value matches their user ID.
 
 All about indexes in DynamoDB:
 
 What are indexes?
 In SQL databases an index is a data structure which allows you to perform fast queries on specific columns that you want included in the index and run your searches on the index-rather than on the entire dataset.
 
+Note: It is not a good practice to have indexes in heavy write db. Also have as less indexes as possibe.
 In DynamoDB two types of indexes are supported.
-
 1. Local Secondary Index
 - Can be created when you are creating the table.
 - It can't be modified, added or removed later.
@@ -50,8 +44,6 @@ In DynamoDB two types of indexes are supported.
 e.g Partition Key: Consumer ID
 Sort Key: Account Creation Date.
 
-
-
 2. Global Secondary Index
 - You can create it anytime. While creating the account or add it later.
 - Choose different partition key and sort key.
@@ -59,39 +51,29 @@ Sort Key: Account Creation Date.
 ex: email_id [Partition Key]
 login_time [Sort Key]
 
-
-
-LAB: Run a script on EC2 to create dynamoDB database, all right.
-
-
 Query vs Scan
 
 Scans:
 A scan operation examines every item in the table.
 By default return all data attributes.
 Use the projection expression parameter to refine the scan to only return the attributes you want.
-
+Scan Limit: [IMPORTANT] A single Query operation can retrieve a maximum of 1 MB of data
 
 When would you use query and when would you use Scan?
 Query is much more efficient than a Scan.
-
 Scan dumps the entire table and then filters out values to provide the desired result - removing the unwanetd data.
-
 This adds an extra step of removing the data you don't want. As the table grows the scan operation takes longer
-
 Improve the Scan Performance by introducing parallel scans.
-
-It can only scan 1 partition at a time. By Default it scans data @1mb at a time.
-
+It can only scan 1 partition at a time.
+By Default it scans data @1mb at a time.
+Query operation will work on either composite key or indexes.
 
 Query results is always sorted on sort key.
-
 You can change the scanIndexForward parameter to do it decreasing order.
-
+Query operation will also fetch a max of 1MB. 
+Using filter will not improve the query performance. It works after the query operation is done.
+Query operation by default uses eventual consistecy reads.
 Improve the performance of scans and queries by introducing a smaller page size which uses fewer read operations.
-
-I had only 1, maybe 2, questions about calculating your provisioned throughput. The one I recall was about write throughput. There may have been 1 about read as well but there were far more questions about optimizing queries which I felt was not covered at all by Ryan in the course.
-
 
 Dynamo DB provision throughput
 
@@ -102,7 +84,8 @@ Dynamo DB provision throughput
 
 DynamoDB On Demand Capacity
 
-We don't need to specify our capacity requirement. They will automatically scale up and down. Charges apply for reading, writing and storing data.
+We don't need to specify our capacity requirement.
+They will automatically scale up and down. Charges apply for reading, writing and storing data.
 
 Question when you should use Provisioned capacity and when you should you use On-Demand capacity?
 When you don't know your traffic, short lived peaks, pay per capacity etc. [On Demand]
@@ -116,30 +99,24 @@ Delivers up to a 10x read performance improvement. Useful for black friday etc. 
 
 DAX is a write through caching service, thus when data is written it is written to cache as well as back end store at the same time.
 It allows you to point your dynamodb calls at the DAX cluster. If the item you are querying is in the cache it will return it.
-
 If the item is not available in the cache then it performs the eventual consistent GetItem operation against dynamoDB.
-
 retrieval of data from DAX reduces the read load on dynamodb tables. may be able to reduce provisioned read capacity.
 
 When not to choose DAX
-
-caters only to eventual consistent read thus if your application wants strongly consistent read this shit is not an option. bruh
-For Write Intensive Application.
-Applications that do not perform many read operations.
-Applications that do not require microsecond response times.
+- caters only to eventual consistent read thus if your application wants strongly consistent read this shit is not an option. bruh
+- For Write Intensive Application.
+- Applications that do not perform many read operations.
+- Applications that do not require microsecond response times.
 
 
 ELASTICACHE
 
 In memory caching. Can be used for any RDS database and also for DynamoDB.
-
 It sits between your DB and the application. Good if your data is not changing rapidly.
-
 There are two types of elasticache
-
 1.memcached: Widely adopted memory object caching system. Multi Threaded. No Multi A-Z capability.
 2.redis: open source in memory key value store. Supports more complex data structure. Sorted List and Sets.
-Supports Multi AZ
+         It also Supports Multi AZ
 
 There are two types of caching mechanism
 
@@ -149,14 +126,13 @@ Only requested data is cached. First it is a miss and then it is loaded so it is
 remove stale data using TTL.
 
 2. Write Through
-
 DynamoDB Transactions
 
 ACID
 
 DynamoDB TTL [comes in exam]
-Encryption at Rest encrypts the data in DynamoDB
 
+Encryption at Rest encrypts the data in DynamoDB
 DynamoDB Streams
 DynamoDB Streams enables solutions such as these, and many others. 
 DynamoDB Streams captures a time-ordered sequence of item-level modifications in any DynamoDB table, and stores this information in a log for up to 24 hours
@@ -168,36 +144,18 @@ We need to specify capacity units at the time of creation.
 
 
 
-////////////// DYNAMO DB SHIT YO ////////////
-DynamoDB Notes
 
-1. DynamoDb provide predictable performance with scalability.
+- there are no limits on the request capacity or storage size for a given table.
 
-2. Atomic updates is available which will increment or decrement the counter no matter what like website visitor
+a table in Amazon SimpleDB has a strict storage limitation of 10 GB and is limited in the request capacity it can achieve (typically under 25 writes/second); it is up to you to manage the partitioning and re-partitioning of your data over additional SimpleDB tables if you need additional scale. While SimpleDB has scaling limitations, it may be a good fit for smaller workloads that require query flexibility. Amazon SimpleDB
 
-3. Query functionality using Get/Put operation using primary key
+Amazon DynamoDB stores structured data, indexed by primary key, and allows low latency read and write access to items ranging from 1 byte up to 400KB. Amazon S3 stores unstructured blobs and suited for storing large objects up to 5 TB. In order to optimize your costs across AWS services, large objects or infrequently accessed data sets should be stored in Amazon S3, while smaller data elements or file pointers (possibly to Amazon S3 objects) are best saved in Amazon DynamoDB.
 
-4. Primary key is the only required attribute for the item in the table
+ There is no explicit limitation on the number of attributes associated with an individual item,
 
-5. in addition DynamoDb query on the non primary key attribute like local secondary index or global secondary index
+but the aggregate size of an item, including all the attribute names and attribute values, cannot exceed 400KB.
 
-6. Primary can be single attribute(partition or Hash key) or composite(Partion/Hash and Range/Sort)
-
-7. Yes, you can specify a condition that must be satisfied for a put, update, or delete
-
-8. Yes, you can specify an expression as part of the Query API call to filter results based on values of primary keys on a table using the KeyConditionExpression parameter.
-
-9. there are no limits on the request capacity or storage size for a given table.
-
-10. a table in Amazon SimpleDB has a strict storage limitation of 10 GB and is limited in the request capacity it can achieve (typically under 25 writes/second); it is up to you to manage the partitioning and re-partitioning of your data over additional SimpleDB tables if you need additional scale. While SimpleDB has scaling limitations, it may be a good fit for smaller workloads that require query flexibility. Amazon SimpleDB
-
-11. Amazon DynamoDB stores structured data, indexed by primary key, and allows low latency read and write access to items ranging from 1 byte up to 400KB. Amazon S3 stores unstructured blobs and suited for storing large objects up to 5 TB. In order to optimize your costs across AWS services, large objects or infrequently accessed data sets should be stored in Amazon S3, while smaller data elements or file pointers (possibly to Amazon S3 objects) are best saved in Amazon DynamoDB.
-
-12. There is no explicit limitation on the number of attributes associated with an individual item,
-
-13. but the aggregate size of an item, including all the attribute names and attribute values, cannot exceed 400KB.
-
-14. Api’s of DynamoDB :
+ Api’s of DynamoDB :
 
 CreateTable- Create a table and specifies the primary index
 
@@ -207,7 +165,7 @@ UpdateTable: Update the table ProvisionThoughput
 
 DeleteTable: Delete the table
 
-DescribeTable: Returns the size ,index and stays information of table
+DescribeTable: Returns the size, index and stays information of table
 
 ListTables: Returns the list of the table associated with current account and endpoint
 
@@ -418,3 +376,13 @@ Nope. They are not. Failed operations are under unprocessedItems(BatchWrite) &
 UnprocessedKeys(BatchGetItem)
 
 Put in place exponential backoff algorithm to handle that shit, yo
+
+Keep the indexes to a minimum and avoid adding it in tables that experience heavy write activity.
+
+Go thorugh this [Must] Optimising DynamoDB operations (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScanGuidelines.html)
+Know/review limits for DynamoDB [Question]http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+I had quite a few DynamoDB questions about hash and range keys that I was not prepared for based on the course alone.
+You need to know what each is and how to optimize each for specific queries for the best performance.
+
+## PRACTICAL ##
+LAB: Run a script on EC2 to create dynamoDB database, all right.

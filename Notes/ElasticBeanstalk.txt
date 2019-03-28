@@ -94,5 +94,13 @@ How can you achieve this in the BEST way possible?
 
 Ask them use Elastic BeanStalk CLI.
 
+Q) How to ensure DB lives even after instance is delted?
+ you should ensure the Retention field is marked as “Create snapshot” for ensuring the database lives even after environment is deleted.
+ Alternatively, you can also ensure that the database is created outside of the Elastic beanstalk environmentOption 
+
+Criterias for bundle to be uploaded.
+When you use the AWS Elastic Beanstalk console to deploy a new application or an application version, you'll need to upload a source bundle.
+Your source bundle must meet the following requirements:· Consist of a single ZIP file or WAR file (you can include multiple WAR files inside your ZIP file)· Not exceed 512 MB· Not include a parent folder or top-level directory (subdirectories are fine)If you want to deploy a worker application that processes periodic background tasks, your application source bundle must also include a cron.yaml file
+
 
 
