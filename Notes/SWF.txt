@@ -1,0 +1,14 @@
+AWS Simpe Workflow Service 
+
+## THEORY ##
+Amazon SWF helps developers build, run, and scale background jobs that have parallel or sequential steps.
+
+Workers - interact with SWF to get task, process received task and return the result
+
+Deciders - program that co-ordinates the tasks, i.e. - ordering, concurrency and scheduling
+
+Workers and Deciders can run independently.
+
+TASK is only assigned ONCE and NEVER DUPLICATED (key difference from SQS where messages can be processed multiple times)
+
+SWF Domain - think of it as a container for the work flow. you can register a domain by Console or API.

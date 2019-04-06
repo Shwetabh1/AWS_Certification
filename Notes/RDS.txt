@@ -1,81 +1,45 @@
-Relational DataBase Service
+AWS Relational DataBase Service
 
+## THEORY ##
+Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud. It provides cost-efficient, resizable capacity for an industry-standard relational database and manages common database administration tasks.
 These are the database types that we can provision:
-
 1. SQL Server
 2. Oracle
 3. MySQL Server
 4. PostgreSQL
 5. Aurora (Amazon's Own)
 6. MariaDB
+- RedShift is used for OLAP. 
+- Amazon Aurora Serverless: is an on-demand, auto-scaling configuration for Amazon Aurora (MySQL-compatible edition), where the database will automatically start up, shut down, and scale capacity up or down based on your application's needs.
 
-DynamoDB to handle Non Relational DataBase
+MULTI AZ DEPLOYMENTS AND READ REPLICASS
+- It is used only for RDS.
+- Multi-AZ for durability and read replicas for scaliability.
+- MULTI AZ is for disaster recovery only.
+- If you want performance improvement, you need read Replicas.
+- Read Replicas can be in dfiference region and availability zones.
+- But they are not availabile for SQL Server or Aurora. 
 
-RedShift - OLAP 
+RDS BACKUPS
+There are two types of backups.
+    1. Automated Backups
+    - Automated Backups allow you to recover your database to any point in time within a "retention period".
+    - The retention period can be between one and 35 days. 
+    - Automated Backups will take a full daily snapshot and will also store transaction logs throughout the day. 
+    - This allows you to do a point in time recovery down to a second, within the retention period.
+    - Enabled by default and is stored on s3 for free.
+    - If I have 10gb RDS I get 10gb S3 size for free.
+    2. DataBase Snapshots.
+    - Snapshots are done manually and are stored even after you delete the original RDS instance, unlike automated backups.
+    - Encrypting an existing database is not supported now.
+    - If a Rest endpoint is encrypted, the underlying storage is encrypted.
 
-Data Warehousing
-Used for business Intelligence. Tools like Cognos, Jaspersoft, SQL Server
-Reporting Services, Oracle Hyperion, and SAP NetWeaver.
-
-Used to pull in very large and complex data sets. Usually used by managements to do queries on data
-
-Used for Reporting only not for production
-
-
-OLTP vs OLAP
-Something related to order 
-
-Something related to profit, unit purchase etc in some region.
-
-ElastiCache - In memory caching
-
-A web service that makes it easy to deploy, operate, and scale an in memory cache in the cloud.
-The service improves the performance of web applications by allowing you to retrieve information from 
-fast, managed, in memory caches, instead of relying entirely on slower disk based databases.
-
-Elasticache supports two open-source in-memory caching engine.
-
-1. Memcached
-2. Redis
-
-LeaderBoard kinda website faster -> Redis
+## QUESTIONS ##
 
 
 
-Difference Betweem MultiAZ and Read Replicas ***Imortant
-(RDS - Back Ups, Multi AZ & Read Replicas)
-
-There are two types of backups
-
-1. Automated Backups and DataBase Snapshots.
-2. Automated Backups allow you to recover your database to any point in time within a 
-"retention period". The retention period can be between one and 35 days. Automated Backups 
-will take a full daily snapshot and will also store transaction logs throughout the day. This allows
-you to do a point in time recovery down to a second, within the retention period.
-Enabled by default and is stored on s3 for free.
-
-if I have 10gb RDS I get 10gb S3 size for free.
-
-Snapshots are done manually and are stored even after you delete the original RDS instance, 
-unlike automated backups.
-
-Encrypting an existing database is not supported now.
-
-If a Rest endpoint is encrypted, the underlying storage is encrypted.
 
 
-MULTI AZ is for disaster recovery only.
-
-If you want performance improvement, you need read Replicas.
-
-READ Replicas
-
-scaling out the database to improve performance improvement.
-
-Read Replicas can be in dfiference region and availability zones.
-
-
-Not availabile for SQL Server or Aurora. 
 
 
 

@@ -1,76 +1,70 @@
-Cloud Formation
+AWS CLOUD  FORMATION
 
-Define AWS Infrastructure as Code
+## THEORY ##
 
-Can be done in YAML or JSON
-It is free to use and you are charged for what you create.
-The resulting resources are called a stack.
-Create the cliud formation template and upload to s3 from where it is read.
+Define AWS Infrastructure as Code which can be done either in YAML or JSON.
+
+- It is free to use and you are charged for what you create.
+- The resulting resources are called a stack.
+
+Example of a JSON template:
+{
+    "Resouces": {
+    "Hello": {
+        "Type": "AWS::S3::Bucket"
+        }
+    }
+}
+
 
 The main sections in the cloud formation template is
-
 1. Parameters: Custom Input Value
 2. Conditions: Provision resources based on environment
 3. Resources: (mandatatory) The resources to create
 4. Mappings: Create Custom Mappings like region: AMI
 5. Transforms: reference code located in s3, eg Lambda Code or reusable snippets of cloud formation code.
-1.Cloud Fromation allow you to concert the AWS Resouces into code
+** Only resources section is required for template to execute. [Important]
+** You can use the Parameters section to take in values at runtime.
 
-2. You need not to figure out the order for the provisioning AWS service CloudFormation will take care of.
-
-3. You can also mofify and update the deployed AWS resouces and also apply versions .
-
-4. Cloud Formation Template is the Achitectural daigram for the CF
-
-5.Cloud Frmation stack is the end result of the diagram
-
-6 You can create ,delete and update the AWS resouces by C,D,U the stack using template
-
-7 Template is in Json and Yaml
-
-8 Template :
-
-Json
-
-{
-
-"Resouces" : {
-
-"Hello" :{
-
-"Type" : "AWS::S3::Bucket"
-
-}
-
-}
-
-}
-
-9 Fn::GetAtt to get the output data in the CF
-
-10.By Default Automatic rollback for error are enables.
-
-11. you are charged for errors
-
-12 CF is free,underline resources are charged
-
-13 CF use Fn:GetAtt to output data
-
-14 You can create A records ,Aliases e
-
-CloudFormation Output section and Function you would use. [Important Question]
-CloudFormation template anatomy (different sections) ie. only resources section is required for template to execute. [Important]
-Also understand CF intrinsic function types and usage.
+Important Points
+- Use Fn::GetAtt to get the output data in the CF.
+- By Default Automatic rollback for error are enables.
+- You are charged for errors.
+- CF is free, underline resources are charged.
+- CF use Fn:GetAtt to output data
 
 
-You can use the Parameters section to take in values at runtime.
-
-"Fn::Join" : [ ":", [ "a", "b", "c" ] ]
-
+Intrinsic Functions
+1. "Fn::Join" : [ ":", [ "a", "b", "c" ] ]
 return a:b:c
+2. { "Fn::Select" : [ "1", [ "apples", "grapes", "oranges", "mangoes" ] ] }
+return grapes
 
+Service Role
+- To separate permissions between a user and the AWS CloudFormation service, use a service role.
+- AWS CloudFormation uses the service role's policy to make calls instead of the user's policy.
+- A service role is an AWS Identity and Access Management (IAM) role that allows AWS CloudFormation to make calls to resources in a stack on your behalf. You can specify an IAM role that allows AWS CloudFormation to create, update, or delete your stack resources. By default, AWS CloudFormation uses a temporary session that it generates from your user credentials for stack operations. If you specify a service role, AWS CloudFormation uses the role's credentials.
 
-The following example returns: "grapes".
+Some Important Best Practices
+1. Organize Your Stacks By Lifecycle and Ownership
+2. Use IAM to Control Access
+3. Use Cross-Stack References to Export Shared Resources
+    use cross-stack references to export resources from a stack so that other stacks can use them. Stacks can use the exported resources by calling them using the Fn::ImportValue function.use cross-stack references to export resources from a stack so that other stacks can use them. Stacks can use the exported resources by calling them using the Fn::ImportValue function.
+4. Verify Quotas for All Resource Types 
+5. Reuse Templates to Replicate Stacks in Multiple Environments 
+    To make templates reusable, use the parameters, mappings, and conditions sections so that you can customize your stacks when you create them. 
+6. Use AWS::CloudFormation::Init to Deploy Software Applications on Amazon EC2 Instances
+    Use AWS::CloudFormation::Init to Deploy Software Applications on Amazon EC2 Instances
+7. Validate Templates Before Using Them
+    During validation, AWS CloudFormation first checks if the template is valid JSON. If it isn't, AWS CloudFormation checks if the template is valid YAML.
+8. Create Change Sets Before Updating Your Stacks
+    Change sets allow you to see how proposed changes to a stack might impact your running resources before you implement them
+9. Use Stack Policies
+    Stack policies help protect critical stack resources from unintentional updates that could cause resources to be interrupted or even replaced. A stack policy is a JSON document that describes what update actions can be performed on designated resources.
 
-JSON
-{ "Fn::Select" : [ "1", [ "apples", "grapes", "oranges", "mangoes" ] ] }
+AWS CloudFormation StackSets
+AWS CloudFormation StackSets extends the functionality of stacks by enabling you to create, update, or delete stacks across multiple accounts and regions with a single operation.
+
+The role in your administrator account must be named AWSCloudFormationStackSetAdministrationRole. The role in each of your target accounts must be named AWSCloudFormationStackSetExecutionRole.
+
+## QUESTIONS ##

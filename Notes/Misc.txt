@@ -1,14 +1,21 @@
-CloudFront
-For web distributions, to control how long your objects stay in a CloudFront cache before CloudFront forwards another request to your origin, 
-you can configure your origin to add a Cache-Control or an Expires header field to each object.
-Specify a value for Minimum TTL in CloudFront cache behaviors.·Use the default value of 24 hours.
-
-AWS X-RAY
-
+1. AWS X-RAY
 AWS Lambda uses environment variables to facilitate communication with the X-Ray daemon and configure the X-Ray SDK.
 _X_AMZN_TRACE_ID: Contains the tracing header, which includes the sampling decision, trace ID, and parent segment ID. If Lambda receives a tracing header when your function is invoked, that header will be used to populate the _X_AMZN_TRACE_ID environment variable. If a tracing header was not received, Lambda will generate one for you.· AWS_XRAY_CONTEXT_MISSING: The X-Ray SDK uses this variable to determine its behavior in the event that your function tries to record X-Ray data, but a tracing header is not available. Lambda sets this value to LOG_ERROR by default.· AWS_XRAY_DAEMON_ADDRESS: This environment variable exposes the X-Ray daemon's address in the following format: IP_ADDRESS:PORT.
 You can use the X-Ray daemon's address to send trace data to the X-Ray daemon directly, without using the X-Ray SDK.
 
-AWS DATA PIPELINE
+2. AWS DATA PIPELINE
 AWS Data Pipeline, you can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks. You define the parameters of your data transformations and AWS Data Pipeline enforces the logic that you've set up
-Use AWS data pipeline to transafer lotta data from ec2 to s3 or shit bro
+Use AWS data pipeline to transafer lotta data from ec2 to s3 or shit bro.
+
+3. SYSTEMS MANAGER PARAMETER STORE
+Storing Confidential Information which can be passed to ec2 usig lambda etc.
+If you have confidential information such as passwords, database, connection strings, and license codes can be stored in SSM parameter store.
+You can store values as plain text or you can encrypt the data.
+
+4. AWS WAF
+You can use AWS WAF with your Application Load Balancer to allow or block requests based on the rules in a web access control list (web ACL).
+
+5. AWS FARGATE
+It is a purpose-built serverless compute engine for containers. Fargate scales and manages the infrastructure required to run your containers.
+
+

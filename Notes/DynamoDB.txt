@@ -43,16 +43,22 @@ In DynamoDB two types of indexes are supported.
 - Any query based on this sort key are much faster than the usual one.
 e.g Partition Key: Consumer ID
 Sort Key: Account Creation Date.
+5 local secondary index per table
 
 2. Global Secondary Index
 - You can create it anytime. While creating the account or add it later.
 - Choose different partition key and sort key.
 - Thus speeds up queries based on above.
+- To speed up queries on non-key attributes, you can create a global secondary index.
+- You can use the Scan operation to retrieve all of the data from a global secondary index. You must provide the base table name and the index name in the request. With a Scan, DynamoDB reads all of the data in the index and returns it to the application. You can also request that only some of the data be returned, and that the remaining data should be discarded. To do this, use the FilterExpression parameter of the Scan operation.
+- Global secondary indexes inherit the read/write capacity mode from the base table.
+- Global secondary indexes support eventually consistent reads.
+our AWS account is charged for storage of the item in the base table and also for storage of attributes in any global secondary indexes on that table.
 ex: email_id [Partition Key]
-login_time [Sort Key]
+- login_time [Sort Key]
+- 20 gloabl index per table
 
 Query vs Scan
-
 Scans:
 A scan operation examines every item in the table.
 By default return all data attributes.
@@ -122,17 +128,13 @@ There are two types of caching mechanism
 
 1. Lazy Loading
 Only requested data is cached. First it is a miss and then it is loaded so it is available afterwards.
-
 remove stale data using TTL.
 
 2. Write Through
 DynamoDB Transactions
 
 ACID
-
-DynamoDB TTL [comes in exam]
-
-Encryption at Rest encrypts the data in DynamoDB
+- Encryption at Rest encrypts the data in DynamoDB
 DynamoDB Streams
 DynamoDB Streams enables solutions such as these, and many others. 
 DynamoDB Streams captures a time-ordered sequence of item-level modifications in any DynamoDB table, and stores this information in a log for up to 24 hours
@@ -384,5 +386,21 @@ Know/review limits for DynamoDB [Question]http://docs.aws.amazon.com/amazondynam
 I had quite a few DynamoDB questions about hash and range keys that I was not prepared for based on the course alone.
 You need to know what each is and how to optimize each for specific queries for the best performance.
 
+QUERY
+Filter Can't contain any primary keys.
+A Query operation can retrieve a maximum of 1 MB of data. 
+ScannedCount — the number of items that matched the key condition expression, before a filter expression (if present) was applied.
+
+Count — the number of items that remain, after a filter expression (if present) was applied.
+
+The following are the valid settings for ReturnConsumedCapacity:
+
+NONE—no consumed capacity data is returned. (This is the default.)
+
+TOTAL—the response includes the aggregate number of read capacity units consumed.
+
+INDEXES—the response shows the aggregate number of read capacity units consumed, together with the consumed capacity for each table and index that was accessed.
 ## PRACTICAL ##
 LAB: Run a script on EC2 to create dynamoDB database, all right.
+
+DynamoDB how many tables it can have per region etc?

@@ -1,55 +1,44 @@
 AWS LAMBDA
 
-  //////////////////////////
- /////////NOTES////////////
-//////////////////////////
+## THEORY ##
 
 What is Lambda?
+- AWS Lambda is a compute service where you can upload your code and create a Lambda function.
+- AWS Lambda takes care of provisioning and managing the servers that you use to run the code.
+- You don't have to worry about operating systems, patching scaling etc. It Scales automatically.
 
-AWS Lambda is a compute service where you can upload your code and create a Lambda function. AWS Lambda takes care of provisioning and managing the servers that you use to run the code. You don't have to worry about operating systems, patching scaling etc. It Scales automatically.
 You can use Lambda in the following ways:
-
 1. As an event-driven compute service where AWS Lambda runs your code in response to events. These events could be changes to data in an Amazon S3 bucket or Dynamo DB table.
 Functions are triggered in parallel, if multiple requests are there.
 Poll Based: SQS, Kinesis
-
 2. For poll-based event sources, AWS Lambda polls the source and then invokes the Lambda function when records are detected on that source. For poll-based sources, event source mapping information is stored in AWS Lambda.
 e.g AWS Lambda Pulls Events from a Kinesis Stream and Invokes a Lambda Function
 Event Based : SNS, SES, S3, Cognito etc.
 
-AWS Lambda natively supports Java, Go, PowerShell, Node.js, C#, Python, and Ruby code,
+AWS Lambda natively supports Java, Go, PowerShell, Node.js, C#, Python, and Ruby code.
 
 Pricing:
 1. Number of Requests: First 1 million requests are free. $0.20 per 1 million requests thereafter.
 2. Duration: It is calculated from the time your code begins executing until it returns or otherwise terminates, rounded up to the nearest 100ms. The price depends on the amount of memory you allocate to your function. You are charged $0.00001667 for every GB per second used.
 
 Why it is cool?
-> No servers.
-> No need for Scaling.
-> Super super cheap.
-e.g Amazon Echo is all Lambda.
+- No servers.
+- No need for Scaling.
+- Super super cheap.
+Example: Amazon Echo is all Lambda.
 
 Lambda scales out (not up) automatically.
 Lambda functions are independent, 1 event = 1 function.
 
 Lambda@Edge lets you run Lambda functions at AWS Edge Location.
 
-AWS fargate is a purpose-built serverless compute engine for containers. Fargate scales and manages the infrastructure required to run your containers.
-AWS Elastic File System (file storage):  It is built to elastically scale on demand, growing and shrinking automatically as you add and remove files.
-Amazon Aurora Serverless: is an on-demand, auto-scaling configuration for Amazon Aurora (MySQL-compatible edition), where the database will automatically start up, shut down, and scale capacity up or down based on your application's needs.
-
-AWS Step Functions (ORCHESTRATION) makes it easy to coordinate the components of distributed applications and microservices using visual workflows.
-
-Amazon Kinesis is a platform for streaming data on AWS, offering powerful services to make it easy to load and analyze streaming data, and also providing the ability for you to build custom streaming data applications for specialized needs.
-
-Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
-
 1 event can = x functions if functions trigger other functions.
 
-## Understand versioning in AWS Lambda.
+### Versioning in AWS Lambda. ###
 
-when you are versioning in Lambda you can publish different versions of your lambda function. As a result you can work with different versions of your lambda function in your development workflow, such as development, beta and production.
-Each Lambda function has a different ARN (Amazon Resource Name) and once published it is immutable.
+When you are versioning in Lambda you can publish different versions of your lambda function.
+- As a result you can work with different versions of your lambda function in your development workflow, such as development, beta and production.
+- Each Lambda function has a different ARN (Amazon Resource Name) and once published it is immutable.
 There are two types of ARN:
 Qualified ARN and Unqualified ARN. Qualified ARN has version suffix (sth.com:version). Unqualified doesn't have that.
 
@@ -68,7 +57,6 @@ There is function level concurrency too. Suppose we have 8 functions then if we 
 
 Throttling
 If the request exceed 1000 it won't be executed at all.
-
 
 STEP FUNCTIONS
 Great way to visualize your serverless application.
@@ -187,3 +175,14 @@ To reuse execution context, initialize Lambda outside of aws client.
 
 To schedule a Lambda function use cloud watch events
 
+Avoid using recurisive code in your Lambda Function
+
+Lambda needs SubnetID and SecurityID for accessing information inside VPC. 
+
+Default timeout for Lambda is 3 seconds but you can set any value between 1 and 300 seconds
+
+MAX RAM SUPPRTED = 3GB
+
+
+A Lambda function should be in a VPC if it is accessing anything else such as RDS, Elasticache
+Lambda creates elastic network interfaces (ENIs) in your VPC to access your internal resources

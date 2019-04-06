@@ -1,48 +1,46 @@
-SNS message format and corresponding API calls SNS message format, API calls for SNS and SWF [Question]
-Know/review limits for SNS [Question]
-http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-devicetoken.html
-Maximum number of SNS topics per Auto Scaling group	10
+AWS Simple Notification Service
 
-SNS And SWF Notes
+## THEORY ## 
+- It is a web service that makes it easy to set up, operate, and send notifications from the cloud.
+- SNS follows the Publish-Subscribe message paradigm with notification being delivered to the clients using the PUSH mechanism.
+- SNS can deliver via SMS, Email, Email-json, HTTP, HTTPS, SQS.
+- It can trigger Lambda functions as well.
+- To provide redundancy all the messages are stored in the different availability zones.
+- Topic is the access point for allowing the recipient to dynamically subscribe the for identical copies of same notification.IT can support different endpoints IOS ,Android,SMS.when you publish it will send the same to different endpoint in their format
+- SNS allows you to group multiple recepients using topics. In each topic different devices can be there. It will format and send messaged appropriately.
+- 0.50 $ for 1M SNS request
+- Subscription will expire in 3 days if not confirmed.
+- Messages can be customised in the body for different protocols.
+- Maximum workflow processing time can 1 year (equivalent seconds) - SQS is 12 hours processing time
+- Maximum number of SNS topics per Auto Scaling group 10.
+- SNS supports SSE.
+- SSE encrypts messages as soon as Amazon SNS receives them. The messages are stored in encrypted form and Amazon SNS decrypts messages only when they are sent.
 
-1. SNS follows the Publish-Subscribe message paradigm with notification being delivered to the clients using the a PUSH mechanism
+FILTER POLICY
+- By default, a subscriber of an Amazon SNS topic receives every message published to the topic. To receive only a subset of the messages, a subscriber assigns a filter policy to the topic subscription.
+- A filter policy is a simple JSON object. The policy contains attributes that define which messages the subscriber receives
 
-2. SQS can deliver via SMS, Email, Email-json, HTTP, HTTPS, SQS, Lambda, Application
-
-3. To provide redundancy all the messages are stored in the different availability zones.
-
-4. Topic is the access point for allowing the recipient to dynamically subscribe the for identical copies of same notification.IT can support different endpoints IOS ,Android,SMS.when you publish it will send the same to different endpoint in their format
-
-5. 0.50 $ for 1M SNS request
-
-6. 0.06 $ for Http, 0.75$ for 100000 SMS ,2 $ for Emails 100000
-
-7. Subscription will expire in 3 days if not conformed
-
-8. Messages can be customised in the body for different protocols
-
-SWF - task oriented API
-
-Simple Work flow - human interaction to complete order or collection of services to complete a work order.
-
-Workers - interact with SWF to get task, process received task and return the result
-
-Deciders - program that co-ordinates the tasks, i.e. - ordering, concurrency and scheduling
-
-Workers and Deciders can run independently.
-
-TASK is only assigned ONCE and NEVER DUPLICATED (key difference from SQS where messages can be processed multiple times)
-
-SWF Domain - think of it as a container for the work flow. you can register a domain by Console or API
-
-Maximum workflow processing time can 1 year (equivalent seconds) - SQS is 12 hours processing time
-
-This was on the exam. How do you register devices for Amazon Mobile Devices and SNS Mobile Push notifiations.
-http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-devicetoken.html
-Answer: use CreatePlatformEndpoint is correct way to do. You can add device tokens and registration IDs to Amazon SNS using the following methods: • Manually add a single token to AWS using the AWS Management Console • Migrate existing tokens from a CSV file to AWS using the AWS Management Console • Upload several tokens using the CreatePlatformEndpoint API • Register tokens from devices that will install your apps in the futur
+SNS MESSAGE FORMAT
 
 
+## QUESTIONS ##
 
-What kind of message does SNS send to endpoints? Choose the correct answer from the options below
+Q) How do you register devices for Amazon Mobile Devices and SNS Mobile Push notifiations.
+Use of CreatePlatformEndpoint is correct way to do. You can add device tokens and registration IDs to Amazon SNS using the following methods: 
+• Manually add a single token to AWS using the AWS Management Console 
+• Migrate existing tokens from a CSV file to AWS using the AWS Management Console 
+• Upload several tokens using the CreatePlatformEndpoint API 
+• Register tokens from devices that will install your apps in the future
 
-By default, a subscriber of an Amazon SNS topic receives every message published to the topic. To receive only a subset of the messages, a subscriber assigns a filter policy to the topic subscription.A filter policy is a simple JSON object. The policy contains attributes that define which messages the subscriber receives
+Q) What are the limits of SNS?
+By default, SNS offers 10 million subscriptions per topic, and 100,000 topics per account
+With the exception of SMS messages, Amazon SNS messages can contain up to 256 KB of text data, including XML, JSON and unformatted text.
+By default, 200 filter policies per account per region can be applied to a topic.
+Max Topics: 
+
+Q: What is raw message delivery?
+You can opt-in to get your messages delivered in raw form, i.e. exactly as you published them. 
+By default, messages are delivered encoded in JSON that provides metadata about the message and topic. 
+sRaw message delivery can be enabled by setting the “RawMessageDelivery” property on the subscriptions.
+
+

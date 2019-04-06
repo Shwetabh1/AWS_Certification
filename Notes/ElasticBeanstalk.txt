@@ -1,106 +1,114 @@
-FAQs done
+ELASTIC BEANSTALK
+
+## THEORY ##
 
 What is Elastic Beanstalk?
-AWS Elastic Beanstalk makes it even easier for developers to quickly deploy and manage applications in the AWS Cloud. Developers simply upload their application, and Elastic Beanstalk automatically handles the deployment details of capacity provisioning, load balancing, auto-scaling, and application health monitoring.
+AWS Elastic Beanstalk makes it even easier for developers to quickly deploy and manage applications in the AWS Cloud. 
+Developers simply upload their application, and Elastic Beanstalk automatically handles the deployment details of capacity provisioning, load balancing, auto-scaling, and application health monitoring.
 
-Amazon's version of PAAS is Elastic Beanstalk.
-A provisioning service. You don't need to choose ec2 etc.
-Deploys and scales your web application.
+- Amazon's version of PAAS is Elastic Beanstalk.
+- A provisioning service. You don't need to choose EC2 type etc.
+- It Deploys and scales your web application.
 
 Language and platform supported:
-AWS Elastic Beanstalk supports the following languages and development stacks:
-Apache Tomcat for Java applications
-Apache HTTP Server for PHP applications
-Apache HTTP Server for Python applications
-Nginx or Apache HTTP Server for Node.js applications
-Passenger or Puma for Ruby applications
-Microsoft IIS 7.5, 8.0, and 8.5 for .NET applications
-Java SE
-Docker
-Go
 
-Elastic BeanStalk Supports several options for processing deployments
+1. Apache Tomcat for Java applications
+2. Apache HTTP Server for PHP applications
+3. Apache HTTP Server for Python applications
+4. Nginx or Apache HTTP Server for Node.js applications
+5. Passenger or Puma for Ruby applications
+6. Microsoft IIS 7.5, 8.0, and 8.5 for .NET applications
+7. Java SE
+8. Docker
+9. Go
 
-1. All at once.: deploys to all instances simulataneously and all of your instances are out while the deployment takes place.
+Elastic BeanStalk Deployment Options
 
-2. Rolling: Deploys new version in batches. each batch of instances is taken out while deployment takes place.
+1. All at once
+- Deploys to all instances simulataneously and all of your instances are out while the deployment takes place.
+- Zero downtime.
+- For rolling back do manual redeploy.
 
-3. Rolling with Additional Batch: Does the above shebang but maintains full capacity by rolling additional instances.
+2. Rolling 
+- Deploys new version in batches. Each batch of instances is taken out while deployment takes place.
+- For rolling back do manual redeploy.
+
+3. Rolling with Additional Batch
+- Does the above shit but maintains full capacity by rolling additional instances.
+- For rolling back do manual redeploy.
 
 4. Immutable: Kinda like blue green, yo.
-Deploys the new version to a fresh group of instances in their own new autoscaling group.
+- Deploys the new version to a fresh group of instances in their own new autoscaling group.
+- For rolling back termiate new instances.
 
-Configuration to be done via config files. YAML or JSON and they are stored under a  folder .ebextensions
-Must be included in the top level directory of your application source code bundle.
+Configuration
+- Configuration is to be done via config files.
+- They are YAML or JSON files and they are stored under a  folder .ebextensions.
+- Must be included in the top level directory of your application source code bundle.
 
+Important Points
 
+- Applications created through BeanStalk can have multiple env. like prod, non-prod, dev or functional type like Frontend, Backend etc.
+- Application can also have many versions 1:M relationship
+- Application versions can be deployed to the environment with an application
+- By creating environment you allow the AWS ElasticBeanStalk to manage resources and permission on your behalf
+- Preconfigure Docker platform - Phython, Go, Glassfish
+-  Generic Docker -Docker and multiple container Docker
+- You can stream logs into CloudWatch and set the retention period upto 10 years. Default 7 days.
+- If you delete the elesticbeanstalk app your associated database will be deleted ,so start your own database outside EB
+- Immutable deployments when new version app will deployed as separate instance and autoscaling group.
+- AWS Elastic Beanstalk has two types of environment tiers to support different types of web applications. Web servers are standard applications that listen for and then process HTTP requests, typically over port 80.
+- Workers are specialised applications that have a background processing task that listens for messages on an Amazon SQS queue. Worker applications post those messages to your application by using HTTP.
+- Connection draining timeout - 20 sec ,Maximum time that the load balancer maintains connections to an Amazon EC2 instance before forcibly closing connections.
+- In EB, you can do App and configuration changes both
 
-Systems Manager Parameter Store
-Storing Confidential Information which can be passed to ec2 usig lambda etc.
-If you have confidential information such as passwords, database, connection strings, and license codes can be stored in SSM parameter store.
-
-You can store values as plain text or you can encrypt the data.
-
-
-Difference between Amazon Block Store, Amazon Storage Gateway and Amazon Elastic FileSystem.
+## QUESTIONS ##
 
 Q) What are the resources Elastic BeanStalk can create?
-Q: What are the Cloud resources powering my AWS Elastic Beanstalk application?
 
-AWS Elastic Beanstalk uses proven AWS features and services, such as Amazon EC2, Amazon RDS, Elastic Load Balancing, Auto Scaling, Amazon S3, and Amazon SNS, to create an environment that runs your application. The current version of AWS Elastic Beanstalk uses the Amazon Linux AMI or the Windows Server 2012 R2 AMI.
+Q: What are the Cloud resources powering my AWS Elastic Beanstalk application?
+  Amazon EC2, Amazon RDS, Elastic Load Balancing, Auto Scaling, Amazon S3, and Amazon SNS.
 
 Q: How much does AWS Elastic Beanstalk cost?
-
 There is no additional charge for AWS Elastic Beanstalk–you pay only for the AWS resources actually used to store and run your application.
 
 Q: How do I make my application private?
-
-By default, your application is available publicly at myapp.elasticbeanstalk.com for anyone to access. You can use Amazon VPC to provision a private, isolated section of your application in a virtual network that you define. This virtual network can be made private through specific security group rules, network ACLs, and custom route tables. You can also easily control what other incoming traffic, such as SSH, is delivered or not to your application servers by changing the EC2 security group settings.
-
-
-
-1. Applications can have multiple env. like prod,non-prod,dev or functional type like Frontend ,Backend etc.
-
-2. Application can have many versions 1:M relationship
-
-3. Application versions can be deployed to the environment with an application
-
-4. By creating environment you allow the AWS ElasticBeanStalk to manage resources and permission on your behalf
-
-5. Platform : Java,.net(window/IIS),node.js,php,phython,Go,ruby,Packer
-
-6. Preconfigure Docker platform - Phython,Go,Glassfish
-
-7. Generic Docker -Docker and multiple container Docker
-
-8. You can stream logs into CloudWatch and set the retention period upto 10 years.Default 7 days
-
-9. If you delete the elesticbeanstalk app your associated database will be deleted ,so start your own database outside EB
-
-10. Immutable deployments when new version app will deployed as separate instance and autoscaling group
-
-11. AWS Elastic Beanstalk has two types of environment tiers to support different types of web applications. Web servers are standard applications that listen for and then process HTTP requests, typically over port 80.
-
-12. Workers are specialised applications that have a background processing task that listens for messages on an Amazon SQS queue. Worker applications post those messages to your application by using HTTP.
-
-13. Connection draining timeout - 20 sec ,Maximum time that the load balancer maintains connections to an Amazon EC2 instance before forcibly closing connections.
-
-14. In EB ,you can do App and configuration changes both
-
-16. Updates on application can at once,1 Instance at a time ,20% if EC2 fleet or immutable.
+By default, your application is available publicly at myapp.elasticbeanstalk.com for anyone to access.
+You can use Amazon VPC to provision a private, isolated section of your application in a virtual network that you define.
+This virtual network can be made private through specific security group rules, network ACLs, and custom route tables.
+You can also easily control what other incoming traffic, such as SSH, is delivered or not to your application servers by changing the EC2 security group settings.
 
 Q) You have a set of developers that need to work with applications hosted on the Elastic Beanstalk environment. You need to ensure they can work with the beanstalk environments but not give them access to the AWS Console. 
 How can you achieve this in the BEST way possible?
-
 Ask them use Elastic BeanStalk CLI.
 
 Q) How to ensure DB lives even after instance is delted?
- you should ensure the Retention field is marked as “Create snapshot” for ensuring the database lives even after environment is deleted.
- Alternatively, you can also ensure that the database is created outside of the Elastic beanstalk environmentOption 
+you should ensure the Retention field is marked as “Create snapshot” for ensuring the database lives even after environment is deleted.
+Alternatively, you can also ensure that the database is created outside of the Elastic beanstalk environmentOption 
 
-Criterias for bundle to be uploaded.
+Q) Criterias for bundle to be uploaded.
 When you use the AWS Elastic Beanstalk console to deploy a new application or an application version, you'll need to upload a source bundle.
 Your source bundle must meet the following requirements:· Consist of a single ZIP file or WAR file (you can include multiple WAR files inside your ZIP file)· Not exceed 512 MB· Not include a parent folder or top-level directory (subdirectories are fine)If you want to deploy a worker application that processes periodic background tasks, your application source bundle must also include a cron.yaml file
 
+
+Q) When to create a custom AMI and release it?
+When you create an AWS Elastic Beanstalk environment, you can specify an Amazon Machine Image (AMI) to use instead of the standard Elastic Beanstalk AMI included in your platform version.
+A custom AMI can improve provisioning times when instances are launched in your environment if you need to install a lot of software that isn't included in the standard AMIs.
+
+Q) Custom Platforms
+- It is regional and must be deployed at all regions.
+- To create a custom platform, you build an AMI from one of the supported operating systems—Ubuntu, RHEL, or Amazon Linux
+- and add further customizations. You create your own Elastic Beanstalk platform using Packer
+- To create a custom platform, the root of your application must include a platform definition file, platform.yaml
+
+Q) Talk about health reporting FAM.
+An environment's health is represented by one of four colors, which is displayed in the environment dashboard, and is also available from the DescribeEnvironments API and by calling eb status with the EB CLI.
+
+Q) Rolling Updates vs Rolling deployments
+- Rolling updates occur when you change settings that require new Amazon EC2 instances to be provisioned for your environment. This includes changes to the Auto Scaling group configuration, such as instance type and key-pair settings, and changes to VPC settings. In a rolling update, each batch of instances is terminated before a new batch is provisioned to replace it.
+Also note, If a batch doesn't become healthy within the rolling update timeout (default is 30 minutes), the update is canceled.
+It then automatically starts the process to roll back to the previous state.
+
+- Rolling deployments occur whenever you deploy your application and can typically be performed without replacing instances in your environment. Elastic Beanstalk takes each batch out of service, deploys the new application version, and then places it back in service.
 
 

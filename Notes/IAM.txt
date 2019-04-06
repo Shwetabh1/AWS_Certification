@@ -123,16 +123,16 @@ Temporary AWS Access
 - 
 Web Identity Federation
 - AWS Web Identity Federation lets you give your users access to AWS resources after they have successfully authenticated with a web-based identity provider like Amazon, Google or Facebook.
-- Following Successful authentication, the user recieves an authentication code from the web id provider,which they can trade for temporary AWS Security Credentials.
+- Following Successful authentication, the user recieves an authentication code from the web id provider, which they can trade for temporary AWS Security Credentials.
 
 Cognito
 
 - Amazon Cognito provides Web Identity Federation with the following features:
 - Sign-Up and Sign-In to your Apps.
 - Access to guest users.
-- Acts as an Identity Broker between your application and Web Id Providers, so you don't
+- Acts as an Identity Broker between your application and Web Id Providers
 - No need to write any additional code.
-- Synchronizes user data for multiple devices
+- Synchronizes user data for multiple devices.
 - Recommended for all mobile applications.
 - It is the recommended approach for Web Identity Federation using social media accounts like facebook.
 
@@ -188,3 +188,12 @@ https://aws.amazon.com/iam/faqs/
 
 https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
 
+When an AWS service receives the request, AWS completes several steps to determine whether to allow or deny the request.
+
+1. Authentication – AWS first authenticates the principal that makes the request, if necessary. This step is not necessary for a few services, such as Amazon S3, that allow some requests from anonymous users.
+
+2. Processing the Request Context – AWS processes the information gathered in the request to determine which policies apply to the request.
+
+3. Evaluating Policies Within a Single Account – AWS evaluates all of the policy types, which affect the order in which the policies are evaluated.
+
+4. Determining Whether a Request Is Allowed or Denied Within an Account 

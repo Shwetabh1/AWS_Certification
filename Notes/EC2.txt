@@ -5,58 +5,45 @@ Amazon Elastic Cloud Compute
 Amazon Elastic Compute Cloud is a web service that provides resizable compute capacity in the cloud. It was released in 2006.
 It reduces time to obtain a new server and boot to minutes thus reduces time to scale very easily.
 
-EC2 Pricing Options
-
+EC2 PRICING OPTIONS
 1. On Demand - allows you to pay a fixed rate by the hour with no commitment. 
-    -> Perfect for users that want the low cost and flexibility without up front payment or long term commitment.
-    -> Applications with short term, spiky, or unpredictable workloads that cannot be interrupted.
-    -> Applications being develped or tested on Amazon EC2 for the first time.
+    - Perfect for users that want the low cost and flexibility without up front payment or long term commitment.
+    - Applications with short term, spiky, or unpredictable workloads that cannot be interrupted.
+    - Applications being develped or tested on Amazon EC2 for the first time.
 
 2. Reserved - provides you with a capacity reservation, and offer a siginificant discount on the hourly charge for an instance. 1 year or 3 year terms.
-    -> Applications with steady state or predictable usage.
-    -> Applications that require reserved capacity.
-    -> Users can make up front payments to reduce the cost even further.
-    -> Standard RIs.
-    -> Convertible RIs.
-    -> Scheduled RIs (scale it on a particular day)
+    - Applications with steady state or predictable usage.
+    - Applications that require reserved capacity.
+    - Users can make up front payments to reduce the cost even further.
+    - Standard RIs.
+    - Convertible RIs.
+    - Scheduled RIs (scale it on a particular day)
 
 3. Spot - enables you to bid whatever price you want for instance capacity, providing for even greater savings if your applications have flexible start and end times.
-    -> Applications that have flexible start and end times.
-    -> Applications that are only feasible at very low compute prices.
-    -> Users with an urgent need for large computational capacity(Genome etc)
+    - Applications that have flexible start and end times.
+    - Applications that are only feasible at very low compute prices.
+    - Users with an urgent need for large computational capacity(Genome etc)
+    - If a spot instance is terminated by Amazon EC2, you will not be charged for a partial hour of usage. However, if you terminate it yourself, you will be charged for the complete hour in which the instance ran.
 
 4. Dedicated Hosts - Physical EC2 server dedicated for your use. Dedicated hosts can help you reduce costs by allowing you to use your existing server bound software licenses.
-   -> Useful for licenses that doesn't support cloud virtulization etc.
-
-???EC2(FIGHT DR MC PX)???
-
-
+   - Useful for licenses that doesn't support cloud virtulization etc.
 Note: Some Windows or Linux AMIs carry with them an additional hourly charge from the provider instead of secondly.
 
 
-EC-2 Instance type types
-
+EC-2 INSTANCE TYPES
+** Try remembering using EC2(FIGHT DR MC PX)
 F1 Field Programmable Gate Array | Genomic Research, real time video processing
 I3 High Speed Storage
 G3 Graphics intensive | Video Encoding and shit
 H1 High Disk Throughput | Map Reduce based workloads
-
 T2 Lowest Cost, General Purpose | Web Servers/ small DBs
-
 D2 Dense Storage | file servers/ Data wwarehousing
-
-R4 \ Memory Optimized | memory intensive Apps/DBs
-
+R4 Memory Optimized | memory intensive Apps/DBs
 M5 General Purpose | Application servers
-
 C5 Compute Optimized | CPU Intensive Apps/DBs
-
 P3 Gen | machine Learning, Bit Coin Mining etc
-
 X1 Memory Optimized | SAP HANA/Apache Spark etc (Huge Amount of RAMs)
-
 The Alphabet remains the same. It represents the family. T2 might change to T3. Remember the letter not the number.
-
 
 F - for FPGA
 I - IOPS
@@ -70,48 +57,50 @@ C - compute
 P - Graphics
 X - Extreme Memory
 
+ELASTIC BLOCK STORAGE
+- An Amazon EBS volume is a durable, block-level storage device that you can attach to a single EC2 instance.
+- EBS volumes persist independently from the running life of an EC2 instance. After a volume is attached to an instance, you can use it like any other physical hard drive.
+- You can create file system on top of these volumes, run a database, or use them in any other way you would use a block device.
+- Amazon EBS are placed in a specific availbility zone where they are automatically replicated to protect you from the failure of a single component.
+- Root volume is the one that has OS running on it.
+- Volumes that are created from encrypted snapshots are automatically encrypted, and volumes that are created from unencrypted snapshots are unencrypted
+- EBS volumes must be in the same availbility zone.
+- To encrypt an unencrypted snapshot you need to make a copy and encrypt it.
+    --then create image and deploy it. This time the root volume will be encrypted.
+- Thus you can encrypt the root device volume (the volume the OS is installed on) using operating System level encryption.
+- You can encrypt the root device volume by first making a snapshot of that volume and then creating a copy of it.
+- Additional attached volumes can easily be encrypted using console, CLI or API.
+- EBS Volume Types
+    1. SSD
+    1.1 General Purpose SSD(GP2)
+        - General purpose, balances both price and performance.
+        - ratio of 3 IOPS per GB with up to 10,000 IOPS and the ability to burst up to 3000 IOPS for extended periods
+        [exam question] An EBS need with less than 10,000 IOPS. ans->GP2
+    1.2 Provisioned IOPS SSD
+        - Good for Big, NOSQL Databases
+        [question] for the above use case. can provision upto 20,000 IOPS per volume.
+    2. Magnetic
+    2.1 Throughput Optimized HDD (ST1)
+        - Big Data
+        - Data Warehouses
+        - Log Processing
+        - Cannot be a boot volume
+    2.2 Cold HDD (SC1)
+        - Lowest Cost Storage designed for less frequently accessed workloads.
+    2.3 Magnetic
+        - Lowest cost per gigabyte of all EBS volume types that is bootable.
+        - previous generation.
 
-What is EBS??
+STICKY SESSIONS
+- By default, a Classic Load Balancer routes each request independently to the registered instance with the smallest load. However, you can use the sticky session feature (also known as session affinity), which enables the load balancer to bind a user's session to a specific instance.
+- This ensures that all requests from the user during the session are sent to the same instance.
+- The key to managing sticky sessions is to determine how long your load balancer should consistently route the user's request to the same instance.
+- If your application has its own session cookie, then you can configure Elastic Load Balancing so that the session cookie follows the duration specified by the application's session cookie.
+- If your application does not have its own session cookie, then you can configure Elastic Load Balancing to create a session cookie by specifying your own stickiness duration.
+- Elastic Load Balancing creates a cookie, named AWSELB, that is used to map the session to the instance.
 
-Elastic Block Storage
-
-An Amazon EBS volume is a durable, block-level storage device that you can attach to a single EC2 instance.
-EBS volumes persist independently from the running life of an EC2 instance. After a volume is attached to an instance, you can use it like any other physical hard drive.
-You can create file system on top of these volumes, run a database, or use them in any other way you would use a block device. Amazon EBS are placed in a specific availbility zone where they are automatically replicated to protect you from the failure of a single component.
-
-EBS Volume Types (Exam Question)
-
-1. SSD
-
-1.1 General Purpose SSD(GP2)
-- General purpose, balances both price and performance.
--ratio of 3 IOPS per GB with up to 10,000 IOPS and the ability to burst up to 3000 IOPS for extended periods
-[exam question] An EBS need with less than 10,000 IOPS. ans->GP2
-
-1.2 Provisioned IOPS SSD
--Good for Big, NOSQL Databases
-[question] for the above use case. can provision upto 20,000 IOPS per volume.
-
-
-2. Magnetic
-2.1 Throughput Optimized HDD (ST1)
- - Big Data
- - Data Warehouses
- - Log Processing
- - Cannot be a boot volume
-
-2.2 Cold HDD (SC1)
--Lowest Cost Storage designed for less frequently accessed workloads.
-
-2.3 Magnetic
--Lowest cost per gigabyte of all EBS volume types that is bootable.
-previous generation.
-
-ELB and session cookies (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html)
-
-Elastic Load Balancer
+ELASTIC LOAD BALANCER
 Balances load between 2 servers such that load is balanced and no server gets overloaded.
-
     Familiarise yourself with OSI layer (Open Systems Interconnection )
     1. Physical (lower) - electrical and mechanical level
     2. Data Link (lower) - data packets are encoded and decoded into bits
@@ -120,7 +109,7 @@ Balances load between 2 servers such that load is balanced and no server gets ov
     5. Session (upper) - manage connection between applications
     6. Presentation (upper) - data transformation e.g ASCII
     7. Application (upper) - Email, Telnet, FTP, HTTP
-
+- Elastic Load Balancing provides you, access logs.
 Now there are three type of load balancers
 1. Application Load balancers (they can make very clever decision and they operate at layer 7)
     - They are best suited for balancing HTTP and HTTPS traffi,c They operate at layer 7 and are intelligent.
@@ -134,43 +123,22 @@ Now there are three type of load balancers
     - You can strict Layer 4 load balancing for applications that rely prely on the TCP protocol.
 
 Load Balancer Errors
+Classic Load Balancers Erros
+- If your application stops responding, the ELB (classic load balancer) responds with a 504 error.
+- This means that the application is having issues either at the database or web server layer.
+- Identify where it is failing and scale it up or out where possible.
+- 504 error means gateway has timed out.
 
-Classic Load Balancers - if your application stops responding, the ELB (classic load balancer) responds with a 504 error.
-This means that the application is having issues either at the database or web server layer.
-Identify where it is failing and scale it up or out where possible.
-504 error means gateway has timed out.
-EC2 Exam tips
-
--4 demand pricing types
-
-[Important] If a spot instance is terminated by Amazon EC2, you will not be charged for a partial hour of usage. However, if you terminate it yourself, you will be charged for the complete hour in which the instance ran.
-
-- questions on Classic LoadBalancer
-
-EC2 LAB--->>>
-
-root volume is the one that has OS running on it.
-
-Volumes that are created from encrypted snapshots are automatically encrypted, and volumes that are created from unencrypted snapshots are unencrypted
-
-EBS volumes must be in the same availbility zone.
-
-To encrypt an unencrypted snapshot you need to make a copy and encrypt it.
---then create image and deploy it. This time the root volume will be encrypted.
-
-Thus you can encrypt the root device volume (the volume the OS is installed on) using operating System level encryption.
-You can encrypt the root device volume by first making a snapshot of that volume and then creating a copy of it.
-
-Additional attached volumes can easily be encrypted using console, CLI or API.
-
-X-ray daemon must be installed into EC2 for it to function correctly.
 
 Error Retries and Exponential BackOff algorithm.
+- Each AWS SDK implements automatic retry logic. 
+- The AWS SDK for Java automatically retries requests, and you can configure the retry settings using the ClientConfiguration class.
+- In addition to simple retries, each AWS SDK implements exponential backoff algorithm for better flow control.
+- The idea behind exponential backoff is to use progressively longer waits between retries for consecutive error responses.
 
-Each AWS SDK implements automatic retry logic. The AWS SDK for Java automatically retries requests, and you can configure the retry settings using the ClientConfiguration class.
-In addition to simple retries, each AWS SDK implements exponential backoff algorithm for better flow control. The idea behind exponential backoff is to use progressively longer waits between retries for consecutive error responses.
-
-Know/review limits for EC2 [Question]
+EC2 LIMITS
+- By default, AWS has a limit of 20 instances per region.
+- By default, AWS sets a limit of 5 static IP addresses per region.
 
 ## PRACTICALS ##
 
@@ -178,33 +146,38 @@ Know/review limits for EC2 [Question]
 
 Q) If I have two instances in different availability zones, how will I be charged for regional data transfer?
 Data In and Data Out Transfer Charges
+If data is transferred between these two instances, it is charged at "Data Transfer Out from EC2 to Another AWS Region" for the first instance and at "Data Transfer In from Another AWS Region" for the second instance.
 
-if data is transferred between these two instances, it is charged at "Data Transfer Out from EC2 to Another AWS Region" for the first instance and at "Data Transfer In from Another AWS Region" for the second instance.
-
-Q: What is a Convertible RI?
-
+Q) What is a Convertible RI?
 A Convertible RI is a type of Reserved Instance with attributes that can be changed during the term.
 
-Q: How do I access my systems?
-
-The RunInstances call that initiates execution of your application stack will return a set of DNS names, one for each system that is being booted. This name can be used to access the system exactly as you would if it were in your own data center. You own that machine while your operating system stack is executing on it.
+Q) How do I access my systems?
+The RunInstances call that initiates execution of your application stack will return a set of DNS names, one for each system that is being booted.
+This name can be used to access the system exactly as you would if it were in your own data center.
+You own that machine while your operating system stack is executing on it.
 
 Q) What kind of Instances would be best for high-performance web servers, high-performance computing?
-
 Compute Optimized Instances.
-
 Each C4 instance type is EBS-optimized by default
-
 The c4.8xlarge instance type provides the ability for an operating system to control processor C-states and P-states. 
 
-Q. Which instances are available within Compute Optimized instances category?
-
+Q) Which instances are available within Compute Optimized instances category?
 C5 instances: C5 instances are the latest generation of EC2 Compute Optimized instances.
 C5 instances support a maximum for 27 EBS volumes for all Operating systems.
 
-Q) Autoscaling is a free service, bitches
+Q) Is Autoscaling a free service?
+Autoscaling is a free service.
 
-AMI’s can only be shared within a region. To make them available across regions , you need to copy them across regions. You can copy an Amazon Machine Image (AMI) within or across an AWS region using the AWS Management Console, the AWS command line tools or SDKs, or the Amazon EC2 API, all of which support the CopyImageaction. You can copy both Amazon EBS-backed AMIs and instance store-backed AMIs. You can copy AMIs with encrypted snapshots and encrypted AMIs
+Q) How can you share AMI?
+AMI’s can only be shared within a region. 
+To make them available across regions , you need to copy them across regions. You can copy an Amazon Machine Image (AMI) within or across an AWS region using the AWS Management Console, the AWS command line tools or SDKs, or the Amazon EC2 API, all of which support the CopyImageaction. You can copy both Amazon EBS-backed AMIs and instance store-backed AMIs. You can copy AMIs with encrypted snapshots and encrypted AMIs
 
+Q) What is Amazon EMR?
 Amazon EMR provides a managed Hadoop framework that makes it easy, fast, and cost-effective to process vast amounts of data across dynamically scalable Amazon EC2 instances
+
+Q) Passing User Data at launch
+When you launch an instance in Amazon EC2, you have the option of passing user data to the instance that can be used to perform common automated configuration tasks and even run scripts after the instance starts.
+You can pass two types of user data to Amazon EC2: shell scripts and cloud-init directives.
+By default, user data scripts and cloud-init directives run only during the boot cycle when you first launch an instance.
+You can update your configuration to ensure that your user data scripts and cloud-init directives run every time you restart your instance.
 

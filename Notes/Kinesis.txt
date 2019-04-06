@@ -1,16 +1,30 @@
 Kinesis
 
-Q) How can you ensure Data is stored in Kinesis?
-You can now encrypt data in your Amazon Kinesis streams using server-side encryption and AWS Key Management Service (KMS) keys. Server-side encryption makes it easy to meet strict data management requirements by encrypting your data at rest within Kinesis Streams.
+## THEORY ##
+Amazon Kinesis is a platform for streaming data on AWS, offering powerful services to make it easy to load and analyze streaming data, and also providing the ability for you to build custom streaming data applications for specialized needs.
 
-To get started, select a new or existing Kinesis stream in the Kinesis management console, select a KMS master key, and enable server-side encryption.
-
-
-Your application currently makes use of AWS Kinesis streams. The data rate of the application is now increasing due to the increased number of producers. Which of the following can be done to keep up with the increased data rate?
+Encryption in Kinesis
+- You can encrypt data in your Amazon Kinesis streams using server-side encryption and AWS Key Management Service (KMS) keys.
+- Server-side encryption makes it easy to meet strict data management requirements by encrypting your data at rest within Kinesis Streams.
+- To encrypt, select a new or existing Kinesis stream in the Kinesis management console, select a KMS master key, and enable server-side encryption.
 
 Amazon Kinesis Firehose
-is used in delivering real-time streaming data to destinations such as Amazon Simple Storage Service
+Amazon Kinesis Data Firehose is a fully managed service for delivering real-time streaming data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon Redshift, Amazon Elasticsearch Service (Amazon ES), and Splunk.
 
 Amazon Kinesis Data Analytics, you can process and analyze streaming data using standard SQL. 
 The service enables you to quickly author and run powerful SQL code against streaming sources to perform time series analytics, feed real-time dashboards, and create real-time metrics.
+You can use Lambda to pre-process data.
+
+You can guaretee the order of Data only in a Single Shard.
+
+## QUESTIONS ##
+
+Q) Your application currently makes use of AWS Kinesis streams. The data rate of the application is now increasing due to the increased number of producers. 
+Which of the following can be done to keep up with the increased data rate?
+Increase the number of shards, yo
+
+Q) When can throttling happen
+Each shard has a read throughput of up to 5 transactions per second for reads, up to a maximum total data read rate of 2 MB per second. 
+If an application (or a group of applications operating on the same stream) attempts to get data from a shard at a faster rate, Kinesis Data Streams throttles the corresponding Get operations
+
 

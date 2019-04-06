@@ -1,15 +1,29 @@
-CloudWatch : Monitors Performance
+AWS CLOUDWATCH
 
+## THEORY ##
 
-CloudTrail monitors API calls in the AWS platform.
+- CloudWatch monitors performance.
+- e.g What the roles were used in the security group.
+- Who provisioned the security groups?-- That would  be cloudtrail
 
-AWS Config records the state of your AWS environment and can notify you of changes.
-
-e.g What the roles were used in the security group.
-Who provisioned the security groups?-- That would  be cloudtrail
-
-Amazon CloudWatch Events is a web service that monitors your AWS resources and the applications you run on AWS. 
+Amazon CloudWatch Events
+It is a web service that monitors your AWS resources and the applications you run on AWS. 
 You can use Amazon CloudWatch Events to detect and react to changes in the state of a pipeline, stage, or action. 
 
-Which of the following tools can be used to determine who provisioned an EC2 instance and what time they made the API call?
+CloudWatch Metric
+When you create an alarm you specify 3 settings
+1. Period
+2. Evaluation Period
+3. Datapoints to Alarm
+
+## QUESTIONS ##
+
+Q) Difference between CloudTrail and CloudWatch.
+CloudTrail monitors API calls in the AWS platform, CloudWatch is used.
+
+Q) Difference between AWS Config and CloudWatch.
+AWS Config records the state of your AWS environment and can notify you of changes.
+
+Q) Which of the following tools can be used to determine who provisioned an EC2 instance and what time they made the API call?
 Cloud Trail
+

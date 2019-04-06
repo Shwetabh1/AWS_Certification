@@ -1,20 +1,24 @@
--------------------
-SQS
--------------------
-Amazon SQS offers distributed queue system, where messages can wait to be proecssed by other components.
 
-Messages can contain upto 256kb of text in any format. Any component can later retrieve the messages programmitically using the Amazon SQS API.
+AWS Simple Queue Service
+## THEORY ##
 
-The queue acts as a buffer between producer and consumer and helpful in cases where consumption rate is very slow or intermittent network connection is there.
+- Amazon SQS offers distributed queue system, where messages can wait to be processed by other components.
+- Messages can contain upto 256kb of text in any format. Any component can later retrieve the messages programmitically using the Amazon SQS API.
+- The queue acts as a buffer between producer and consumer and helpful in cases where consumption rate is very slow or intermittent network connection is there.
+- Default retention period is 4 days. You can have it for 14 days max to 1 minute minimum.
+- SQS can resolve the issue of producer producing fast or consumer consumes slowly (Autoscaling or failover)
+- Data transferred between Amazon SQS and Amazon EC2 within a single region is free of charge (that is, $0.00 per GB). Data transferred between Amazon SQS and Amazon EC2 in different regions is charged at Internet Data Transfer rates on both sides of the transfer.
+- You can Create one SNS topic and create ,subscribe multiple SQS queues to that SNS topic ,basically you can fanned out single message to multiple SQS queues.
 
-Default retention period is 4 days. You can have it for 14 days max to 1 minute minimum.
-Visibility Timeout
-Immediately after a message is received, it remains in the queue. To prevent other consumers from processing the message again, Amazon SQS sets a visibility timeout, a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. The default visibility timeout for a message is 30 seconds. The minimum is 0 seconds. The maximum is 12 hours.
+VISIBILITY TIMEOUT
+- Immediately after a message is received, it remains in the queue. 
+- To prevent other consumers from processing the message again, Amazon SQS sets a visibility timeout, a period of time during which Amazon SQS prevents other consumers from receiving and processing the message. 
+- The default visibility timeout for a message is 30 seconds. The minimum is 0 seconds. The maximum is 12 hours.
+
+SHORT POLLING
+- By default, Amazon SQS uses short polling, querying only a subset of its servers (based on a weighted random distribution), to determine whether any messages are available for a response.
 
 Amazon SQS offers two queue types for different application requirements.
-
-By default, Amazon SQS uses short polling, querying only a subset of its servers (based on a weighted random distribution), to determine whether any messages are available for a response.
-
 Standard Queues(default)					FIFO Queues
 
 1. Unlimited Throughput						High Throughput.
@@ -31,134 +35,34 @@ Occasionly, messages might be delivered     Messages will always be sent in FIFO
 in an order different from which they are   ordering.
 sent.
 
--------------
-SNS
--------------
+SQS DELAY QUEUES
+- Delay queues let you postpone the delivery of new messages to a queue for a number of seconds.
+- If you create a delay queue, any messages that you send to the queue remain invisible to consumers for the duration of the delay period. 
+- The default (minimum) delay for a queue is 0 seconds. The maximum is 15 minutes.
+- For standard queues, the per-queue delay setting is not retroactive—changing the setting doesn't affect the delay of messages already in the queue.
+- For FIFO queues, the per-queue delay setting is retroactive—changing the setting affects the delay of messages already in the queue.
+- SetQueueAttributes or AWS Console.
 
-Simple Notificication Service
+SES
+- Email Messaging Service. 
+- Can also be used to recieve emails which can be stored in s3.
+- Incoming emails can also be used to trigger lamda functions and SNS notification.
 
-It is a web service that makes it easy to set up, operate, and send notifications from the cloud.
+## QUESTIONS ##
 
-It provides developers with a highly scalable, flexible and cost effective capability to publish messages from an application and immediately deliver them to subscribers or other applications.
-
-Push notifications to apple, google fire os devices etc.
-
-It can also send text messages. It can send messages to SQS, or to any http endpoint.
-
-It can also trigger lambda function.
-
-SNS allows you to group multiple recepients using topics. In each topic different devices can be there. It will format and send messaged appropriately.
-
-The messages are stored redundantly across all AZ.
-
-Benefits:
-
-1. Instantaneous Push Based Delivery.
-2. Flexible message delivery to different protocol.
-3. Inexpensive, pay as you go model with no upfront costs.
-
-Pricing:
-It is cheap.
-Users pay $0.50 per million requests
-%0.06 per 100,000 notification deliveries over http.
-$0.75 per 100 notification over SMS
-$2.00 per 100,000 notifications deliveries over email.
-
-It is a pub-sub model. No polling required.
-
-SES: Email Messaging Service. Can also be used to recieve emails which can be stored in s3. Incoming emails can also be used to trigger lamda functions and SNS notification.
-
-
-Kinesis
-
-First Understand streaming data. Data generated regularly from multiple sources.
-Ex: Game Data etc.
-
-Identify which service you should use
-
-1. Kinesis Streams
-2. Kinesis Firehose
-3. Kinesis Analytics
-
-Check the image yo.
-
-Difference between SQS and SNS
-Amazon SNS allows applications to send time-critical messages to multiple subscribers through a “push” mechanism, eliminating the need to periodically check or “poll” for updates.
-
-Amazon SQS is a message queue service used by distributed applications to exchange messages through a polling model, and can be used to decouple sending and receiving components—without requiring each component to be concurrently available
-
-How this is efficient
-
-SNS will publish to three queue when image is uploaded. Q1 will generate thumnail, q2 will do analysis and so on. This way shit will work.
-
-
-Delay Queues in SQS
-Message Time Value of individual message in SQS
-
-
-
-/////check this shit out
-
-
-1. SqS data limit is 256 kb and any format
-
-2. SQS can resolve the issue of producer producing fast or consumer consumes slowly (Autoscaling or failover)
-
-3. SQS can at least deliver the message once and support multiple readers and writers interacting with same queues
-
-4. Single SQS can be used by multiple application components without coordinating with each other(scaling out. Your application)
-
-5. SQS can guarantee to deliver the message but not in first in first out if you want you can add sequencing info in the messages so we can rearrange once it is received
-
-6. Always Pulls the data from SQS
-
-7. Visibitytimeout start only when application retrieve the message once it is completed it will be deleted from the queue during the visibilitytimeout window, if app server is failing in between message will not be deleted so another app server can use
-
-8. If SQS is filling fast we can do autoscaling n reduce the size of the sqs
-
-9. 12 hours of Visibility timeout maximum
-
-10. Biiing is based on 64kb chunks
-
-11. 1 million SQS is free and 0.50$ after 1 million per message
-
-12. Single request can have 1 to 10 message upto 256 kb
-
-13. Standard queue and FIFO queue are there .
-
-14. FIFO is first in first out message and only once
-
-15. Standard queue: maximum throughput, best-effort ordering, at least once delivery
-
-16. FIFO queue: limited throughput, first in first out ordering, exactly once delivered
-
-17. You're charged $0.40 per million requests (after the first million, which is free).
-
-18. Data transferred between Amazon SQS and Amazon EC2 within a single region is free of charge (that is, $0.00 per GB). Data transferred between Amazon SQS and Amazon EC2 in different regions is charged at Internet Data Transfer rates on both sides of the transfer.
-
-19. The messages are pushed into the queue by the producers but pulled out of the queue by the consumers.
-
-20. You have to call the ReceiveMessage action from the consumer in order to get the messages, they are not pushed to you automatically when they arrive.
-
-21. Default time a message stays in the queue I(retention period) is 4 days, maximum is 14 days
-
-22. Default is 30 sec and Max visibility timeout is 12 hr, if you think Default visibility timeout is less and your processing is not completing within that you can change it by calling ChangeMessageVisiblity and specify new value
-
-23. Short polling or standard polling - Short polling polls for the message every time whether queue is empty ,consume cpu and waste extra money but Long polling you can set the Maxlongpollingime to 20 Sec and it will not continuously poll ,it will poll after 20 sec or when gives message if is there in the queue
-
-24. You can Create one SNS topic and create ,subscribe multiple SQS queues to that SNS topic ,basically you can fanned out single message to multiple SQS queues
-
-
-Methods for changing message visibility?
+Q) Methods for changing message visibility?
 1. Do it using Console
-2. Use setQueueAttributes for d entire queue
-3. Use ChangeMessageVisiblity for a single message
+2. Use setQueueAttributes for the entire queue.
+3. Use ChangeMessageVisiblity for a single message.
 
-How to enable long polling in SQS?
+Q) How to enable long polling in SQS?
 
+Q) What is the default visibility timeout?
+The default visibility timeout for a message is 30 seconds. The minimum is 0 seconds. The maximum is 12 hours.
 
-Know/review limits for SQS
-(messageVisiblityTimeout, how long an item can stay and shit like that)
-
- The default visibility timeout for a message is 30 seconds. The minimum is 0 seconds. The maximum is 12 hours
+Q) Difference between SQS and SNS
+Amazon SNS allows applications to send time-critical messages to multiple subscribers through a “push” mechanism, eliminating the need to periodically check or “poll” for updates.
+Amazon SQS is a message queue service used by distributed applications to exchange messages through a polling model, and can be used to decouple sending and receiving components—without requiring each component to be concurrently available
+How this is efficient?
+SNS will publish to three queue when image is uploaded. Q1 will generate thumnail, q2 will do analysis and so on. This way shit will work.
 

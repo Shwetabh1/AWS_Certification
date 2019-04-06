@@ -1,0 +1,111 @@
+AWS CodeDeploy
+
+## THEORY ##
+
+- It is an automated deployments service which allows you to deploy your application code automatically yo EC2 instances, on-premises systems and lambda functions.
+- Allows you to quickly release new features, avoid downtime during application deployments, and avoid downtime during application deployments, and avoid the risks associated with manual processes.
+- It integrates with various CI/CD tools such as jenkins, Github, Atlasssian, AWS CodePipeline as well as config management tools such as chef, puppet, Ansible
+- Two different deployment approaches available: In-Place and Blue/Green
+- If you need to roll back, rededploy prev version
+
+The AppSec File
+- The Appspec file is used to define the parameters that will be used for a CodeDeploy deployment.
+- The file structure depends on whether you are deploying to Lambda or EC2/on premise instance.
+
+For Lambda Deployments the file can be written in YAML or JSON.
+They contain the following fields:
+
+1.Resources : The name and properties of the Lambda function to deploy
+2.Version: Reserved for future use - currently the only allowed value is 0.0
+3.Hooks: specifies Lambda function to run at a certain time in the process etc.
+There are two hooks allowed:
+
+BeforeAllowTraffic: used to specify the task and function that needs to be excuted before the traffic is routed to the new lambda function
+e.g test validating deployment
+
+AfterAllowTraffic : used to specify the task and function that needs to be excuted after the traffic is routed to the new lambda function
+e.g validation tests for traffc analaysis
+
+FOR EC2
+
+1. version: Reserved for future use - currently the only allowed value is 0.0
+2. OS: The name of the operating system you are using.
+3. Files: source and destination folder.
+4. Hooks: scripts that need to run at set point in the deployment lifecycle.
+(e.g) Unzip files prior to deployment lifecycle, run functional tests.
+
+
+YAML file only for EC2 deployments, fam
+
+Hooks:
+- The content in the 'hooks' section of the AppSpec file varies, depending on the compute platform for your deployment.
+- The 'hooks' section for an EC2/On-Premises deployment contains mappings that link deployment lifecycle event hooks to one or more scripts.
+- The 'hooks' section for a Lambda or an Amazon ECS deployment specifies Lambda validation functions to run during a deployment lifecycle event. 
+- If an event hook is not present, no operation is executed for that event. 
+- This section is required only if you are running scripts or Lambda validation functions as part of the deployment.
+
+Hook Categories:
+Application Stop: Gracefully stop the application in preparation for deploying the new revision.
+Download Bundle: The Code Deploy agent copies the file to a temporary location.
+BeforeInstall: Details of any installation script, backing up current revision, decrypting files
+Install: The code deploy agent copies the file from temporary location to correct location
+AfterInstall: Details of any post application scripts e.g configuration tasks, change file permission.
+ApplicationStart: restart any services that were stopped during ApplicationStop
+ValidateService: Details of any test to validate the service
+
+Then these 3 final hooks are executed for re-registering. They are also executed before beginning.
+BeforeBlockTraffic: Run Tasks on instances before they are deregistered from a load balancer
+BlockTraffic: Deregister instances from a load balancer
+AfterBlockTraffic: Run tasks on instances after they are deregistered from a load balancer
+
+FOR ECS
+BeforeInstall-->AfterInstall-->AfterAllowTestTraffic-->BeforeAllowTraffic-->AfterAllowTraffic
+(Start, Install, TestTraffic, AllowTraffic, and End)
+
+FOR EC2/On-Premises
+Without Classic Load Balancer
+ApplicationStop -> Before Install -> AfterInstall -> Application Start -> Validate Service
+With Classic Load Balancer
+Block Traffic -> Application STop -> The above shit
+
+FOR LAMBDA
+BeforeAllowTraffic -->  AllowTraffic-->AfterAllowTraffic
+(Start, AllowTraffic, and End )
+
+Environment Variables Available
+During each deployment lifecycle event, hook scripts can access the following environment variables:
+APPLICATION_NAME
+The name of the application in CodeDeploy that is part of the current deployment (for example, WordPress_App).
+DEPLOYMENT_ID
+The ID CodeDeploy has assigned to the current deployment (for example, d-AB1CDEF23).
+DEPLOYMENT_GROUP_NAME
+The name of the deployment group in CodeDeploy that is part of the current deployment (for example, WordPress_DepGroup).
+DEPLOYMENT_GROUP_ID
+The ID of the deployment group in CodeDeploy that is part of the current deployment (for example, b1a2189b-dd90-4ef5-8f40-4c1c5EXAMPLE).
+LIFECYCLE_EVENT
+The name of the current deployment lifecycle event (for example, AfterInstall).
+
+## Questions ##
+
+Q:) What are the parameters that I need to specify for a deployment? 
+There are three parameters you specify for a deployment:
+Revision - Specifies what to deploy.
+Deployment group - Specifies where to deploy.
+Deployment configuration - An optional parameter that specifies how to deploy.
+
+
+Q:) Can I stop an in-flight deployment? 
+Yes. When you stop an in-flight deployment, the AWS CodeDeploy service will instruct the agent on each instance to stop executing additional scripts.
+To get your application back to a consistent state, you can either redeploy the revision, or deploy another revision.
+
+Q:) How does AWS CodeDeploy work with Auto Scaling? 
+You can associate an Auto Scaling group with a deployment group to make sure that newly launched instances always get the latest version of your application.
+Every time a new Amazon EC2 instance is launched for that Auto Scaling group, it will be first put in a Pending state and a deployment of the last successful revision for that deployment group triggered on that Amazon EC2 instance.
+If the deployment completes successfully, the state of the Amazon EC2 instance is changed to InService.
+If that deployment fails, the Amazon EC2 instance is terminated, a new Amazon EC2 instance is launched in Pending state, and a deployment triggered for the newly launched EC2 instance.
+
+Q) The deployment is failing. What could be the reason?
+The appsec.yml file is not placed in the root of the directory revision where all the application code is.
+
+Q)You’re planning on using the AWS CodeDeploy tool for deployment of your application. Which of the following is used to specify how your application will be deployed to the underlying instances?
+AppSec.json

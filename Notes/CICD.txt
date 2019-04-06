@@ -1,135 +1,115 @@
-CI & CD
+CONTINOUS INTEGRATION & CONTINOUS DELIVERY/DEPLOYMENT
 
+Continous Integration
 Code repository -> Build Management System -> Test FrameWork
 
+- Multiple Developers working in on different features or bug fixes.
+- All contributing to the same application.
+- Sharing the same code repository.
+- Frequently pushing their updates into the shared repo- at least daily.
+- Code Repository integrated with a build management system, code changes trigger an automated build.
+- We need a way to ensure that any code changes does not break the build or intorduce new bugs in the application.
+- The test system runs automated tests on the newly built application
+- Identifies any bugs, preventing issues from being introduced in the master code
 
-Multiple Developers working in on different features or bug fixes.
-All contributing to the same application.
-Sharing the same code repository.
-Frequently pushing their updates into the shared repo- at least daily.
+Thus, CI focuses on small code changes which frequently committed into the main repository once they have been successfully tested.
 
-Code Repository integrated with a build management system. Code Changes trigger an automated build
-
-We need a way to ensure that any code changes does not break the build or intorduce new bugs in the application.
-
-The test system runs automated tests on the newly built application
-
-Identifies any bugs, preventing issues from being introduced in the master code
-
-CI focuses on small code changes which frequently committed into the main repository once they have been successfully tested.
-
-------------------------------------
 CD: Continous Delivery/ Deployment
-------------------------------------
 
-Continous Delivery is a development practice where merged changes are automatically built, tested, and prepared for release into staging and eventually production environments.
+- Continous Delivery is a development practice where merged changes are automatically built, tested, and prepared for release into staging and eventually production environments.
+- There is usually a manual decision to deploy.
 
-There is usually a manual decision to deploy.
+- Continous Deployment takes the idea of automation one step further and automatically deploys the new code following successful testing, eliminating manual steps.
+- The new code is automatically released as soon as it passes through the stages of your release process(build, test, package)
+- Basically Continous Deployment also automate the release process as well.
 
+AWS Services:  [[AWS Code Commit - > AWS CodeBuild -> AWS CodeDeploy] CodePipeline ] CodeStar
 
----------------------------------------
-
-Continous Deployment takes the idea of automation one step further and automatically deploys the new code following successful testing, eliminating manual steps.
-
-The new code is automatically released as soon as it passes through the stages of your release process(build, test, package)
-
-Basically Continous Deployment also automate the release process as well.
-
-AWS Services:  [AWS Code Commit - > AWS CodeBuild -> AWS CodeDeploy] CodePipeline
-
-CodeCommit - source code control
-CodeBuild - compile source code, run tests and package code
-Code Deploy -
-AWS  CodePipeline - CI/CD workflow tool that fully automates the entire release process.
+AWS CodeCommit - source code control.
+AWS CodeBuild - compile source code, run tests and package code.
+AWS CodeDeploy - Deploy code in different modes to instance.
+AWS CodePipeline - CI/CD workflow tool that fully automates the entire release process.
 
 
-AWS CodeCommit -> 1.based on git. central repo for all code binaries etc. Tracks and manages code changes. Maintains version history. Manages updates from multiple sources enables collaboration. 
-Data is encrypted in transit or at rest.
+AWS CodeCommit
 
+- Based on git, central repo for all code binaries.
+- Tracks and manages code changes. 
+- Maintains version history. 
+- Manages updates from multiple sources enables collaboration. 
+- Data is encrypted in transit or at rest.
+- To migrate repository to Code Commit, you hafta first migrate that to git repository and then migrate code to CodeCommit.
 
+AWS CodeDeploy
+- It is an automated deployments service which allows you to deploy your application code automatically yo EC2 instances, on-premises systems and lambda functions.
+- Allows you to quickly release new features, avoid downtime during application deployments, and avoid downtime during application deployments, and avoid the risks associated with manual processes.
+- It integrates with various CI/CD tools such as jenkins, Github, Atlasssian, AWS CodePipeline as well as config management tools such as chef, puppet, Ansible
+- Two different deployment approaches available: In-Place and Blue/Green
+- If you need to roll back, rededploy prev version.
 
-Code Deploy
-
-It is an automated deployments service which allows you to deploy your application code automatically yo EC2 instances, on-premises systems and lambda functions.
-
-Allows you to quickly release new features, avoid downtime during application deployments, and avoid downtime during application deployments, and avoid the risks associated with manual processes.
-
-It integrates with various CI/CD tools such as jenkins, Github, Atlasssian, AWS CodePipeline as well as config management tools such as chef, puppet, Ansible
-Two different deployment approaches available:
-In-Place and Blue/Green
-
-
+In-Place and Blue/Green deployment approach
 In-Place: Application is stopped and then new version is installed. You can also use ELB to stop sending requests to it.
 also known is rolling feature.
+If you need to roll back, rededploy prev version.
 
-drawbacks
-Not supported for lambda, only for EC-2 and on-premise systems
-
-If you need to roll back rededploy prev version
-
-
-
-Blue Green: Just route back the traffic to new server
-
-blue: active
-green: new release
+Blue Green: Just route back the traffic to new server.
+Blue: Active
+Green: New Release
 
 Deployment Group - A set of EC2 instances or Lambda functions to which a new revision of the software is to be deployed.
 Deployment - The process and components used to apply a new revision.
 Deployment Configuration - A set of deployment rules as well as success/failure conditions used during a deployment.
 AppSec File - Defines the deployment actions you want AWS CodeDeploy to execute.
 Revision - Everything needed to deploy new version: Appsec File, applications file, executables, config files
-Appliaction - Unique identifier for the application you want to deploy. To ensure the correct Combination of revision, deployment configuration and deployment group are referenced during a deployment.
+Application - Unique identifier for the application you want to deploy. To ensure the correct Combination of revision, deployment configuration and deployment group are referenced during a deployment.
 
+More Info in CodeDeploy.txt
+BuildSpec.yml Override
 
-Code Deploy Lab 
+AWS CodePipeline 
 
-
-CodePipeline 101
-
-AWS CodePipeLine is a fully managed Continous Integration and Delivery Service.
-
-CodePipeline can orchestrate the Build, Test, and even Deployment of your application every time there is a change to your code - all based on a user defined software release process.
-
-Traditional manual approaches to code delivery can be slow and prone to errors, whereas an automated process allows developers to frequently release new features and bug fixes in a fast and reliable way.
-
-It itnegrates with CodeCommit, deploy, Lambda, Elastic Beanstalk, ClouFormation, ECS as well as third party tools like Github and Jenkins. 
+- AWS CodePipeLine is a fully managed Continous Integration and Delivery Service.
+- CodePipeline can orchestrate the Build, Test, and even Deployment of your application every time there is a change to your code - all based on a user defined software release process.
+- Traditional manual approaches to code delivery can be slow and prone to errors, whereas an automated process allows developers to frequently release new features and bug fixes in a fast and reliable way.
+- It itnegrates with CodeCommit, deploy, Lambda, Elastic Beanstalk, ClouFormation, ECS as well as third party tools like Github and Jenkins. 
 
 
 Using Code Pipeline you can deploy to EC2, Lambda and On-Premise System.
-
-CodePipeLine Lab
-
-Use CodePipeLine to Deploy your code to a set of ec2 instances.
 
 There are three deployment style
 one at a time
 half at a time 
 all at a time
 
+## PRACTICAL ##
 
-Code Deploy Right Sequence
-Code Build More Information
-Code Pipeline
+Use CodePipeLine to Deploy your code to a set of ec2 instances.
+
+## QUESTIONS ##
 
 Q)Which of the following is the right sequence of hooks that get called in AWS CodeDeploy?
+Ans in CodeDeploy.txt
+
 Q) Code Deploy Instance Profile
+Code instance Profile only for EC2
+If you are using the Amazon ECS or AWS Lambda compute platform , skip this step. Amazon ECS deployments deploy an Amazon ECS service, and AWS Lambda deployments deploy a serverless Lambda function version, so an instance profile for Amazon EC2 instances is not required.
 
-Create a service role for AWS CodeDeploy
-n AWS, service roles are used to grant permissions to an AWS service so it can access AWS resources.
+Deployment Preference Type
+AutoPublishAlias: 10 percent of your customer traffic is immediately shifted to your new version. After 10 minutes, all traffic is shifted to the new version. 
+Canary: Traffic is shifted in two increments. You can choose from predefined canary options.
+Linear: Traffic is shifted in equal increments with an equal number of minutes between each increment
+All at Once: All traffic is shifted from the original Lambda function to the updated Lambda function version at once.
+
+
+Q) Explain service role for AWS CodeDeploy
+In AWS, service roles are used to grant permissions to an AWS service so it can access AWS resources.
 The policies that you attach to the service role determine which AWS resources the service can access and what it can do with those resources.
-
 For EC2 AWSCodeDeployRole
 For ECS AWSCodeDeployRoleForEC2
 For Lambda AWSCodeDeployRoleForLambda
 
-Code instance Profile only for EC2
-If you are using the Amazon ECS or AWS Lambda compute platform , skip this step. Amazon ECS deployments deploy an Amazon ECS service, and AWS Lambda deployments deploy a serverless Lambda function version, so an instance profile for Amazon EC2 instances is not required.
+Q) Code Commit Notification
+The AWS Documentation mentions the followingYou can configure an AWS CodeCommit repository so that code pushes or other events trigger actions, such as sending a notification from Amazon Simple Notification Service (Amazon SNS) or invoking a function in AWS Lambda. You can create up to ten triggers for each AWS CodeCommit repository
 
-You’re planning on using the AWS CodeDeploy tool for deployment of your application. Which of the following is used to specify how your application will be deployed to the underlying instances?
-
-AppSec.json
-
-
-
-
+Q)What happens if there is failure at any stage?
+The entire process stops, dawg. You gotta manually redeploy.

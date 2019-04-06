@@ -1,0 +1,38 @@
+AWS SAM
+
+## THEORY ##
+The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS.
+
+AWS SAM consists of the following components:
+AWS SAM template specification. You use this specification to define your serverless application. It provides you with a simple and clean syntax to describe the functions, APIs, permissions, configurations, and events that make up a serverless applicatio
+
+AWS SAM command line interface (AWS SAM CLI). You use this tool to build serverless applications that are defined by AWS SAM templates. 
+
+An AWS Serverless Application Repository application – You can define nested applications by using applications that are available to your account in the AWS Serverless Application Repository. 
+A local application – You can define nested applications by using applications that are stored on your local file system.
+
+The maximum number of applications that can be nested in a serverless application is 200.
+
+The maximum number of parameters a nested application can have is 60.
+
+To define an application that's hosted in the AWS Serverless Application Repository in your serverless application's AWS SAM template, use the Copy as SAM Resource button on the detail page of every AWS Serverless Application Repository applications
+
+Two way of controlling access to 
+
+BENEFITS
+
+1. Single-deployment configuration. AWS SAM makes it easy to organize related components and resources, and operate on a single stack. 
+2. Extension of AWS CloudFormation. Because AWS SAM is an extension of AWS CloudFormation, you get the reliable deployment capabilities of AWS CloudFormation. You can define resources by using AWS CloudFormation in your AWS SAM template.
+3. Built-in best practices. You can use AWS SAM to define and deploy your infrastructure as config. This makes it possible for you to use and enforce best practices such as code reviews.
+4. Local debugging and testing. The AWS SAM CLI lets you locally build, test, and debug serverless applications that are defined by AWS SAM templates. The CLI provides a Lambda-like execution environment locally, and helps you catch issues upfront by providing parity with the actual Lambda execution environment.
+Deploying Serverless applications
+- AWS SAM uses AWS CloudFormation as the underlying deployment mechanism. 
+- The AWS Serverless Application Repository is a service that hosts serverless applications that are built using AWS SAM. 
+- If you want to share serverless applications with others, you can publish them in the AWS Serverless Application Repository.
+- Use SAM with these 3
+    CodeBuild: You use CodeBuild to build, locally test, and package your serverless application. 
+    CodeDeploy: You use CodeDeploy to gradually deploy updates to your serverless applications.
+    CodePipeline: You use CodePipeline to model, visualize, and automate the steps that are required to release your serverless application.
+- AWS SAM comes built-in with CodeDeploy to help ensure safe Lambda deployments.
+
+## QUESTIONS ##
