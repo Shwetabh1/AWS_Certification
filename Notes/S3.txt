@@ -9,7 +9,7 @@ AWS Simple Storage Service (S3)
 - Bucket ~ Folder
 - It is object based storage. S3 is a simple key, value store.
 - S3 supports version control.
-- S3 is a universal namesapce. That is, names must be unique globally.
+- S3 is a universal namespace. That is, names must be unique globally.
 e.g https://s3-eu-west-1.amazonaws.com/somename
 
 S3 Object Anatomy {
@@ -21,7 +21,7 @@ S3 Object Anatomy {
 }
 
 DURABILTY AND AVAILABILITY
-- Built for 99.99% availability for s3 platform
+- Built for 99.99% availability for s3 platform.
 - Amazon Guarentees 99.9% availability
 - Amazon Guarentees 99.999999999 (11 9's) of durability.
 - It is designed to sustain the loss of 2 facilities concurrently.
@@ -42,9 +42,7 @@ S3- STORAGE TIERS/CLASSES [check image]
    Cost is 20% less than regular S3-IA
 4. Reduced Redundancy Storage: Designed to provide 99.99% durability and 99.99% availability of objects over a given year.
 Used for data that can be recreated if lost, e.g thumbnails. (Starting to disappear from AWS documentation but may still feature in exam)
-5. Glacier: Very Cheap, but used for archival only. Optimised for data that is infrequently accessed.
-
-CORS in S3.
+5. Glacier: Very Cheap, but used for archival only. Optimised for data that is infrequently accessed. 
 
 How to name a file for optimum performance? (Also, know the best filename format in S3 to optimize performance.)
 In AWS key names determine which partition the object(file) is stored in - you could add a hex prefix to file name for better performance.
@@ -91,8 +89,8 @@ S3 SECURITY
 CROSS REGION REPLICATION
 - Cross-region replication (CRR) enables automatic, asynchronous copying of objects across buckets in different AWS Regions. 
 - Configuration is required for this.
-- The destination bucket, where you want Amazon S3 to replicate objects
-- An AWS IAM role that Amazon S3 can assume to replicate objects on your behalf
+- The destination bucket, where you want Amazon S3 to replicate objects.
+- An AWS IAM role that Amazon S3 can assume to replicate objects on your behalf.
 - Criterias for CRR:
   Both source and destination buckets must have versioning enabled.
   The source and destination buckets must be in different AWS Regions.
@@ -102,12 +100,12 @@ CROSS REGION REPLICATION
 - Versioning must be on while using CORS.
 
 CLOUDFRONT
-- Amazon CloudFront can be used to deliver your entire website, including dynamic, static, streaming, and interactive content using a  global network of edge locations. Requests for your content are automatically routed to the nearest edge locations, so the content is delivered with the best possible performance.
+- Amazon CloudFront can be used to deliver your entire website, including dynamic, static, streaming, and interactive content using a global network of edge locations. Requests for your content are automatically routed to the nearest edge locations, so the content is delivered with the best possible performance.
 - CloudFront is a CDN.
-- A content delivery network is a system of distributed servers that Basically helps you reduce network latency and hops.
+- A content delivery network is a system of distributed servers that basically helps you reduce network latency and hops.
 - Edge Locations used by Cloud Front to keep copies of cache file which is much closer to the geographihc location.
-- Origin: This is the origin of all the files the CDN will distribute, which can be an s3 bucket, an ec2 instance an elastic load balancer,route53 or elastic load balancer.
-- Distribution is a collection of edge locations
+- Origin: This is the origin of all the files the CDN will distribute, which can be an s3 bucket, an ec2 instance an elastic load balancer, route53 or elastic load balancer.
+- Distribution is a collection of edge locations.
   1. Web Distribution - Typically used for websites.HTTP, HTTPS
   2. RTMP- Protocol used for Media Streaming
 - Can be used to be used to optimize performance for users accessing a website backed by s3.
@@ -120,7 +118,7 @@ CLOUDFRONT
 - Specify a value for Minimum TTL in CloudFront cache behaviors.·Use the default value of 24 hours.
 
 S3 VERSIONING
-- Versioning is extra layer of durability and you can preservee, retrieve and retain any version of data
+- Versioning is extra layer of durability and you can preservee, retrieve and retain any version of data.
 - Buckets can be in one of three states: unversioned (the default), versioning-enabled, or versioning-suspended.
 - Objects stored in your bucket before you set the versioning state have a version ID of null.
 - The bucket owner (or any user with appropriate permissions) can suspend versioning to stop accruing object versions. 
@@ -137,27 +135,27 @@ S3 OBJECT LIFECYCLE MANAGEMENT
 - Lifecycle configuration is an XML file.
 
 S3 TAGS
-- Objects Tags (key values ) can be used for IAM and lifecycle policies and customize metric storage
-- You can add upto 10 tags to s3 object while creating or later
-- Outside AWS console all the tags need to add in set example if you have added 5 tags and want to add 6th ,you have to mention all five
+- Objects Tags (key values ) can be used for IAM and lifecycle policies and customize metric storage.
+- You can add upto 10 tags to s3 object while creating or later.
+- Outside AWS console all the tags need to add in set example if you have added 5 tags and want to add 6th, you have to mention all five.
 - $0.01 per 10000 tags per month
 
 S3 TRANSFER ACCELERATION
-- Transfer Accelararion can help in transfer data fast for long distance using cloud front edge location
+- Transfer Accelararion can help in transfer data fast for long distance using cloud front edge location.
 - Nickname.s3-accelarate.awsamozon.com or backutname.s3-accrete.dulstack.awaamaazon.com
-- Fast depends on bandwidth ,packet loss and distance
-- Accelreate is secure are Over TCP and can restrict IP
+- Fast depends on bandwidth, packet loss and distance.
+- Accelreate is secure are Over TCP and can restrict IP.
 - S3 acceleration is giving throuput and TCP it is better than cloud front if you have data < 5 gb then use put/post commands
-- Snowball is idea for customer transferring batch at once and 5-7 days turnaround.Tranfer acceleration can use 1 gb bandwidth and upload 75 TB of Data if possible than this is better
-- Other option is perform initial heavy lift using snowball and use transfer acc later
-- 5AWS Direct Connect is for customer having private network, Tranfer acc is best for all from diff loc over public internet where variable network condition make throughput poor. Some Aws direct customer use transfer acc where internet speed is slow
+- Snowball is idea for customer transferring batch at once and 5-7 days turnaround. Tranfer acceleration can use 1 gb bandwidth and upload 75 TB of Data if possible than this is better
+- Other option is perform initial heavy lift using snowball and use transfer acc later.
+- AWS Direct Connect is for customer having private network, Tranfer acc is best for all from diff loc over public internet where variable network condition make throughput poor. Some Aws direct customer use transfer acc where internet speed is slow
 - Gateways that connect directly to s3 can take advantages of transfer acceleration.
 
 S3 LIMITS BRUH
 - 3500 put operations per prefix in a bucket.
 - 5500 get operations per prefix in a bucket.
 - At a time you can upload a max of 5GB. Use multipart upload if the file size is greater than that bruh.
-- S3 support ipv6, use dual stack endpoints which supports both 6 and 4
+- S3 support ipv6, use dual stack endpoints which supports both 6 and 4.
 - http://s3.dualstak.region.awsamozon.com/bucketname and bucket.s3.dualstack.region.awsamaomzon.com
 - The bucket name can be between 3 and 63 characters long, and can contain only lower-case characters, numbers, periods, and dashes.
 
@@ -185,9 +183,9 @@ The largest object that can be uploaded in a single PUT is 5 gigabytes.
 For objects larger than 100 megabytes, customers should consider using the Multipart Upload capability.
 
 Q) How can I control access to my data stored on Amazon S3?
-Customers may use four mechanisms for controlling access to Amazon S3 resources: 
+Customers may use four mechanisms for controlling access to Amazon S3 resources
 1. Identity and Access Management (IAM) policies.
-2. bucket policies.
+2. Bucket Policies.
 3. Access Control Lists (ACLs).
 4. Query String Authentication.
 IAM enables organizations with multiple employees to create and manage multiple users under a single AWS account.
@@ -198,7 +196,7 @@ With Query String Authentication, customers can create a URL to an Amazon S3 obj
 
 Q) What is an Amazon VPC Endpoint for Amazon S3?
 An Amazon VPC Endpoint for Amazon S3 is a logical entity within a VPC that allows connectivity only to S3. 
-The VPC Endpoint routes requests to S3 and routes responses back to the VPC. For more information about VPC Endpoints, read.
+The VPC Endpoint routes requests to S3 and routes responses back to the VPC.
 
 Q) How would you replicate bucket?
 If you want to do Replication at bucket level, do cross region replication(aka CRR).
@@ -224,12 +222,12 @@ It also supports Multipart Upload.
 
 Q) What is S3 Inventory?
 The S3 Inventory report provides a scheduled alternative to Amazon S3’s synchronous List API. You can configure S3 Inventory to provide a CSV, ORC, or Parquet file output of your objects and their corresponding metadata on a daily or weekly basis for an S3 bucket or prefix.
-S3 inventory is alternative for S3 sync list Api which will provide the .csv or ORC file containing the output of your obj and metadata
+S3 inventory is alternative for S3 sync list Api which will provide the .csv or ORC file containing the output of your obj and metadata.
 
 Q) Website Hosting Required permissions?
 1. Make Bucket Public.
-2. Enable static web hosting in your bucket
-3. Add an index.js file
+2. Enable static web hosting in your bucket.
+3. Add an index.js file.
 
 Q) ERROR CODE for S3?
 403 [AccessDenied] Access Related 
@@ -240,10 +238,10 @@ Q) You are working with the S3 API and receive an error message: 409 Conflict. W
 You can remove the bucket only after removing the contents, otherwise face 409 error
 
 Q) TroubleShooting S3
-Significant Increases in HTTP 503 Responses to Amazon S3 Requests to Buckets with Versioning Enabled
+Significant Increases in HTTP 503 Responses to Amazon S3 Requests to Buckets with Versioning Enabled.
 If you notice a significant increase in the number of HTTP 503-slow down responses received for Amazon S3 PUT or DELETE object requests to a bucket that has versioning enabled, you might have one or more objects in the bucket for which there are millions of versions. When you have objects with millions of versions, Amazon S3 automatically throttles requests to the bucket to protect the customer from an excessive amount of request traffic, which could potentially impede other requests made to the same bucket.
 
-Q) What is S3 Inventory tool?
-To determine which S3 objects have millions of versions, use the Amazon S3 inventory tool. The inventory tool generates a report that provides a flat file list of the objects in a bucket. For more information, see Amazon S3 Inventory.
+Q) What does S3 copy command do?
+Use this to transfer large segments of data from S3 to Redshift or DynamoDB.
 
 

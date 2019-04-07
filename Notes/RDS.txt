@@ -14,10 +14,10 @@ These are the database types that we can provision:
 
 MULTI AZ DEPLOYMENTS AND READ REPLICASS
 - It is used only for RDS.
-- Multi-AZ for durability and read replicas for scaliability.
+- Multi-AZ for durability and read replicas for scalability.
 - MULTI AZ is for disaster recovery only.
 - If you want performance improvement, you need read Replicas.
-- Read Replicas can be in dfiference region and availability zones.
+- Read Replicas can be in different region and availability zones.
 - But they are not availabile for SQL Server or Aurora. 
 
 RDS BACKUPS
@@ -33,6 +33,20 @@ There are two types of backups.
     - Snapshots are done manually and are stored even after you delete the original RDS instance, unlike automated backups.
     - Encrypting an existing database is not supported now.
     - If a Rest endpoint is encrypted, the underlying storage is encrypted.
+
+CONNECTING TO RDS INSTANCE
+- Get the endpoint of instance from DB Admin.
+- Use DescribeDBInstances to get the 
+- The maximum number of connections allowed to an Amazon RDS MySQL DB instance is based on the amount of memory available for the DB instance class of the DB instance.
+- The connection limit for a DB instance is set by default to the maximum for the DB instance class for the DB instance. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed using the max_connections parameter in the parameter group for the DB instance.
+- Amazon RDS creates an SSL certificate for your DB instance when the instance is created. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name (CN) for the SSL certificate to guard against spoofing attacks.
+- To connect to your DB instance using SSL, you can use native password authentication or IAM database authentication
+
+LOGS IN RDS
+- General Error logs
+- Slow Query logs
+- Query logs
+
 
 ## QUESTIONS ##
 
