@@ -9,8 +9,8 @@ Code repository -> Build Management System -> Test FrameWork
 - Frequently pushing their updates into the shared repo- at least daily.
 - Code Repository integrated with a build management system, code changes trigger an automated build.
 - We need a way to ensure that any code changes does not break the build or intorduce new bugs in the application.
-- The test system runs automated tests on the newly built application
-- Identifies any bugs, preventing issues from being introduced in the master code
+- The test system runs automated tests on the newly built application.
+- Identifies any bugs, preventing issues from being introduced in the master code.
 
 Thus, CI focuses on small code changes which frequently committed into the main repository once they have been successfully tested.
 
@@ -60,7 +60,7 @@ Deployment Group - A set of EC2 instances or Lambda functions to which a new rev
 Deployment - The process and components used to apply a new revision.
 Deployment Configuration - A set of deployment rules as well as success/failure conditions used during a deployment.
 AppSec File - Defines the deployment actions you want AWS CodeDeploy to execute.
-Revision - Everything needed to deploy new version: Appsec File, applications file, executables, config files
+Revision - Everything needed to deploy new version: Appsec File, applications file, executables, config files.
 Application - Unique identifier for the application you want to deploy. To ensure the correct Combination of revision, deployment configuration and deployment group are referenced during a deployment.
 
 More Info in CodeDeploy.txt
@@ -71,8 +71,7 @@ AWS CodePipeline
 - AWS CodePipeLine is a fully managed Continous Integration and Delivery Service.
 - CodePipeline can orchestrate the Build, Test, and even Deployment of your application every time there is a change to your code - all based on a user defined software release process.
 - Traditional manual approaches to code delivery can be slow and prone to errors, whereas an automated process allows developers to frequently release new features and bug fixes in a fast and reliable way.
-- It itnegrates with CodeCommit, deploy, Lambda, Elastic Beanstalk, ClouFormation, ECS as well as third party tools like Github and Jenkins. 
-
+- It integrates with CodeCommit, deploy, Lambda, Elastic Beanstalk, ClouFormation, ECS as well as third party tools like Github and Jenkins. 
 
 Using Code Pipeline you can deploy to EC2, Lambda and On-Premise System.
 
@@ -87,14 +86,14 @@ Use CodePipeLine to Deploy your code to a set of ec2 instances.
 
 ## QUESTIONS ##
 
-Q)Which of the following is the right sequence of hooks that get called in AWS CodeDeploy?
+Q) Which of the following is the right sequence of hooks that get called in AWS CodeDeploy?
 Ans in CodeDeploy.txt
 
 Q) Code Deploy Instance Profile
 Code instance Profile only for EC2
-If you are using the Amazon ECS or AWS Lambda compute platform , skip this step. Amazon ECS deployments deploy an Amazon ECS service, and AWS Lambda deployments deploy a serverless Lambda function version, so an instance profile for Amazon EC2 instances is not required.
+If you are using the Amazon ECS or AWS Lambda compute platform, skip this step. Amazon ECS deployments deploy an Amazon ECS service, and AWS Lambda deployments deploy a serverless Lambda function version, so an instance profile for Amazon EC2 instances is not required.
 
-Deployment Preference Type
+Q) Deployment Preference Type
 AutoPublishAlias: 10 percent of your customer traffic is immediately shifted to your new version. After 10 minutes, all traffic is shifted to the new version. 
 Canary: Traffic is shifted in two increments. You can choose from predefined canary options.
 Linear: Traffic is shifted in equal increments with an equal number of minutes between each increment
@@ -109,7 +108,7 @@ For ECS AWSCodeDeployRoleForEC2
 For Lambda AWSCodeDeployRoleForLambda
 
 Q) Code Commit Notification
-The AWS Documentation mentions the followingYou can configure an AWS CodeCommit repository so that code pushes or other events trigger actions, such as sending a notification from Amazon Simple Notification Service (Amazon SNS) or invoking a function in AWS Lambda. You can create up to ten triggers for each AWS CodeCommit repository
+You can configure an AWS CodeCommit repository so that code pushes or other events trigger actions, such as sending a notification from Amazon Simple Notification Service (Amazon SNS) or invoking a function in AWS Lambda. You can create up to ten triggers for each AWS CodeCommit repository.
 
-Q)What happens if there is failure at any stage?
-The entire process stops, dawg. You gotta manually redeploy.
+Q) What happens if there is failure at any stage?
+The entire process stops, bruh. You gotta manually redeploy.

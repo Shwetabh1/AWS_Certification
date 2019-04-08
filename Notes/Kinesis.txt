@@ -15,16 +15,19 @@ Amazon Kinesis Data Analytics, you can process and analyze streaming data using 
 The service enables you to quickly author and run powerful SQL code against streaming sources to perform time series analytics, feed real-time dashboards, and create real-time metrics.
 You can use Lambda to pre-process data.
 
-You can guaretee the order of Data only in a Single Shard.
+You can guarentee the order of Data only in a Single Shard.
+
+Calculation of Shards
+max(incoming_write_bandwidth_in_KB/1000, outgoing_read_badwidth_in_KB/2000)
 
 ## QUESTIONS ##
 
 Q) Your application currently makes use of AWS Kinesis streams. The data rate of the application is now increasing due to the increased number of producers. 
 Which of the following can be done to keep up with the increased data rate?
-Increase the number of shards, yo
+Increase the number of shards.
 
-Q) When can throttling happen
+Q) When can throttling happen?
 Each shard has a read throughput of up to 5 transactions per second for reads, up to a maximum total data read rate of 2 MB per second. 
-If an application (or a group of applications operating on the same stream) attempts to get data from a shard at a faster rate, Kinesis Data Streams throttles the corresponding Get operations
+If an application (or a group of applications operating on the same stream) attempts to get data from a shard at a faster rate, Kinesis Data Streams throttles the corresponding Get operations.
 
 

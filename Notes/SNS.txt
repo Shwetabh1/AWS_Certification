@@ -6,7 +6,8 @@ AWS Simple Notification Service
 - SNS can deliver via SMS, Email, Email-json, HTTP, HTTPS, SQS.
 - It can trigger Lambda functions as well.
 - To provide redundancy all the messages are stored in the different availability zones.
-- Topic is the access point for allowing the recipient to dynamically subscribe the for identical copies of same notification.IT can support different endpoints IOS ,Android,SMS.when you publish it will send the same to different endpoint in their format
+- Topic is the access point for allowing the recipient to dynamically subscribe for identical copies of same notification. It can support different endpoints IOS, Android, SMS.
+- When you publish it will send the same to different endpoint in their format.`
 - SNS allows you to group multiple recepients using topics. In each topic different devices can be there. It will format and send messaged appropriately.
 - 0.50 $ for 1M SNS request
 - Subscription will expire in 3 days if not confirmed.
@@ -22,18 +23,17 @@ FILTER POLICY
 
 SNS MESSAGE FORMAT
 
-
 ## QUESTIONS ##
 
 Q) How do you register devices for Amazon Mobile Devices and SNS Mobile Push notifiations.
 Use of CreatePlatformEndpoint is correct way to do. You can add device tokens and registration IDs to Amazon SNS using the following methods: 
-• Manually add a single token to AWS using the AWS Management Console 
-• Migrate existing tokens from a CSV file to AWS using the AWS Management Console 
-• Upload several tokens using the CreatePlatformEndpoint API 
-• Register tokens from devices that will install your apps in the future
+• Manually add a single token to AWS using the AWS Management Console. 
+• Migrate existing tokens from a CSV file to AWS using the AWS Management Console. 
+• Upload several tokens using the CreatePlatformEndpoint API. 
+• Register tokens from devices that will install your apps in the future.
 
 Q) What are the limits of SNS?
-By default, SNS offers 10 million subscriptions per topic, and 100,000 topics per account
+By default, SNS offers 10 million subscriptions per topic, and 100,000 topics per account.
 With the exception of SMS messages, Amazon SNS messages can contain up to 256 KB of text data, including XML, JSON and unformatted text.
 By default, 200 filter policies per account per region can be applied to a topic.
 Max Topics: 
@@ -41,6 +41,6 @@ Max Topics:
 Q: What is raw message delivery?
 You can opt-in to get your messages delivered in raw form, i.e. exactly as you published them. 
 By default, messages are delivered encoded in JSON that provides metadata about the message and topic. 
-sRaw message delivery can be enabled by setting the “RawMessageDelivery” property on the subscriptions.
+Raw message delivery can be enabled by setting the “RawMessageDelivery” property on the subscriptions.
 
 

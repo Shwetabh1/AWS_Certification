@@ -2,11 +2,11 @@ AWS CodeDeploy
 
 ## THEORY ##
 
-- It is an automated deployments service which allows you to deploy your application code automatically yo EC2 instances, on-premises systems and lambda functions.
-- Allows you to quickly release new features, avoid downtime during application deployments, and avoid downtime during application deployments, and avoid the risks associated with manual processes.
+- It is an automated deployments service which allows you to deploy your application code automatically to your EC2 instances, on-premises systems and lambda functions.
+- Allows you to quickly release new features, and avoid downtime during application deployments, and avoid the risks associated with manual processes.
 - It integrates with various CI/CD tools such as jenkins, Github, Atlasssian, AWS CodePipeline as well as config management tools such as chef, puppet, Ansible
 - Two different deployment approaches available: In-Place and Blue/Green
-- If you need to roll back, rededploy prev version
+- If you need to roll back, rededploy prev version.
 
 The AppSec File
 - The Appspec file is used to define the parameters that will be used for a CodeDeploy deployment.
@@ -15,7 +15,7 @@ The AppSec File
 For Lambda Deployments the file can be written in YAML or JSON.
 They contain the following fields:
 
-1.Resources : The name and properties of the Lambda function to deploy
+1.Resources : The name and properties of the Lambda function to deploy.
 2.Version: Reserved for future use - currently the only allowed value is 0.0
 3.Hooks: specifies Lambda function to run at a certain time in the process etc.
 There are two hooks allowed:
@@ -35,7 +35,7 @@ FOR EC2
 (e.g) Unzip files prior to deployment lifecycle, run functional tests.
 
 
-YAML file only for EC2 deployments, fam
+YAML file only for EC2 deployments.
 
 Hooks:
 - The content in the 'hooks' section of the AppSpec file varies, depending on the compute platform for your deployment.
@@ -85,6 +85,12 @@ The ID of the deployment group in CodeDeploy that is part of the current deploym
 LIFECYCLE_EVENT
 The name of the current deployment lifecycle event (for example, AfterInstall).
 
+
+VPC SPECIFIC CODE BUILD
+- Typically, resources in an VPC are not accessible by AWS CodeBuild. To enable access, you must provide additional VPC-specific configuration information as part of your CodeBuild project configuration. 
+- This includes the VPC ID, the VPC subnet IDs, and the VPC security group IDs
+- The vpcConfig object should include your vpcId, securityGroupIds, and subnets.
+
 ## Questions ##
 
 Q:) What are the parameters that I need to specify for a deployment? 
@@ -94,11 +100,11 @@ Deployment group - Specifies where to deploy.
 Deployment configuration - An optional parameter that specifies how to deploy.
 
 
-Q:) Can I stop an in-flight deployment? 
+Q) Can I stop an in-flight deployment? 
 Yes. When you stop an in-flight deployment, the AWS CodeDeploy service will instruct the agent on each instance to stop executing additional scripts.
 To get your application back to a consistent state, you can either redeploy the revision, or deploy another revision.
 
-Q:) How does AWS CodeDeploy work with Auto Scaling? 
+Q) How does AWS CodeDeploy work with Auto Scaling? 
 You can associate an Auto Scaling group with a deployment group to make sure that newly launched instances always get the latest version of your application.
 Every time a new Amazon EC2 instance is launched for that Auto Scaling group, it will be first put in a Pending state and a deployment of the last successful revision for that deployment group triggered on that Amazon EC2 instance.
 If the deployment completes successfully, the state of the Amazon EC2 instance is changed to InService.

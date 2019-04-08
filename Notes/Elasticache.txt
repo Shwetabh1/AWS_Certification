@@ -8,7 +8,7 @@ Redis
 Use Cases: Ranking, More Advanced Data Types and shit.
 Wanna run in Multiple AZ, If so use Redis.
 
-Choose Redis
+Choose Redis when
 You need complex data types, such as strings, hashes, lists, sets, sorted sets, and bitmaps.
 You need to sort or rank in-memory datasets.
 You need persistence of your key store.
@@ -17,15 +17,15 @@ You need automatic failover if your primary node fails.
 You need publish and subscribe (pub/sub) capabilities—to inform clients about events on the server.
 You need backup and restore capabilities.
 You need to support multiple databases.
+You need to support streams, encryption and advanced operations like that.
 
 Memcached:  No Persistence, yo
-Use cases: Large CacheChoose Memcached if the following apply for you:
+Use cases: Large Cache. Choose Memcached if the following apply for you:
 
 Choose Memcached if the following apply for you:
 You need the simplest model possible.
 You need to run large nodes with multiple cores or threads.
 You need the ability to scale out and in, adding and removing nodes as demand on your system increases and decreases.
 You need to cache objects, such as a database.
-You need to support streams, encryption and advanced shit like that.
 
 

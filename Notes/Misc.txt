@@ -3,12 +3,28 @@ AWS Lambda uses environment variables to facilitate communication with the X-Ray
 _X_AMZN_TRACE_ID: Contains the tracing header, which includes the sampling decision, trace ID, and parent segment ID. If Lambda receives a tracing header when your function is invoked, that header will be used to populate the _X_AMZN_TRACE_ID environment variable. If a tracing header was not received, Lambda will generate one for you.· AWS_XRAY_CONTEXT_MISSING: The X-Ray SDK uses this variable to determine its behavior in the event that your function tries to record X-Ray data, but a tracing header is not available. Lambda sets this value to LOG_ERROR by default.· AWS_XRAY_DAEMON_ADDRESS: This environment variable exposes the X-Ray daemon's address in the following format: IP_ADDRESS:PORT.
 You can use the X-Ray daemon's address to send trace data to the X-Ray daemon directly, without using the X-Ray SDK.
 
+X-RAY provides 3 things
+- Intereptors to trace incoming HTTP requests.
+- Client handlers to instrument AWS SDK clients that your application uses to call other AWS services.
+- An HTTP client to use to instrument calls to other internal and external HTTP web services. 
+
 2. AWS DATA PIPELINE
-AWS Data Pipeline, you can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks. You define the parameters of your data transformations and AWS Data Pipeline enforces the logic that you've set up
-Use AWS data pipeline to transafer lotta data from ec2 to s3 or shit bro.
+- AWS Data Pipeline, you can define data-driven workflows, so that tasks can be dependent on the successful completion of previous tasks. You define the parameters of your data transformations and AWS Data Pipeline enforces the logic that you've set up
+- Use AWS data pipeline to transafer lotta data from ec2 to s3 or shit bro.
+- In AWS Data Pipeline, a data node defines the location and type of data that a pipeline activity uses as input or output.
+- A task runner is an application that polls AWS Data Pipeline for tasks and then performs those tasks.
+- In AWS Data Pipeline, an activity is a pipeline component that defines the work to perform. AWS Data Pipeline provides several pre-packaged activities that accommodate common scenarios, such as moving data from one location to another, running Hive queries, and so on.
+- In AWS Data Pipeline, a precondition is a pipeline component containing conditional statements that must be true before an activity can run. 
+- In AWS Data Pipeline, a resource is the computational resource that performs the work that a pipeline activity specifies. AWS Data Pipeline supports the following types of resources:
+
+EC2Resource
+An EC2 instance that performs the work defined by a pipeline activity.
+EMRCluster
+An Amazon EMR cluster that performs the work defined by a pipeline activity, such as EmrActivity.
+- AWS Data Pipeline actions are steps that a pipeline component takes when certain events occur, such as success, failure, or late activities
 
 3. SYSTEMS MANAGER PARAMETER STORE
-Storing Confidential Information which can be passed to ec2 usig lambda etc.
+Storing Confidential Information which can be passed to EC2 using lambda etc.
 If you have confidential information such as passwords, database, connection strings, and license codes can be stored in SSM parameter store.
 You can store values as plain text or you can encrypt the data.
 
@@ -17,5 +33,13 @@ You can use AWS WAF with your Application Load Balancer to allow or block reques
 
 5. AWS FARGATE
 It is a purpose-built serverless compute engine for containers. Fargate scales and manages the infrastructure required to run your containers.
+
+6. AMAZON QUICKSIGHT?
+Amazon QuickSight is a business analytics service you can use to build visualizations, perform ad hoc analysis, and get business insights from your data. It can automatically discover AWS data sources and also works with your data sources. Amazon QuickSight enables organizations to scale to hundreds of thousands of users, and delivers responsive performance by using a robust in-memory engine (SPICE).
+Using Amazon QuickSight, you can do the following:
+Access data from multiple sources – Upload files, connect to AWS data sources, or use your own external data sources.
+Take advantage of dynamic visualizations – Smart visualizations are dynamically created based on the fields that you select.
+Get answers fast – Generate fast, interactive visualizations on large data sets.
+Tell a story with your data – Create data dashboards and point-in-time visuals, share insights and collaborate with others.
 
 

@@ -112,7 +112,7 @@ Balances load between 2 servers such that load is balanced and no server gets ov
 - Elastic Load Balancing provides you, access logs.
 Now there are three type of load balancers
 1. Application Load balancers (they can make very clever decision and they operate at layer 7)
-    - They are best suited for balancing HTTP and HTTPS traffi,c They operate at layer 7 and are intelligent.
+    - They are best suited for balancing HTTP and HTTPS traffic, They operate at layer 7 and are intelligent.
     - You can create advanced request routing sending specified request to specified server.
 2. Network Load Balancer (operates at layer 4, most expensive, used in production)
     - Best Suited for load balancing of TCP traffic where extreme performance is required.
@@ -128,7 +128,6 @@ Classic Load Balancers Erros
 - This means that the application is having issues either at the database or web server layer.
 - Identify where it is failing and scale it up or out where possible.
 - 504 error means gateway has timed out.
-
 
 Error Retries and Exponential BackOff algorithm.
 - Each AWS SDK implements automatic retry logic. 

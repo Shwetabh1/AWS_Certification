@@ -43,7 +43,7 @@ ROUTE TABLE
 - Don’t touch Main route table.
 - Create another routetable for route out to internet (0.0.0.0/0 IGW) <— route out to the internet
 - Last thing you associate this new route table to one of the subnet which will make it public. (you can enable auto assign public IP for the public subnet)
-- 1 subnet can have 1 routetable
+- 1 subnet can have 1 routetable.
 
 VPC FLOWLOGS
 - To capture all the traffic information into logs - logs everything (create IAM role and create cloud watch log group - and log stream) [Question]
