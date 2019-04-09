@@ -40,8 +40,8 @@ aws kms enable-key-rotation --key-id YOURKEYIDHERE
 
 Granting Permissions
 1. Key Policies: When you create a CMK, you determine who can use and manage that CMK. These permissions are contained in a document called the key policy.
-2. Grant:  You can use grants to give long-term access that allows AWS principals to use your customer managed CMKs.
-3. Grant Tokens  You can use grants to give long-term access that allows AWS principals to use your customer managed CMKs.
+2. Grant: You can use grants to give long-term access that allows AWS principals to use your customer managed CMKs.
+3. Grant Tokens:  You can use grants to give long-term access that allows AWS principals to use your customer managed CMKs.
 
 
 KMS Envelope Encryption

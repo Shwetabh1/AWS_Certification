@@ -36,27 +36,17 @@ This a complete guide for achieving AWS certified developer mettle. It comprises
 | Monitoring and Troubleshooting      | 12%    |
 </div>
 
-<b>IAM ~ 4 Questions.</b><br>
-<i>Questions will definetly be asked from IAM including IAM role for DynamoDB, Web Federation, Corporate network, CloudFront, Elastic Beanstalk, Cloud Formation and Elastic Cache.
+<b><i>Special attention on Elastic Beanstalk, S3 & DyanmoDB.</b></i></br>
+
+<b>IAM & Cognito ~ 5-6 Questions.</b><br>
+<i>Questions will definetly be asked from IAM including IAM role for DynamoDB, Web Federation, Corporate network, CloudFront, Elastic Beanstalk, Cloud Formation and Elastic Cache. Cognito data sync, unauthenticated identities etc.
 Options on authenticating using LDAP together with IAM.</i>
 
-<b>S3 ~ 12 Questions.</b><br>
+<b>S3 ~ 10 Questions.</b><br>
 <i>CORS, Static Hosting, S3 Encryption Header, S3 Performance optimisation(Mostly on adding uniqueness before the key), Bucket policy and ACL (basically how to restrict), Limits (like total bucket</i>
 
 <b>DynamoDB ~ 12 Questions</b></br>
 <i>Basic questions about Hash and range key, DynamoDBStreams, Throughput error (like if not Table then what is the cause), One question on write throughput calculation.</i>
-
-<b>EC2 ~ 5 Question</b></br>
-<i>Less questions from EC2 as they are focusing more on serverless. Basic API like DescribeImages, AMI related(example EC2 can be launched from the same region where AMI is stored) and Root Device Encryption. Also one question regarding EC2 instance profile. One question about EBS and multi container docker.</i>
-
-<b>SQS  ~ 6-7 Questions</b></br>
-<i>Basic SQS functionality, Protocols used and, Long Polling, Max Visibility and Timeout Scenario Questions. One question about grouping messages by messageid in SQS.</i>
-
-<b>SNS ~ 4-5 Questions</b></br>
-<i>Basic Functionality, Do check the Format of the SNS Notification and Field used in (JSON ), Fanout concept.</i>
-
-<b>SWF ~ 1-2 Questions</b></br>
-<i>Basic Functionality Scenario Based(like what all the functionally used by SWF)</i>
 
 <b>VPC ~ 5 Questions</b></br>
 <i>All scenario based 2-3 lines revolving around assigning Elastic address or public address to access the instance and NAT in subnet. One question related to VPC flow logs.</i>
@@ -64,20 +54,35 @@ Options on authenticating using LDAP together with IAM.</i>
 <b>Kinesis ~ 2-3 Questions</b></br>
 <i>Questions about Kinesis Client Library and resharding.</i>
 
+<b>AWS X-Ray ~ 2-3 Questions</b></br> 
+<i>Question related to tracing, embedding it with docker etc.</i>
+
 <b>API Gateway</b></br> 
 <i>Question related to solving api gateway autodeployment with SAM. Also how the user(client) can evict API gateway cache.</i>
 
+<b>Elastic Beanstalk</b></br> 
+<i>Question related to resources it can create, deployments, template, .ebextensions etc.</i>
+
+<b>CloudFormation</b></br> 
+<i>Question related to template sections, deployments.</i>
+
+<b>Code Deploy</b></br> 
+<i>Question related to deployment strategy, difference in on-premise and EC2 deployments.</i>
+
 Note: 
+1. Less questions from EC2 as they are focusing more on serverless.
 1. Know/review limits for S3, DynamoDB, EC2, SNS, and SQS. 
 1. Understanding the service limits would help with at least 5 questions.
 1. Also know which AWS services are key-based and which platforms Elastic Beanstalk supports and which resources it can create.
 1. One question about chosing Fargate over ECS when you don't want to take care of everything yourself and you can leave it to AWS :)
 1. Resharding (KCL), Evicting API cache (Default not DLB), Fargate, Glue and VPC/Security Groups (?)
-1. Acess Control Lists vs Security Group
-1. Rest Questions were on AWS SDK, Default region (us-east-1) and Elastic Beanstalk Platforms and Elastic Cache to avoid the session state problem.  
+1. Access Control Lists vs Security Group.
+1. Rest Questions were on AWS SDK, Default region (us-east-1) and Elastic Beanstalk Platforms and Elastic Cache to avoid the session state problem.
+1. 1 Question was from SAM related to required properties on their template.
+1. Questions from Systems Manager Parameter Store.  
 
 ## Some Essential Tips
-1. Do Practice Tests on AWS Cloud Guru and other sites.
+1. Practice Test is a must. I found tests from WHIZLABS quite helpful.
 1. Lookout for scenario based questions.
 1. Confirm big focus on DynamoDB (~15/55 questions) and S3 (~12/55 questions)
 1. Attempt all questions as there are no negative marks.
