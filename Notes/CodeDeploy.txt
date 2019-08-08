@@ -99,7 +99,6 @@ Revision - Specifies what to deploy.
 Deployment group - Specifies where to deploy.
 Deployment configuration - An optional parameter that specifies how to deploy.
 
-
 Q) Can I stop an in-flight deployment? 
 Yes. When you stop an in-flight deployment, the AWS CodeDeploy service will instruct the agent on each instance to stop executing additional scripts.
 To get your application back to a consistent state, you can either redeploy the revision, or deploy another revision.

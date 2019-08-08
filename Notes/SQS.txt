@@ -1,5 +1,5 @@
-
 AWS Simple Queue Service
+
 ## THEORY ##
 
 - Amazon SQS offers distributed queue system, where messages can wait to be processed by other components.
@@ -8,7 +8,7 @@ AWS Simple Queue Service
 - Default retention period is 4 days. You can have it for 14 days max to 1 minute minimum.
 - SQS can resolve the issue of producer producing fast or consumer consumes slowly (Autoscaling or failover)
 - Data transferred between Amazon SQS and Amazon EC2 within a single region is free of charge (that is, $0.00 per GB). Data transferred between Amazon SQS and Amazon EC2 in different regions is charged at Internet Data Transfer rates on both sides of the transfer.
-- You can Create one SNS topic and create ,subscribe multiple SQS queues to that SNS topic ,basically you can fanned out single message to multiple SQS queues.
+- You can Create one SNS topic and create, subscribe multiple SQS queues to that SNS topic, basically you can fanned out single message to multiple SQS queues.
 
 VISIBILITY TIMEOUT
 - Immediately after a message is received, it remains in the queue. 

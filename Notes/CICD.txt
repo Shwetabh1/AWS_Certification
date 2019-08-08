@@ -1,5 +1,6 @@
 CONTINOUS INTEGRATION & CONTINOUS DELIVERY/DEPLOYMENT
 
+## THEORY ##
 Continous Integration
 Code repository -> Build Management System -> Test FrameWork
 

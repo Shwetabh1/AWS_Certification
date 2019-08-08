@@ -79,7 +79,7 @@ Note:
 1. Resharding (KCL), Evicting API cache (Default not DLB), Fargate, Glue and VPC/Security Groups.
 1. Access Control Lists vs Security Group.
 1. Questions from SAM and terraforms will certainly be asked.
-1. Learn sbout Systems Manager Parameter Store.  
+1. Learn about Systems Manager Parameter Store.  
 
 ## Some Essential Tips
 1. Practice Test is a must. I found tests from WHIZLABS quite helpful.

@@ -1,4 +1,4 @@
-Kinesis
+KINESIS
 
 ## THEORY ##
 Amazon Kinesis is a platform for streaming data on AWS, offering powerful services to make it easy to load and analyze streaming data, and also providing the ability for you to build custom streaming data applications for specialized needs.

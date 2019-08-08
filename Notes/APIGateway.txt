@@ -83,3 +83,12 @@ AWS Config can track changes to:
     protocol
     tags
 
+Q) Support Binary Payloads.
+
+1. Add the desired binary media types to the binaryMediaTypes list on the RestApi resource. 
+    If this property and the contentHandling property are not defined, the payloads are handled as UTF-8 encoded JSON strings.
+2. Set the contentHandling property of the Integration resource to CONVERT_TO_BINARY to have the request payload converted from a Base64-encoded string to its binary blob, or set the property to CONVERT_TO_TEXT to have the request payload converted from a binary blob to a Base64-encoded string. 
+    If this property is not defined, API Gateway passes the payload through without modification. This occurs when the Content-Type header value matches one of the binaryMediaTypes entries and the passthrough behaviors are also enabled for the API.
+3. Set the contentHandling property of the IntegrationResponse resource to CONVERT_TO_BINARY to have the response payload converted from a Base64-encoded string to its binary blob, or set the property to CONVERT_TO_TEXT to have the response payload converted from a binary blob to a Base64-encoded string.
+     If contentHandling is not defined, and if the Content-Type header of the response and the Accept header of the original request match an entry of the binaryMediaTypes list, API Gateway passes through the body.
+    This occurs when the Content-Type header and the Accept header are the same; otherwise, API Gateway converts the response body to the type specified in the Accept header.

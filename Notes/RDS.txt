@@ -36,11 +36,11 @@ There are two types of backups.
 
 CONNECTING TO RDS INSTANCE
 - Get the endpoint of instance from DB Admin.
-- Use DescribeDBInstances to get the 
+- Use DescribeDBInstances to get the instances meta data.
 - The maximum number of connections allowed to an Amazon RDS MySQL DB instance is based on the amount of memory available for the DB instance class of the DB instance.
 - The connection limit for a DB instance is set by default to the maximum for the DB instance class for the DB instance. You can limit the number of concurrent connections to any value up to the maximum number of connections allowed using the max_connections parameter in the parameter group for the DB instance.
 - Amazon RDS creates an SSL certificate for your DB instance when the instance is created. If you enable SSL certificate verification, then the SSL certificate includes the DB instance endpoint as the Common Name (CN) for the SSL certificate to guard against spoofing attacks.
-- To connect to your DB instance using SSL, you can use native password authentication or IAM database authentication
+- To connect to your DB instance using SSL, you can use native password authentication or IAM database authentication.
 
 LOGS IN RDS
 - General Error logs

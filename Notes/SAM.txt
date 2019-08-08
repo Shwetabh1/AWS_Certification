@@ -4,8 +4,7 @@ AWS SAM
 The AWS Serverless Application Model (AWS SAM) is an open-source framework that you can use to build serverless applications on AWS.
 
 AWS SAM consists of the following components:
-AWS SAM template specification. You use this specification to define your serverless application. It provides you with a simple and clean syntax to describe the functions, APIs, permissions, configurations, and events that make up a serverless applicatio
-
+AWS SAM template specification. You use this specification to define your serverless application. It provides you with a simple and clean syntax to describe the functions, APIs, permissions, configurations, and events that make up a serverless applications.
 AWS SAM command line interface (AWS SAM CLI). You use this tool to build serverless applications that are defined by AWS SAM templates. 
 
 An AWS Serverless Application Repository application – You can define nested applications by using applications that are available to your account in the AWS Serverless Application Repository. 
@@ -15,9 +14,8 @@ The maximum number of applications that can be nested in a serverless applicatio
 
 The maximum number of parameters a nested application can have is 60.
 
-To define an application that's hosted in the AWS Serverless Application Repository in your serverless application's AWS SAM template, use the Copy as SAM Resource button on the detail page of every AWS Serverless Application Repository applications
+To define an application that's hosted in the AWS Serverless Application Repository in your serverless application's AWS SAM template, use the Copy as SAM Resource button on the detail page of every AWS Serverless Application Repository applications.
 
-Two way of controlling access to 
 
 BENEFITS
 
@@ -36,3 +34,6 @@ Deploying Serverless applications
 - AWS SAM comes built-in with CodeDeploy to help ensure safe Lambda deployments.
 
 ## QUESTIONS ##
+
+Q) Is AWS SAM open-source?
+AWS SAM and the SAM CLI are open-sourced under the Apache 2.0 license. 
