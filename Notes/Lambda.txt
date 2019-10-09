@@ -20,10 +20,11 @@ PRICING
 1. Number of Requests: First 1 million requests are free. $0.20 per 1 million requests thereafter.
 2. Duration: It is calculated from the time your code begins executing until it returns or otherwise terminates, rounded up to the nearest 100ms. The price depends on the amount of memory you allocate to your function. You are charged $0.00001667 for every GB per second used.
 
-Why it is cool?
-- No servers.
-- No need for Scaling.
+Why it is cool? Why you should adapt Lambda?
+- No servers. No need to spen time on system engineering of servers.
+- No need for Scaling. Supports scaling up & down.
 - Super super cheap.
+- It takes care of load balancing and security isolation.
 Example: Amazon Echo is all Lambda.
 
 Lambda scales out (not up) automatically.
