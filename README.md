@@ -90,9 +90,8 @@ Note:
 1. Practise the art of elimination! Eliminate the options that you are sure are not correct.
 
 ## Important Links
-1. https://learn.acloud.guru/course/aws-certified-developer-associate-june-2018/ [Course]
-1. https://linuxacademy.com/amazon-web-services/training/course/name/aws-certified-developer-associate-2018 [Course]
+1. https://acloudguru.com/ [Course, personally recommended]
+1. https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/ [Course]
 1. https://www.whizlabs.com/aws-developer-associate/ [Mock Test]
 1. https://www.udemy.com/aws-certified-developer-associate-practice-tests-dva-c01/ [Mock Test]
-1. https://acloud.guru/forums/aws-certified-developer-associate/discussion/-KBkBPMHpN2ITSH1oDTO/passedwith90%25-myexamtips
-1. https://acloud.guru/forums/aws-certified-developer-associate/discussion/-KUdI5f2LNbi4wvK7v4I/howtopassawscertified_deve
+1. https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS_Certified_Developer_Associate-Exam_Guide_EN_1.4.pdf [Official Exam Guide]
