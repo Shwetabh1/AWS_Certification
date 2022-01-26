@@ -11,9 +11,9 @@ Focus on the learning and certification will follow. Certification should never 
 > You can never understand everything but you should push yourself to understand the system.<br/>
 > *-Ryan Dahl (creator of Node.JS)*
 
-This a complete guide for achieving AWS certified developer mettle. It comprises of notes, lab works, exam break down, essential tips and probable questions could be asked. Each topic in the content has 3 sections; Notes, then the practical work you should do and lastly dozens of questions that can be asked in the AWS Certified Developer Exam related to that topic.
+This a complete guide for achieving AWS certified developer mettle. It comprises of notes, lab works, exam break down, essential tips and probable questions that could be asked. Each topic has 3 sections: Notes, then the practical work you should do, and lastly dozens of questions that can be asked in the AWS Certified Developer Exam related to that topic.
 
-<b>NOTE: As per the NDA I have not disclosed any questions but steered people in the right direction.</b>
+<b>NOTE: As per the NDA I have not disclosed the direct questions asked to me but have tried my best to steer people in the right direction.</b>
 
 ## Exam Details
 <ul>
@@ -38,7 +38,7 @@ This a complete guide for achieving AWS certified developer mettle. It comprises
 | Monitoring and Troubleshooting      | 12%    |
 </div>
 
-<b><i>Special attention on Elastic Beanstalk, S3 & DyanmoDB.</b></i></br>
+<b><i>Pay special attention to Elastic Beanstalk, S3 & DyanmoDB.</b></i></br>
 
 <b>IAM & Cognito</b><br>
 <i>Questions will definetly be asked from IAM including IAM role for DynamoDB, Web Federation, Corporate network, CloudFront, Elastic Beanstalk, Cloud Formation and Elastic Cache. Cognito data sync, unauthenticated identities etc.</i>
