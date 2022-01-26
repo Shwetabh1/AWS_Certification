@@ -19,8 +19,8 @@ This a complete guide for achieving AWS certified developer mettle. It comprises
 <ul>
 <li>Exam Duration: 130 Minutes</li>
 <li>Total Questions: 65 Questions</li>
-<li>Maximum Score 1000</li>
-<li>Passing is 720</li>
+<li>Maximum Score: 1000</li>
+<li>Passing score: 720</li>
 <li>Resuts are available immediately.</li>
 <li>In case you were unsuccessful you can always retake the exam, 14 days after yor first attempt.</li>
 <li>The certification is valid for 3 years.</li>
@@ -47,10 +47,10 @@ This a complete guide for achieving AWS certified developer mettle. It comprises
 <i>CORS, Static Hosting, S3 Encryption Header, S3 Performance optimisation(Mostly on adding uniqueness before the key), Bucket policy and ACL (basically how to restrict), Limits (like total bucket). Go through the FAQs.</i>
 
 <b>DynamoDB ~ 12 Questions</b></br>
-<i>Basic questions about Hash and range key, DynamoDBStreams, Throughput error (like if not Table then what is the cause), One question on write throughput calculation.  Go through the FAQs.</i>
+<i>Basic questions about Hash and range key, DynamoDBStreams, Throughput error (like if not Table then what is the cause), One question on write throughput calculation. Go through the FAQs.</i>
 
 <b>VPC</b></br>
-<i>Scenario based questions revolving around assigning Elastic address or public address to access the instance and NAT in subnet, vpc flow logs etc</i>
+<i>Scenario based questions revolving around assigning Elastic address or public address to access the instance and NAT in subnet, vpc flow logs etc.</i>
 
 <b>Kinesis</b></br>
 <i>Questions related to Kinesis Client Library and resharding, etc.</i>
@@ -84,7 +84,7 @@ Note:
 ## Some Essential Tips
 1. Practice Test is a must. I found tests from WHIZLABS quite helpful.
 1. Lookout for scenario based questions.
-1. Confirm big focus on DynamoDB (~15/55 questions) and S3 (~12/55 questions)
+1. Confirm big focus on DynamoDB (~15/55 questions) and S3 (~12/55 questions).
 1. Attempt all questions as there are no negative marks.
 1. If you have a long question, read the full question once and then only re read the last one or two lines as the real question lies there.
 1. Practise the art of elimination! Eliminate the options that you are sure are not correct.
